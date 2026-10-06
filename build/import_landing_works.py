@@ -317,7 +317,29 @@ def clients_flags_in_text(sec):
     listed = ", ".join(names[:-1]) + " and " + names[-1]
     plain = "the UK, the UAE, Qatar, Saudi Arabia, the US and India"
     assert plain in sec, "clients paragraph changed on the landing site"
-    return sec.replace(plain, listed, 1)
+    sec = sec.replace(plain, listed, 1)
+    # One row of bigger logos instead of two rows of the same 20 logos, so the
+    # same logo is never on screen twice (the row is wider than any screen).
+    rows = re.findall(r'<div class="client-row">.*?</div></div></div>', sec, flags=re.S)
+    assert len(rows) == 2, "client rows changed on the landing site"
+    sec = sec.replace(rows[1], "", 1)
+    sec = re.sub(r'(<img src="/lp/clients/[^"]+" alt="[^"]*" width=")(\d+)(" height=")(\d+)',
+                 lambda m: m.group(1) + str(round(int(m.group(2)) * LOGO_SCALE)) + m.group(3)
+                 + str(round(int(m.group(4)) * LOGO_SCALE)), sec)
+    sec = re.sub(r'(<div class="logo-track") style="animation-duration:\d+s"', r'\1', sec, count=1)
+    return sec
+
+
+LOGO_SCALE = 1.35          # logos were drawn at .8 of these sizes on the landing site
+CLIENTS_CSS = (
+    "\n.lp-sec .client-marquee .client-logo{height:%dpx}"
+    "\n.lp-sec .client-marquee .client-logo img{transform:none}"
+    "\n.lp-sec .client-marquee .logo-set{gap:72px;padding-right:72px}"
+    "\n.lp-sec .client-marquee .logo-track{animation-duration:90s}"   # ~45px/s, as before
+    "\n@media(max-width:640px){.lp-sec .client-marquee .logo-set{gap:24px;padding-right:24px}"
+    ".lp-sec .client-marquee .client-logo{height:%dpx}"
+    ".lp-sec .client-marquee .client-logo img{transform:scale(.78)}}" % (round(44 * LOGO_SCALE), round(44 * LOGO_SCALE * .8))
+)
 
 
 def home_sections(src):
@@ -349,7 +371,7 @@ def home_sections(src):
     reels_css = io.open(os.path.join(src, "assets", "reels.css"), encoding="utf-8").read()
     scoped += ("\n.lp-sec .cflag{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}"
                "\n.lp-sec .cflag img{display:inline-block;width:18px;height:12px;border-radius:2px;"
-               "box-shadow:0 0 0 1px rgba(13,18,17,.12);vertical-align:middle}")
+               "box-shadow:0 0 0 1px rgba(13,18,17,.12);vertical-align:middle}") + CLIENTS_CSS
     return out, scoped.replace("/assets/", "/lp/"), re.sub(r"/\*.*?\*/", "", reels_css, flags=re.S).strip()
 
 
