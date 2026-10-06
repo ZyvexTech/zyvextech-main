@@ -88,6 +88,9 @@ document.addEventListener('DOMContentLoaded', function(){ initFounderVideo(); in
 
 # Small layer on top of the landing CSS for this site's header and footer.
 SITE_NAV_CSS = """/* This site's navigation on the imported portfolio pages. */
+/* Portfolio grid: 2 columns on desktop, 1 on phones */
+.wgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:28px!important}
+@media(max-width:760px){.wgrid{grid-template-columns:1fr!important}}
 .zx-nav{display:flex;align-items:center;gap:26px}
 .zx-nav .nav-link{font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .15s}
 .zx-nav .nav-link:hover,.zx-nav .nav-link.active{color:var(--ink)}
