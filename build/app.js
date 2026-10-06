@@ -880,23 +880,24 @@ function ctaSection(opts){
 }
 /* ── Platform logos ───────────────────────────────────────────
    Official assets, used as supplied by each platform.
-     Shopify: primary logo, from the Shopify Partners brand pack
-     Meta:    company lockup; full-colour on light, mono on dark
-     Google:  full-colour wordmark (light backgrounds only)
+     "light" (home Core Expertise cards): icon-only marks in colour —
+       Shopify bag, Meta infinity, Google "G" (supplied by Zyvex).
+     "dark": Shopify primary logo (Partners brand pack) and the mono
+       Meta lockup (Meta Brand Resource Center). Google has no dark one.
    "light" is the version for light backgrounds, "dark" for dark ones.
    h    = image height as a multiple of MARK_UNIT
    pad  = clear space around it, as a multiple of MARK_UNIT
    darkH / darkPad = overrides for the "dark" version, when it differs
-   Meta's mono artboard carries its own clear space (drawn at 3x, no
-   padding); the colour Meta, Shopify and Google marks are tight, so the
-   clear space is added around them.
+   Light icons are sized so every plate is 3 units tall. Meta's mono
+   artboard carries its own clear space (drawn at 3x, no padding); the
+   other marks are tight, so the clear space is added around them.
    Google has no dark version, so on dark backgrounds it falls back to
    the plain wordmark.                                                 */
 var MARK_UNIT = 20;
 var PARTNER_LOGOS = {
-  shopify: { light: "/assets/img-52.svg", dark: "/assets/img-53.svg", h: 1, pad: 1, alt: "Shopify" },
-  meta:    { light: "/assets/img-54.svg", dark: "/assets/img-55.svg", h: 1, pad: 1, darkH: 3, darkPad: 0, alt: "Meta" },
-  google:  { light: "/assets/img-56.svg", h: 1, pad: 1, alt: "Google" }
+  shopify: { light: "/assets/img-52.svg", dark: "/assets/img-53.svg", h: 1.6, pad: 0.7, darkH: 1, darkPad: 1, alt: "Shopify" },
+  meta:    { light: "/assets/img-54.png", dark: "/assets/img-55.svg", h: 1.2, pad: 0.9, darkH: 3, darkPad: 0, alt: "Meta" },
+  google:  { light: "/assets/img-56.png", h: 1.5, pad: 0.75, alt: "Google" }
 };
 
 function brandMark(key, onLight, unit){
