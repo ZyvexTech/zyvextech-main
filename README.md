@@ -143,7 +143,7 @@ Change the data, run the build, commit, and push to `master`.
 - **Placeholder images** still in place: team group photo, founder portrait, client meeting photos, client logos, and the X Emirates / Firoz Pickles result screenshots.
 - **Testimonials are empty** — the cards render "Quote to be added" until real quotes go into `TESTIMONIALS` and `WORK_REVIEWS`.
 - **X Emirates is labelled a UAE client.** It is an Indian client. Fixed on the India landing site, not yet here.
-- **Google and WhatsApp logos** render as wordmarks, not official marks — no licensed asset files for them. Shopify and Meta use the official supplied assets.
+- **Logos.** The home page Core Expertise cards show full-colour Shopify, Meta and Google logos (Meta and Google from the CC0 `gilbarbara/logos` set). Google has no dark-background version, so it is still a plain wordmark on the Works page, and WhatsApp is a wordmark everywhere.
 
 ---
 

@@ -881,19 +881,22 @@ function ctaSection(opts){
 /* ── Platform logos ───────────────────────────────────────────
    Official assets, used as supplied by each platform.
      Shopify: primary logo, from the Shopify Partners brand pack
-     Meta:    company lockup (mono), from the Meta Brand Resource Center
+     Meta:    company lockup; full-colour on light, mono on dark
+     Google:  full-colour wordmark (light backgrounds only)
    "light" is the version for light backgrounds, "dark" for dark ones.
    h    = image height as a multiple of MARK_UNIT
    pad  = clear space around it, as a multiple of MARK_UNIT
-   Meta's artboard already carries its required clear space, so it is
-   drawn at 3x and needs no extra padding. Shopify's does not, so the
-   clear space is added around it.
-   Google has no asset here (their marks need partner approval), so it
-   keeps the generic outline icon.                                     */
+   darkH / darkPad = overrides for the "dark" version, when it differs
+   Meta's mono artboard carries its own clear space (drawn at 3x, no
+   padding); the colour Meta, Shopify and Google marks are tight, so the
+   clear space is added around them.
+   Google has no dark version, so on dark backgrounds it falls back to
+   the plain wordmark.                                                 */
 var MARK_UNIT = 20;
 var PARTNER_LOGOS = {
   shopify: { light: "/assets/img-52.svg", dark: "/assets/img-53.svg", h: 1, pad: 1, alt: "Shopify" },
-  meta:    { light: "/assets/img-54.svg", dark: "/assets/img-55.svg", h: 3, pad: 0, alt: "Meta" }
+  meta:    { light: "/assets/img-54.svg", dark: "/assets/img-55.svg", h: 1, pad: 1, darkH: 3, darkPad: 0, alt: "Meta" },
+  google:  { light: "/assets/img-56.svg", h: 1, pad: 1, alt: "Google" }
 };
 
 function brandMark(key, onLight, unit){
@@ -902,8 +905,10 @@ function brandMark(key, onLight, unit){
   var src = onLight ? cfg.light : cfg.dark;
   if(!src) return '';
   var u = unit || MARK_UNIT;
-  return '<img src="'+src+'" alt="'+cfg.alt+' logo" style="height:'+(u*cfg.h)+'px;width:auto;display:block;'
-       + (cfg.pad ? 'margin:'+(u*cfg.pad)+'px;' : '')+'" />';
+  var h = (!onLight && cfg.darkH != null) ? cfg.darkH : cfg.h;
+  var pad = (!onLight && cfg.darkPad != null) ? cfg.darkPad : cfg.pad;
+  return '<img src="'+src+'" alt="'+cfg.alt+' logo" style="height:'+(u*h)+'px;width:auto;display:block;'
+       + (pad ? 'margin:'+(u*pad)+'px;' : '')+'" />';
 }
 
 function iconBox(iconName, sizeClass, px){
@@ -1107,7 +1112,7 @@ function pageHome(){
   +     '<div class="grid-3" style="margin-top:48px">'
   +       coreServiceCard('shopify', 'Shopify Ecommerce', 'Official Shopify Partner', 'End-to-end Shopify and Shopify Plus builds, checkout configuration, and ongoing implementation, backed by official partner status.')
   +       coreServiceCard('meta', 'Meta Ads', 'Performance Marketing', 'Meta (Facebook & Instagram) campaigns built for measurable ROAS: audience research, creative testing, and retargeting run as an ongoing system.')
-  +       coreServiceCard('seo', 'SEO', 'Organic Growth', 'Technical and on-page SEO, keyword strategy, and Shopify-specific search audits, for growth that compounds instead of spikes.')
+  +       coreServiceCard('google', 'SEO', 'Organic Growth', 'Technical and on-page SEO, keyword strategy, and Shopify-specific search audits, for growth that compounds instead of spikes.')
   +     '</div>'
   +   '</div>'
   + '</section>'
