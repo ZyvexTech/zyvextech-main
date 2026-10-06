@@ -304,6 +304,22 @@ def scope_css(css, scope):
     return "\n".join(out)
 
 
+COUNTRIES = [("gb", "the UK"), ("ae", "the UAE"), ("qa", "Qatar"), ("sa", "Saudi Arabia"), ("us", "the US"), ("in", "India")]
+
+
+def clients_flags_in_text(sec):
+    """Client logos: drop the flag above each logo and show the flags once,
+    beside the country names in the paragraph above the logos."""
+    sec, n = re.subn(r'<span class="client-flags">.*?</span>(?=<span class="client-logo">)', "", sec, flags=re.S)
+    assert n, "client flags not found"
+    flag = lambda c, name: ('<span class="cflag"><img src="/lp/flags/%s.svg" alt="" width="18" height="12">%s</span>' % (c, name))
+    names = [flag(c, n) for c, n in COUNTRIES]
+    listed = ", ".join(names[:-1]) + " and " + names[-1]
+    plain = "the UK, the UAE, Qatar, Saudi Arabia, the US and India"
+    assert plain in sec, "clients paragraph changed on the landing site"
+    return sec.replace(plain, listed, 1)
+
+
 def home_sections(src):
     html = io.open(os.path.join(src, "index.html"), encoding="utf-8").read()
     body = html[html.index("<body"):]
@@ -323,12 +339,17 @@ def home_sections(src):
         sec = re.sub(r'data-link="(/[^"]*)"', lambda m: 'data-link="' + route(m.group(1)) + '"', sec)
         sec = sec.replace('"/assets/', '"/lp/')
         sec = re.sub(r"\s*\n\s*", "\n", sec)
+        if key == "clients":
+            sec = clients_flags_in_text(sec)
         sec = no_currency(sec, key)
         out[key] = '<div class="lp-sec lp-' + key + '">' + sec + "</div>"
     css = re.findall(r"<style[^>]*>(.*?)</style>", html, re.S)[0]
     light = io.open(os.path.join(src, "assets", "light.css"), encoding="utf-8").read()
     scoped = scope_css(css, ".lp-sec") + "\n" + scope_css(light, ".lp-sec")
     reels_css = io.open(os.path.join(src, "assets", "reels.css"), encoding="utf-8").read()
+    scoped += ("\n.lp-sec .cflag{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}"
+               "\n.lp-sec .cflag img{display:inline-block;width:18px;height:12px;border-radius:2px;"
+               "box-shadow:0 0 0 1px rgba(13,18,17,.12);vertical-align:middle}")
     return out, scoped.replace("/assets/", "/lp/"), re.sub(r"/\*.*?\*/", "", reels_css, flags=re.S).strip()
 
 
