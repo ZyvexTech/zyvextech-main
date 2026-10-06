@@ -318,15 +318,27 @@ def clients_flags_in_text(sec):
     plain = "the UK, the UAE, Qatar, Saudi Arabia, the US and India"
     assert plain in sec, "clients paragraph changed on the landing site"
     sec = sec.replace(plain, listed, 1)
-    # One row of bigger logos instead of two rows of the same 20 logos, so the
-    # same logo is never on screen twice (the row is wider than any screen).
+    # Two rows of bigger logos. On the landing site each row lists its 10
+    # logos twice per loop, so a logo can be on screen twice; here each row
+    # lists its own logos once per loop, and the logos are bigger, so the
+    # loop is wider than the screen.
     rows = re.findall(r'<div class="client-row">.*?</div></div></div>', sec, flags=re.S)
     assert len(rows) == 2, "client rows changed on the landing site"
-    sec = sec.replace(rows[1], "", 1)
+    def row(old, rev):
+        first_set = re.search(r'<div class="logo-set">(.*?)</div>', old, flags=re.S).group(1)
+        seen, items = set(), []
+        for it in re.findall(r'<span class="client">.*?</span></span>', first_set, flags=re.S):
+            src = re.search(r'src="([^"]+)"', it).group(1)
+            if src not in seen:
+                seen.add(src); items.append(it)
+        set_ = "".join(items)
+        hidden = re.sub(r'alt="[^"]*"', 'alt=""', set_)
+        return ('<div class="client-row"><div class="logo-track%s"><div class="logo-set">%s</div>'
+                '<div class="logo-set" aria-hidden="true">%s</div></div></div>' % (" rev" if rev else "", set_, hidden))
+    sec = sec.replace(rows[0], row(rows[0], False), 1).replace(rows[1], row(rows[1], True), 1)
     sec = re.sub(r'(<img src="/lp/clients/[^"]+" alt="[^"]*" width=")(\d+)(" height=")(\d+)',
                  lambda m: m.group(1) + str(round(int(m.group(2)) * LOGO_SCALE)) + m.group(3)
                  + str(round(int(m.group(4)) * LOGO_SCALE)), sec)
-    sec = re.sub(r'(<div class="logo-track") style="animation-duration:\d+s"', r'\1', sec, count=1)
     return sec
 
 
@@ -334,9 +346,9 @@ LOGO_SCALE = 1.35          # logos were drawn at .8 of these sizes on the landin
 CLIENTS_CSS = (
     "\n.lp-sec .client-marquee .client-logo{height:%dpx}"
     "\n.lp-sec .client-marquee .client-logo img{transform:none}"
-    "\n.lp-sec .client-marquee .logo-set{gap:72px;padding-right:72px}"
-    "\n.lp-sec .client-marquee .logo-track{animation-duration:90s}"   # ~45px/s, as before
-    "\n@media(max-width:640px){.lp-sec .client-marquee .logo-set{gap:24px;padding-right:24px}"
+    "\n.lp-sec .client-marquee .logo-set{gap:110px;padding-right:110px}"
+    "\n.lp-sec .client-marquee .logo-track{animation-duration:48s}"   # ~45px/s, as before
+    "\n@media(max-width:640px){.lp-sec .client-marquee .logo-set{gap:40px;padding-right:40px}"
     ".lp-sec .client-marquee .client-logo{height:%dpx}"
     ".lp-sec .client-marquee .client-logo img{transform:scale(.78)}}" % (round(44 * LOGO_SCALE), round(44 * LOGO_SCALE * .8))
 )
