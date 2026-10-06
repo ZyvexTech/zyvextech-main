@@ -3,6 +3,29 @@
 Source, build toolchain and deployable output for the main agency site
 (live at **https://zyvextech-nu.vercel.app**, Vercel project `zyvextech`).
 
+- **Repository:** [`ZyvexTech/zyvextech-main`](https://github.com/ZyvexTech/zyvextech-main)
+- **Production branch:** `master`
+- **Main source:** `src/index.html`
+- **Build:** `npm run build` generates the `dist/` output
+
+---
+
+## Deployment workflow
+
+The Vercel project `zyvextech` is connected to the GitHub repository
+`ZyvexTech/zyvextech-main`, and Production tracks the `master` branch.
+**Pushing to `master` automatically deploys the production site.**
+Do not deploy manually or create a separate Vercel project.
+
+```
+Local changes → commit → push to master → Vercel automatically deploys
+```
+
+1. Edit `src/index.html` (the only source file; never hand-edit `dist/`).
+2. Run `npm run build` to regenerate `dist/`.
+3. Commit the source **and** the regenerated `dist/` output.
+4. `git push origin master` — Vercel picks up the push and deploys.
+
 ---
 
 ## Tech stack
@@ -86,7 +109,7 @@ That does five things:
 4. Writes `vercel.json`, `serve.json`, and `robots.txt`.
 5. Generates a production deployment zip (`dist.zip`).
 
-Output lands in `dist/`. Deploy that folder.
+Output lands in `dist/`. Commit it and push to `master` to deploy (see Deployment workflow above).
 
 To preview the built production bundle:
 
@@ -111,7 +134,7 @@ Everything lives in plain data arrays near the top of `src/index.html`:
 | `STATS`, `VALUES`, `TOOLS_ADVISED`, `TECH_PARTNERS` | the supporting blocks |
 | `TEAM_PHOTO`, `FOUNDER_PHOTO`, `TEAM_MEETING_PHOTO`, `CLIENT_LOGOS` | image slots (**placeholders**) |
 
-Change the data, run the build, deploy `dist/`.
+Change the data, run the build, commit, and push to `master`.
 
 ---
 
@@ -121,7 +144,6 @@ Change the data, run the build, deploy `dist/`.
 - **Testimonials are empty** — the cards render "Quote to be added" until real quotes go into `TESTIMONIALS` and `WORK_REVIEWS`.
 - **X Emirates is labelled a UAE client.** It is an Indian client. Fixed on the India landing site, not yet here.
 - **Google and WhatsApp logos** render as wordmarks, not official marks — no licensed asset files for them. Shopify and Meta use the official supplied assets.
-- **No Git repo.** This site is deployed by uploading the bundle. The India landing site has since moved to a GitHub workflow; doing the same here would end the manual step.
 
 ---
 
