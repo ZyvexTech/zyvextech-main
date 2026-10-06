@@ -109,8 +109,9 @@ SITE_NAV_CSS = """/* This site's navigation on the imported portfolio pages. */
 
 
 # ── No currency anywhere ──────────────────────────────────────────────
-# This site does not mention money in any currency. Landing-site copy that
-# does is rewritten here (figures become multiples/percentages), screenshots
+# This site does not mention rupees (₹, lakhs, Rs.) anywhere; pounds and
+# dirhams on the UK and UAE case studies stay. Landing-site copy that
+# quotes rupees is rewritten here (figures become multiples/percentages), screenshots
 # that only exist to show money figures are dropped, and the X Emirates
 # banner (which reads "₹76 Lakhs") is replaced by build/lp-overrides/.
 NO_CURRENCY = [
@@ -146,16 +147,8 @@ NO_CURRENCY = [
     # Firoz Pickles, reporting section
     (r'<p class="metric-v">₹0</p>', '<p class="metric-v">0</p>'),
     (r"Before we spend a rupee,", "Before we spend anything,"),
-    # Niche Spectacles (UK) and French Cakes (UAE)
-    (r"a free-shipping threshold that reads naturally in pounds", "a free-shipping threshold that reads naturally to UK shoppers"),
-    (r"prices in pounds, UK shipping", "local pricing, UK shipping"),
-    (r"Free shipping kicks in on orders over &pound;100,", "Free shipping kicks in above a set order value,"),
-    (r"showing prices in pounds and free UK shipping unlocked", "showing free UK shipping unlocked"),
-    (r"cart in AED with Apple Pay", "cart with Apple Pay"),
-    (r"from the first page to the last: prices in dirhams, sale pricing", "from the first page to the last: local pricing, sale pricing"),
-    (r"catalog with prices in dirhams and sale badges", "catalog with sale badges"),
 ]
-CURRENCY_RE = re.compile(r"(?i)(₹|&#8377;|rupee|lakh|\binr\b|\brs\.|\baed\b|\busd\b|\bgbp\b|£|&pound;|€|&euro;|\$ ?[0-9]|dollar|\bpounds?\b|currenc|dirham|riyal)")
+CURRENCY_RE = re.compile(r"(?i)(₹|&#8377;|rupee|lakh|\binr\b|\brs\.)")
 SKIP_ASSETS |= {"xemirates-revenue.jpg", "xemirates-meta-roas.jpg"}   # money screenshots
 
 
