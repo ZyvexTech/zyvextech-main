@@ -38,11 +38,11 @@ HEADER = """<header class="site-header">
 <span class="brand-name">Zyvex Tech</span>
 </a>
 <nav class="nav zx-nav" aria-label="Main">
-<a href="/services" class="nav-link">Services</a>
+<div class="zx-item"><a href="/services" class="nav-link">Services<span class="zx-caret" aria-hidden="true"></span></a><!--zx-dropdown:services--></div>
 <a href="/works" class="nav-link active">Works</a>
 <a href="/our-story" class="nav-link">Our Story</a>
 <a href="/blog" class="nav-link">Blog</a>
-<a href="/contact" class="nav-link zx-nav-cta">Contact</a>
+<div class="zx-item"><a href="/contact" class="nav-link zx-nav-cta">Contact<span class="zx-caret" aria-hidden="true"></span></a><!--zx-dropdown:contact--></div>
 </nav>
 </div>
 </header>"""
@@ -106,6 +106,23 @@ SITE_NAV_CSS = """/* This site's navigation on the imported portfolio pages. */
   .zx-nav .zx-nav-cta{padding:7px 11px}
 }
 @media(max-width:440px){.zx-nav .nav-link:nth-child(3),.zx-nav .nav-link:nth-child(4){display:none}}
+/* Services / Contact dropdowns. The links are filled in at build time by
+   build/prerender.js from the site's own menu, replacing <!--zx-dropdown:key-->. */
+.zx-item{position:relative;display:flex;align-items:center}
+.zx-item > .nav-link{display:inline-flex;align-items:center;gap:6px}
+.zx-caret{width:6px;height:6px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(45deg);opacity:.65;margin-top:-3px;transition:transform .15s,margin-top .15s}
+.zx-item:hover .zx-caret,.zx-item:focus-within .zx-caret{transform:rotate(225deg);margin-top:3px}
+.zx-dd{position:absolute;top:100%;left:-12px;margin-top:14px;width:290px;background:#fff;border:1px solid var(--line);
+  box-shadow:0 24px 48px rgba(13,18,17,.12);padding:10px 0;opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .15s,visibility .15s,transform .15s;z-index:60;max-height:70vh;overflow-y:auto;text-align:left}
+.zx-dd::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px}
+.zx-dd.align-right{left:auto;right:0}
+.zx-item:hover .zx-dd,.zx-item:focus-within .zx-dd{opacity:1;visibility:visible;transform:translateY(0)}
+.zx-dd a{display:block;padding:9px 20px;font-size:13.5px;line-height:1.35;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400}
+.zx-dd a:hover{color:var(--ink);background:rgba(13,18,17,.04)}
+.zx-dd a.dd-all{color:var(--ink);font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em}
+.zx-dd-divider{height:1px;background:var(--line);margin:8px 0}
+@media(max-width:760px){.zx-dd,.zx-caret{display:none}}
 .zx-footer .footer-in{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
 .zx-footer a{color:var(--muted)}
 """

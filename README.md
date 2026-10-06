@@ -110,8 +110,8 @@ That does six things:
 
 1. Writes `index.artifact.html` — the self-contained page with hash routing switched on, for offline or standalone previewing.
 2. Extracts every inline `data:` URI into `dist/assets/`, deduplicated by content hash, and splits the inline `<style>` and `<script>` into `app.css` and `app.js`.
-3. Runs `prerender.js`, which loads `app.js` inside a Node `vm` sandbox with a stubbed `window`/`document`, calls each page function, and writes one HTML file per route plus `sitemap.xml`. Routes that exist in `static/` (the portfolio) are skipped there and only listed in the sitemap.
-4. Copies `static/` into `dist/`.
+3. Copies `static/` into `dist/`.
+4. Runs `prerender.js`, which loads `app.js` inside a Node `vm` sandbox with a stubbed `window`/`document`, calls each page function, and writes one HTML file per route plus `sitemap.xml`. Routes that exist in `static/` (the portfolio) are skipped there and only listed in the sitemap, and the Services / Contact dropdowns in their header are filled in from the site's menu.
 5. Writes `vercel.json`, `serve.json`, and `robots.txt`.
 6. Generates a production deployment zip (`dist.zip`).
 

@@ -51,6 +51,13 @@ io.open(os.path.join(ASSETS, "app.js"), "w", encoding="utf-8").write(js)
 io.open(os.path.join(HERE, "app.js"), "w", encoding="utf-8").write(js)
 print("assets extracted:", len(os.listdir(ASSETS)))
 
+# 2b ── static pages and media, copied verbatim (the imported portfolio:
+#       works.html, works/<slug>.html and their assets under /lp/)
+STATIC = os.path.join(ROOT, "static")
+if os.path.isdir(STATIC):
+    shutil.copytree(STATIC, OUT, dirs_exist_ok=True)
+    print("static files:", sum(len(f) for _, _, f in os.walk(STATIC)))
+
 # 3 ── prerender every route
 env = os.environ.copy()
 env["DIST_DIR"] = OUT
@@ -59,13 +66,6 @@ if p.stdout:
     print(p.stdout.strip())
 if p.stderr:
     print("Prerender warnings/errors:", p.stderr.strip())
-
-# 3b ── static pages and media, copied verbatim (the imported portfolio:
-#       works.html, works/<slug>.html and their assets under /lp/)
-STATIC = os.path.join(ROOT, "static")
-if os.path.isdir(STATIC):
-    shutil.copytree(STATIC, OUT, dirs_exist_ok=True)
-    print("static files:", sum(len(f) for _, _, f in os.walk(STATIC)))
 
 # 4 ── config files
 io.open(os.path.join(OUT, "vercel.json"), "w", encoding="utf-8").write("""{

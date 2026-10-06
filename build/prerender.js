@@ -99,6 +99,20 @@ staticPaths.sort();
 for(let i=routes.length-1;i>=0;i--) if(staticPaths.includes(routes[i].p)) routes.splice(i,1);
 const sitemapPaths=routes.filter(r=>r.p!=='/404').map(r=>r.p).concat(staticPaths);
 
+// The static pages' header has placeholders for the Services / Contact
+// dropdowns; fill them from the same menu data the rest of the site uses.
+const ddHtml=key=>C.fixLinks('<div class="zx-dd'+(key==='contact'?' align-right':'')+'">'
+  + C.navDropdownTop(key).map(it=>'<a href="'+it.href+'" class="dd-all">'+it.label+'</a>').join('')
+  + '<div class="zx-dd-divider"></div>'
+  + C.navDropdownItems(key).map(it=>'<a href="'+it.href+'">'+it.label+'</a>').join('') + '</div>');
+let filled=0;
+for(const sp of staticPaths){
+  const f=path.join(OUT, sp.replace(/^\//,'')+'.html');
+  if(!fs.existsSync(f)) continue;
+  const h=fs.readFileSync(f,'utf8'), out=h.replace(/<!--zx-dropdown:(\w+)-->/g,(m,k)=>ddHtml(k));
+  if(out!==h){ fs.writeFileSync(f,out); filled++; }
+}
+
 let n=0, bytes=0;
 for(const r of routes){
   const file = r.p==='/' ? 'index.html' : r.p.replace(/^\//,'')+'.html';
@@ -112,4 +126,4 @@ fs.writeFileSync(path.join(OUT,'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
   + sitemapPaths.map(p=>`  <url><loc>${SITE+(p==='/'?'/':p)}</loc><priority>${p==='/'?'1.0':(p.split('/').length>2?'0.7':'0.8')}</priority></url>`).join('\n')
   + '\n</urlset>\n');
-console.log('pages written:', n, '| static pages:', staticPaths.length, '| total html', (bytes/1048576).toFixed(2), 'MB | avg', Math.round(bytes/n/1024), 'KB');
+console.log('pages written:', n, '| static pages:', staticPaths.length, '(menus filled: '+filled+')', '| total html', (bytes/1048576).toFixed(2), 'MB | avg', Math.round(bytes/n/1024), 'KB');
