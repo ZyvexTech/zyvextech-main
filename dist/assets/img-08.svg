@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<rect width="1200" height="800" fill="#02493d"/>
+<g stroke="rgba(3,15,13,0.22)" stroke-width="1"><line x1="150" y1="0" x2="150" y2="800"/><line x1="300" y1="0" x2="300" y2="800"/><line x1="450" y1="0" x2="450" y2="800"/><line x1="600" y1="0" x2="600" y2="800"/><line x1="750" y1="0" x2="750" y2="800"/><line x1="900" y1="0" x2="900" y2="800"/><line x1="1050" y1="0" x2="1050" y2="800"/></g>
+<g transform="translate(90,90) scale(2.6)" fill="none" stroke="#f4f2ec" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M4 20l1.3-3.9A7.6 7.6 0 1 1 8.5 19L4 20Z"/><path d="M8.6 9.8c.3 2.9 2.7 5.3 5.6 5.6"/></g>
+<text font-family="Georgia,serif" font-size="46" fill="#f4f2ec" font-style="italic"><tspan x="90" y="316">A customer who feels spammed</tspan><tspan x="90" y="372">on WhatsApp doesn't</tspan><tspan x="90" y="428">unsubscribe quietly — they</tspan><tspan x="90" y="484">block you.</tspan></text>
+<text x="90" y="720" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="rgba(244,242,236,0.7)">MARKETING AUTOMATION</text>
+</svg>

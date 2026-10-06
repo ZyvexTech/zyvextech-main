@@ -1,0 +1,24 @@
+{
+  "name": "zyvextech-main-site",
+  "version": "1.0.0",
+  "description": "Zyvex Tech — main website source, build toolchain, and static deployment bundle",
+  "main": "dev-server.js",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js",
+    "build": "python build/rebuild.py",
+    "preview": "serve dist -c serve.json -l 3000"
+  },
+  "keywords": [
+    "zyvex",
+    "agency",
+    "shopify",
+    "static-site",
+    "vanilla-js"
+  ],
+  "author": "Zyvex Tech",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

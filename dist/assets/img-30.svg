@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="840" viewBox="0 0 1600 840" role="img" aria-label="Team photo placeholder">
+<rect width="1600" height="840" fill="#070707"/>
+<g stroke="#f4f2ec" stroke-opacity="0.06" stroke-width="1">
+<line x1="200" y1="0" x2="200" y2="840"/><line x1="400" y1="0" x2="400" y2="840"/><line x1="600" y1="0" x2="600" y2="840"/><line x1="800" y1="0" x2="800" y2="840"/><line x1="1000" y1="0" x2="1000" y2="840"/><line x1="1200" y1="0" x2="1200" y2="840"/><line x1="1400" y1="0" x2="1400" y2="840"/>
+</g>
+<g fill="none" stroke="#036b58" stroke-width="3" stroke-linecap="round">
+<circle cx="540" cy="352" r="30"/><path d="M488 452a52 52 0 0 1 104 0"/>
+<circle cx="670" cy="338" r="32"/><path d="M614 448a56 56 0 0 1 112 0"/>
+<circle cx="800" cy="326" r="36"/><path d="M738 446a62 62 0 0 1 124 0"/>
+<circle cx="930" cy="338" r="32"/><path d="M874 448a56 56 0 0 1 112 0"/>
+<circle cx="1060" cy="352" r="30"/><path d="M1008 452a52 52 0 0 1 104 0"/>
+</g>
+<g stroke="#f4f2ec" stroke-opacity="0.14" stroke-width="2">
+<path d="M120 120h60M120 120v60M1480 120h-60M1480 120v60M120 720h60M120 720v-60M1480 720h-60M1480 720v-60"/>
+</g>
+<text x="800" y="566" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="26" font-weight="600" letter-spacing="9" fill="#6b6a64">GROUP PHOTO</text>
+<text x="800" y="610" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="18" fill="#4a4a46">Placeholder &#8212; replace with the team photo</text>
+</svg>
