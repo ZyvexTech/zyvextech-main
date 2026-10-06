@@ -22,9 +22,9 @@ Local changes → commit → push to master → Vercel automatically deploys
 ```
 
 1. Edit `src/index.html` (the only source file; never hand-edit `dist/`).
-2. Run `npm run build` to regenerate `dist/`.
-3. Commit the source **and** the regenerated `dist/` output.
-4. `git push origin master` — Vercel picks up the push and deploys.
+2. Run `npm run build` locally to check the result in `dist/` (optional, but recommended).
+3. Commit the source changes. `dist/` is **not** committed (it is in `.gitignore`).
+4. `git push origin master` — Vercel runs `npm run build` (set in `vercel.json`) and deploys `dist/`.
 
 ---
 
@@ -63,7 +63,7 @@ zyvextech-main-site/
 │   ├── rebuild.py          ← build orchestrator (run this)
 │   ├── prerender.js        ← static route generator
 │   └── import_landing_works.py ← re-imports the portfolio and home sections from the landing site
-├── dist/                   ← generated. Do not hand-edit; it is overwritten.
+├── dist/                   ← generated, not in git. Vercel builds it on every deploy.
 │   ├── index.html          ← prerendered home
 │   ├── services.html  services/<slug>.html      (10 services)
 │   ├── works.html     works/<slug>.html         (15 case studies, from static/)
@@ -115,7 +115,7 @@ That does six things:
 5. Writes `vercel.json`, `serve.json`, and `robots.txt`.
 6. Generates a production deployment zip (`dist.zip`).
 
-Output lands in `dist/`. Commit it and push to `master` to deploy (see Deployment workflow above).
+Output lands in `dist/`, which is not committed: Vercel rebuilds it from source on every push to `master` (see Deployment workflow above).
 
 To preview the built production bundle:
 
@@ -140,7 +140,7 @@ Everything lives in plain data arrays near the top of `src/index.html`:
 | `STATS`, `VALUES`, `TOOLS_ADVISED`, `TECH_PARTNERS` | the supporting blocks |
 | `TEAM_PHOTO`, `FOUNDER_PHOTO`, `TEAM_MEETING_PHOTO`, `CLIENT_LOGOS` | image slots (**placeholders**) |
 
-Change the data, run the build, commit, and push to `master`.
+Change the data, run the build to check it, commit, and push to `master`.
 
 ### Content shared with the landing site
 

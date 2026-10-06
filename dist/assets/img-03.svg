@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-<rect width="1200" height="630" fill="#f4f8f7"/>
-<g stroke="rgba(13,18,17,0.06)" stroke-width="1"><line x1="150" y1="0" x2="150" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/><line x1="450" y1="0" x2="450" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="750" y1="0" x2="750" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/><line x1="1050" y1="0" x2="1050" y2="630"/></g>
-<defs><radialGradient id="g1" cx="72%" cy="40%" r="55%"><stop offset="0%" stop-color="#067a64" stop-opacity="0.38"/><stop offset="100%" stop-color="#067a64" stop-opacity="0"/></radialGradient></defs>
-<rect width="1200" height="630" fill="url(#g1)"/>
-<g transform="translate(760,130) scale(15)" fill="none" stroke="#067a64" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"><path d="M3.5 16.5 9 11l4 4 7-8"/><path d="M15.5 6.5H20V11"/></g>
-<rect x="80" y="72" width="264.40000000000003" height="36" fill="#03594a"/>
-<text x="96" y="96" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#ffffff">CONVERSION RATE OPTIMIZATION</text>
-</svg>

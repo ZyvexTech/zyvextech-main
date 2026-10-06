@@ -4,3 +4,4 @@ dist.zip
 Thumbs.db
 *.log
 __pycache__/
+dist/

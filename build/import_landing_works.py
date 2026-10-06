@@ -108,6 +108,65 @@ SITE_NAV_CSS = """/* This site's navigation on the imported portfolio pages. */
 """
 
 
+# ── No currency anywhere ──────────────────────────────────────────────
+# This site does not mention money in any currency. Landing-site copy that
+# does is rewritten here (figures become multiples/percentages), screenshots
+# that only exist to show money figures are dropped, and the X Emirates
+# banner (which reads "₹76 Lakhs") is replaced by build/lp-overrides/.
+NO_CURRENCY = [
+    # X Emirates: card lines, meta descriptions, hero, metrics
+    (r"From WhatsApp orders to &#8377;76 lakhs in Shopify revenue, 8\.32x ROAS",
+     "From WhatsApp orders to a Shopify store with 8.32x ROAS and a 9% conversion rate"),
+    (r"reaching &#8377;76 lakhs in revenue, 8\.32x ROAS", "reaching 8.32x ROAS"),
+    (r"moved onto a Shopify store we grew to <b>&#8377;76 lakhs in revenue</b>, with 8\.32x ROAS",
+     "moved onto a Shopify store where sales grew <b>nearly 13x in the first month</b>, with 8.32x ROAS"),
+    (r'<p class="metric-v">&#8377;76L</p><p class="metric-l">Revenue on Shopify</p>',
+     '<p class="metric-v">13x</p><p class="metric-l">Sales, first month</p>'),
+    (r'<p class="metric-v">&#8377;76L</p><p class="metric-l">Revenue</p>',
+     '<p class="metric-v">13x</p><p class="metric-l">Sales, month one</p>'),
+    (r"Grew to <b>&#8377;76 lakhs in revenue</b> on Shopify, with",
+     "Sales grew <b>nearly 13x in the first month</b> on Shopify, with"),
+    # X Emirates case study: revenue section and ROAS section
+    (r"&#8377;76 Lakhs in Revenue</h2>", "Sales That Kept Growing</h2>"),
+    (r"The store has done <b>&#8377;76,65,516</b> in total sales on Shopify this year, from 1 January to 2 October 2026\.",
+     "Within the first month total sales grew <b>nearly 13x</b>, and the store has kept growing through 2026."),
+    (r'<div class="wshots">\s*<img src="/lp/work/xemirates-revenue\.jpg"[^>]*>\s*</div>', ""),
+    (r"In July 2026 the account spent <b>&#8377;1,80,812</b> and returned <b>&#8377;15,04,356</b> in revenue, a purchase ROAS of <b>8\.32x</b>\.",
+     "In July 2026 the account returned <b>8.32x</b> its ad spend in revenue."),
+    (r'<div class="metric"><p class="metric-v">&#8377;1\.8L</p><p class="metric-l">Ad spend, July</p></div><div class="metric"><p class="metric-v">&#8377;15\.04L</p><p class="metric-l">Revenue, July</p></div>',
+     '<div class="metric"><p class="metric-v">9%</p><p class="metric-l">Conversion rate</p></div><div class="metric"><p class="metric-v">13x</p><p class="metric-l">Sales, first month</p></div>'),
+    (r'<div class="wshots">\s*<img src="/lp/work/xemirates-meta-roas\.jpg"[^>]*>\s*</div>', ""),
+    (r"a Shopify store that has done &#8377;76 lakhs in revenue, with ads returning",
+     "a Shopify store where sales grew nearly 13x in the first month, with ads returning"),
+    # X Emirates testimonial
+    (r"all I got was a loss, not a single rupee of profit\.", "all I got was a loss, not any profit."),
+    (r"total sales went from <b>&#8377;50K to &#8377;6\.45 lakhs</b>\.", "total sales grew <b>nearly 13 times over</b>."),
+    (r"total sales went from &#8377;50K to &#8377;6\.45 lakhs\.", "total sales grew nearly 13 times over."),
+    (r"&#8377;50K &rarr; &#8377;6\.45L in a month", "13x sales in a month"),
+    # Firoz Pickles, reporting section
+    (r'<p class="metric-v">₹0</p>', '<p class="metric-v">0</p>'),
+    (r"Before we spend a rupee,", "Before we spend anything,"),
+    # Niche Spectacles (UK) and French Cakes (UAE)
+    (r"a free-shipping threshold that reads naturally in pounds", "a free-shipping threshold that reads naturally to UK shoppers"),
+    (r"prices in pounds, UK shipping", "local pricing, UK shipping"),
+    (r"Free shipping kicks in on orders over &pound;100,", "Free shipping kicks in above a set order value,"),
+    (r"showing prices in pounds and free UK shipping unlocked", "showing free UK shipping unlocked"),
+    (r"cart in AED with Apple Pay", "cart with Apple Pay"),
+    (r"from the first page to the last: prices in dirhams, sale pricing", "from the first page to the last: local pricing, sale pricing"),
+    (r"catalog with prices in dirhams and sale badges", "catalog with sale badges"),
+]
+CURRENCY_RE = re.compile(r"(?i)(₹|&#8377;|rupee|lakh|\binr\b|\brs\.|\baed\b|\busd\b|\bgbp\b|£|&pound;|€|&euro;|\$ ?[0-9]|dollar|\bpounds?\b|currenc|dirham|riyal)")
+SKIP_ASSETS |= {"xemirates-revenue.jpg", "xemirates-meta-roas.jpg"}   # money screenshots
+
+
+def no_currency(html, where):
+    for pat, rep in NO_CURRENCY:
+        html = re.sub(pat, rep, html)
+    left = [html[max(0, m.start() - 50):m.end() + 30] for m in CURRENCY_RE.finditer(html)]
+    assert not left, (where, left[:3])
+    return html
+
+
 def route(path):
     """Landing-site href -> this site's href."""
     m = re.match(r"^/works/([a-z0-9-]+)/?(#.*)?$", path)
@@ -148,7 +207,7 @@ def convert(html):
     # our nav layer, after the landing stylesheets
     html = html.replace("</head>", '<link rel="stylesheet" href="/lp/site-nav.css">\n</head>', 1)
     assert "in.zyvextech.co" not in html, re.findall(r".{40}in\.zyvextech\.co.{40}", html)[:3]
-    return html
+    return no_currency(html, "page")
 
 
 def main(src):
@@ -167,7 +226,7 @@ def main(src):
     # assets: everything under landing assets/, minus tracking
     for dp, _, fs in os.walk(os.path.join(src, "assets")):
         for fn in fs:
-            if fn in SKIP_ASSETS and dp == os.path.join(src, "assets"):
+            if (fn in {"attribution.js", "app.js"} and dp == os.path.join(src, "assets")) or fn in SKIP_ASSETS - {"attribution.js", "app.js"}:
                 continue
             rel = os.path.relpath(os.path.join(dp, fn), os.path.join(src, "assets"))
             dst = os.path.join(LP, rel)
@@ -177,6 +236,10 @@ def main(src):
                 io.open(dst, "w", encoding="utf-8").write(css.replace("/assets/", "/lp/"))
             else:
                 shutil.copyfile(os.path.join(dp, fn), dst)
+    # this site's replacements for landing assets (e.g. the currency-free X Emirates banner)
+    ovr = os.path.join(HERE, "lp-overrides")
+    if os.path.isdir(ovr):
+        shutil.copytree(ovr, LP, dirs_exist_ok=True)
     io.open(os.path.join(LP, "case-app.js"), "w", encoding="utf-8").write(CASE_APP_JS)
     io.open(os.path.join(LP, "site-nav.css"), "w", encoding="utf-8").write(SITE_NAV_CSS)
     print("pages:", len(pages), "| assets:", sum(len(f) for _, _, f in os.walk(LP)))
@@ -267,6 +330,7 @@ def home_sections(src):
         sec = re.sub(r'data-link="(/[^"]*)"', lambda m: 'data-link="' + route(m.group(1)) + '"', sec)
         sec = sec.replace('"/assets/', '"/lp/')
         sec = re.sub(r"\s*\n\s*", "\n", sec)
+        sec = no_currency(sec, key)
         out[key] = '<div class="lp-sec lp-' + key + '">' + sec + "</div>"
     css = re.findall(r"<style[^>]*>(.*?)</style>", html, re.S)[0]
     light = io.open(os.path.join(src, "assets", "light.css"), encoding="utf-8").read()
