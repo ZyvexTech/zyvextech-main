@@ -1,0 +1,39 @@
+/* Case study pages: headings and stat values in Helvetica instead of Runalto. */
+.h1,.h2,.h3,.case-name,.wcard-title,.metric-v,.quote-mark{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+.h1{letter-spacing:-0.03em}
+.h2,.h3{letter-spacing:-0.02em}
+/* Phone screenshots shown side by side, and brand name tiles. */
+.wshots.phones{grid-template-columns:repeat(auto-fit,minmax(200px,300px));justify-content:center}
+.wshots.phones img{border-radius:26px}
+.brands{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.brands span{border:1px solid var(--line);padding:22px 12px;min-height:88px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+font-size:15px;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+/* Side-scrolling carousel of phone screenshots. */
+.pcar{margin-top:28px}
+.pcar-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pcar-track::-webkit-scrollbar{display:none}
+.pcar-track img{flex:0 0 280px;width:280px;scroll-snap-align:start;border:1px solid var(--line);border-radius:26px;display:block}
+.pcar-nav{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:18px}
+.pcar-dots{display:flex;gap:7px;margin:0 8px}
+.pcar-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
+.pcar-dot.on{background:var(--teal2);width:22px;border-radius:4px}
+.pcar-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:inherit;
+font-size:18px;line-height:1;cursor:pointer}
+.pcar-btn:hover{border-color:var(--teal2);color:var(--teal2)}
+.pcar-btn:disabled{opacity:.35;cursor:default}
+@media(max-width:640px){.pcar-track img{flex-basis:72%;width:72%}}
+.pcar.fits .pcar-nav{display:none}
+.pcar.fits .pcar-track{justify-content:center}
+/* Brand logo tiles: square marks take one column, wide wordmarks two. */
+.brands.logos{grid-template-columns:repeat(4,1fr)}
+.brands.logos span{min-height:150px;padding:24px}
+.brands.logos .wide{grid-column:span 2}
+.brands.logos img{display:block;max-width:100%;max-height:100px;width:auto;height:auto;object-fit:contain}
+.brands.logos .wide img{max-width:88%;max-height:56px}
+@media(max-width:640px){.brands.logos{grid-template-columns:1fr 1fr}.brands.logos span{min-height:120px}.brands.logos img{max-height:80px}}
+/* Keep screenshots at their natural aspect ratio when width/height attributes are set. */
+.wshots img,.wcover{height:auto}
+/* Case study heroes size to their content on phones instead of filling the screen,
+   so there is no empty band between the site link and the cover image. */
+@media(max-width:768px){body .hero{min-height:0;padding-top:48px;padding-bottom:48px}body .hero::before,body .hero::after{content:none}}

@@ -60,6 +60,13 @@ if p.stdout:
 if p.stderr:
     print("Prerender warnings/errors:", p.stderr.strip())
 
+# 3b ── static pages and media, copied verbatim (the imported portfolio:
+#       works.html, works/<slug>.html and their assets under /lp/)
+STATIC = os.path.join(ROOT, "static")
+if os.path.isdir(STATIC):
+    shutil.copytree(STATIC, OUT, dirs_exist_ok=True)
+    print("static files:", sum(len(f) for _, _, f in os.walk(STATIC)))
+
 # 4 ── config files
 io.open(os.path.join(OUT, "vercel.json"), "w", encoding="utf-8").write("""{
   "cleanUrls": true,

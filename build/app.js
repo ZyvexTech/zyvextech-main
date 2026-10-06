@@ -91,29 +91,29 @@ var APPROACH = [
    carry the idea of each step rather than decorating it.               */
 function stepArt(key){
   var open = '<svg class="hw-svg" viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">';
-  var g = '<g stroke="#0d9c80" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">';
-  var faint = 'stroke="#f4f2ec" stroke-opacity="0.18" stroke-width="1.5"';
+  var g = '<g stroke="#0a8a70" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">';
+  var faint = 'stroke="#0d1211" stroke-opacity="0.18" stroke-width="1.5"';
   if(key === 'consult'){
     /* An intake sheet mid-answer: three things we establish before a single
        tool gets named. The last line is still being written.              */
     var row = function(n, y, label, answer, width, done){
-      var out = '<circle cx="46" cy="'+y+'" r="15" fill="none" stroke="#0d9c80" '
+      var out = '<circle cx="46" cy="'+y+'" r="15" fill="none" stroke="#0a8a70" '
         + 'stroke-opacity="'+(done?'1':'0.45')+'" stroke-width="2"/>'
         + '<text x="46" y="'+(y+6)+'" text-anchor="middle" font-family="Helvetica,Arial" '
-        + 'font-size="15" fill="#0d9c80" fill-opacity="'+(done?'1':'0.55')+'">'+n+'</text>'
+        + 'font-size="15" fill="#0a8a70" fill-opacity="'+(done?'1':'0.55')+'">'+n+'</text>'
         + '<text x="86" y="'+(y-14)+'" font-family="Helvetica,Arial" font-size="13" '
         + 'letter-spacing="2.2" fill="#6b6a64">'+label+'</text>'
-        + '<line x1="86" y1="'+(y+22)+'" x2="556" y2="'+(y+22)+'" stroke="#f4f2ec" '
+        + '<line x1="86" y1="'+(y+22)+'" x2="556" y2="'+(y+22)+'" stroke="#0d1211" '
         + 'stroke-opacity="0.16" stroke-width="1.5"/>'
         + '<text x="86" y="'+(y+14)+'" font-family="Helvetica,Arial" font-size="19" '
-        + 'fill="'+(done?'#cfcdc6':'#8a8880')+'">'+answer+'</text>'
+        + 'fill="'+(done?'#cfcdc6':'#78817d')+'">'+answer+'</text>'
         + '<line x1="86" y1="'+(y+22)+'" x2="'+(86+width)+'" y2="'+(y+22)+'" '
-        + 'stroke="#0d9c80" stroke-width="2.5" stroke-linecap="round"/>';
+        + 'stroke="#0a8a70" stroke-width="2.5" stroke-linecap="round"/>';
       return out;
     };
     return open
       + '<text x="46" y="36" font-family="Helvetica,Arial" font-size="13" letter-spacing="3" '
-      + 'fill="#0d9c80">DISCOVERY</text>'
+      + 'fill="#0a8a70">DISCOVERY</text>'
       + '<line x1="46" y1="52" x2="556" y2="52" ' + faint + '/>'
       + row('1', 110, 'BUSINESS MODEL', 'How the money is actually made', 330, true)
       + row('2', 212, 'PRODUCT', 'What it is, and who buys it', 288, true)
@@ -124,11 +124,11 @@ function stepArt(key){
   }
   if(key === 'scope'){
     var chip = function(x, y, w, label, teal){
-      var stroke = teal ? '#0d9c80' : '#f4f2ec', op = teal ? '1' : '0.20';
+      var stroke = teal ? '#0a8a70' : '#0d1211', op = teal ? '1' : '0.20';
       return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="44" rx="3" fill="none" '
         + 'stroke="'+stroke+'" stroke-opacity="'+op+'" stroke-width="'+(teal?2:1.5)+'"/>'
         + '<text x="'+(x+w/2)+'" y="'+(y+28)+'" text-anchor="middle" font-family="Helvetica,Arial" '
-        + 'font-size="15" fill="'+(teal?'#0d9c80':'#8a8880')+'">'+label+'</text>';
+        + 'font-size="15" fill="'+(teal?'#0a8a70':'#78817d')+'">'+label+'</text>';
     };
     var col = [52, 224, 396], w = 152;
     var inTop = ['Shopify Plus', 'Shopify', 'Custom ERP'];
@@ -142,19 +142,19 @@ function stepArt(key){
     for(var k=0;k<3;k++){ out += chip(col[k], 312, w, keep[k], true); }
 
     var cross = function(x, y){
-      return '<path d="M'+(x-9)+' '+(y-9)+'l18 18M'+(x+9)+' '+(y-9)+'l-18 18" stroke="#f4f2ec" '
+      return '<path d="M'+(x-9)+' '+(y-9)+'l18 18M'+(x+9)+' '+(y-9)+'l-18 18" stroke="#0d1211" '
         + 'stroke-opacity="0.26" stroke-width="2" stroke-linecap="round"/>';
     };
 
     return open
       + pile
-      + '<g stroke="#0d9c80" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">'
+      + '<g stroke="#0a8a70" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">'
       + '<path d="M40 150 L236 258 L236 296"/><path d="M560 150 L364 258 L364 296"/>'
       + '</g>'
       + cross(104, 246) + cross(496, 246)
       + out
-      + '<path d="M300 258 v34" stroke="#0d9c80" stroke-width="2" stroke-linecap="round"/>'
-      + '<path d="M291 284 l9 12 l9 -12" stroke="#0d9c80" stroke-width="2" fill="none" '
+      + '<path d="M300 258 v34" stroke="#0a8a70" stroke-width="2" stroke-linecap="round"/>'
+      + '<path d="M291 284 l9 12 l9 -12" stroke="#0a8a70" stroke-width="2" fill="none" '
       + 'stroke-linecap="round" stroke-linejoin="round"/>'
       + '<text x="300" y="392" text-anchor="middle" font-family="Helvetica,Arial" font-size="14" '
       + 'letter-spacing="2.5" fill="#6b6a64">THE STACK THAT FITS</text>'
@@ -183,20 +183,20 @@ function stepArt(key){
   // maintain
   var cx = 300, cy = 206, r = 128;
   var node = function(x, y, label, ly){
-    return '<circle cx="'+x+'" cy="'+y+'" r="10" fill="#0d9c80"/>'
+    return '<circle cx="'+x+'" cy="'+y+'" r="10" fill="#0a8a70"/>'
       + '<text x="'+x+'" y="'+ly+'" fill="#cfcdc6" font-family="Helvetica,Arial" font-size="17" text-anchor="middle">'+label+'</text>';
   };
   var chev = function(x, y, rot){
     return '<path d="M-7 -9 L7 0 L-7 9" transform="translate('+x+','+y+') rotate('+rot+')" '
-      + 'stroke="#0d9c80" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+      + 'stroke="#0a8a70" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
   };
   return open
-    + '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#f4f2ec" stroke-opacity="0.16" stroke-width="1.5" fill="none"/>'
+    + '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke="#0d1211" stroke-opacity="0.16" stroke-width="1.5" fill="none"/>'
     + chev(412, 141, 60) + chev(300, 334, 180) + chev(188, 141, 300)
     + node(300, 78, 'Monitor', 52)
     + node(411, 270, 'Improve', 302)
     + node(189, 270, 'Support', 302)
-    + '<text x="'+cx+'" y="'+(cy-4)+'" fill="#0d9c80" font-family="Helvetica,Arial" font-size="15" '
+    + '<text x="'+cx+'" y="'+(cy-4)+'" fill="#0a8a70" font-family="Helvetica,Arial" font-size="15" '
     + 'letter-spacing="3" text-anchor="middle">AFTER LAUNCH</text>'
     + '<text x="'+cx+'" y="'+(cy+24)+'" fill="#6b6a64" font-family="Helvetica,Arial" font-size="15" '
     + 'text-anchor="middle">we stay on</text>'
@@ -388,6 +388,58 @@ var SERVICES = [
     relatedCaseStudies: [] }
 ];
 
+/* ── Service extras (content from the India landing site) ────────
+   Merged into SERVICES below: a hands-on checklist of what we run,
+   what every build includes, notes on fit, and extra FAQs.          */
+var SERVICE_EXTRAS = {
+  "performance-marketing": {
+    practice: { title: "Paid Advertising", sub: "Meta-led campaigns built around ROAS, not reach",
+      items: ["Meta and Instagram campaigns","Audience research and targeting","Retargeting and funnel structure","Budget scaling based on what converts","Pixel, CAPI and ROAS tracking","Reporting tied to decisions, not a PDF"] },
+    reporting: true,
+    note: { title: "Is this a fit?", body: "<b>There is a minimum monthly ad spend.</b> Below it there is not enough volume for testing to produce a real answer, and we would be charging you to guess. We confirm the figure for your market during the audit, and would rather say so now than in month three.</p><p>We also work best with brands that already have their own content or creative team. We plan and run the campaigns, the SEO and the store. We do not produce the photography, video or ad creative." },
+    faqs: [
+      { q: "Is there a lock-in period?", a: "It runs month to month. The work compounds, so most engagements get more valuable the longer they run, but that should be your reason to stay rather than a contract." },
+      { q: "We already have an agency. Can you take over?", a: "Yes, and it is a common starting point. The onboarding audit covers the existing ad account, the store and the tracking setup before anything is changed, so we know what is worth keeping. You keep ownership of the ad account throughout." },
+      { q: "How soon do we see results?", a: "Paid and CRO work can move within weeks. Testing needs enough volume to produce a real answer, so the first month is about finding what converts, then budget scales behind it." },
+      { q: "Do you produce the ad creative and content?", a: "No. We plan and run the campaigns and tell you what the numbers say is working. The photography, video and ad creative come from your side, so this works best if you already have a content team or a system for producing it." }
+    ],
+    related: ["x-emirates"] },
+  "marketing-automation-funnels": {
+    practice: { title: "Retention Marketing", sub: "Turning first orders into repeat customers",
+      items: ["Email and WhatsApp marketing flows","Abandoned cart and browse recovery","Welcome, post-purchase and win-back journeys","Customer segmentation and lifecycle offers","Broadcasts for launches, drops and sales","Repeat purchase rate and LTV tracking"] } },
+  "seo": {
+    practice: { title: "SEO & Content", sub: "Infrastructure, not a one-time checklist",
+      items: ["Technical and on-page SEO","Shopify-specific indexing and structure","Keyword strategy from real search behaviour","Collection and product page optimisation","Structured data and site speed","Content strategy and buying guides"] },
+    reporting: true,
+    faqs: [
+      { q: "How soon will SEO show results?", a: "SEO compounds and usually shows meaningful movement in two to four months. Anyone promising you ranking results faster than that is selling you something." }
+    ],
+    related: ["firoz-pickles","nichespectacles"] },
+  "shopify-ecommerce-development": {
+    practice: { title: "Shopify Development", sub: "Stores built around conversion, not around a theme",
+      items: ["Store builds, migrations and theme work","Conversion-focused product and cart pages","Checkout, payments and COD configured","Funnel audits backed by session data","Average order value and bundling work","Structured CRO tests, not opinion-led redesigns"] },
+    includes: { title: "Every build includes", items: ["Structured catalog","Product metafields","Checkout &amp; COD setup","CRO","AOV optimisation","Documented handover"] },
+    faqs: [
+      { q: "How long does a Shopify build take?", a: "It depends on the project scope, but most builds take 3 to 4 weeks from consultation to launch. We confirm the timeline before you commit." },
+      { q: "How much does a Shopify build cost?", a: "It depends completely on the scope, since every build is customised. You get a clear quote after the consultation, before any work starts." },
+      { q: "Do you build custom projects beyond Shopify themes?", a: "Yes. Alongside Shopify themes and Liquid, we build custom projects in React, from custom storefronts to web apps and tools." },
+      { q: "Do you offer ongoing support?", a: "Yes. After launch we offer ongoing support for fixes, updates and improvements. You also get full documentation, so your team is never locked in." },
+      { q: "Can you handle the marketing too?", a: "Yes. Performance marketing, SEO and retention run as one system with the store, by the same team, so fixes on the store ship without waiting on another vendor." }
+    ],
+    related: ["colin-guest","nichespectacles","frenchcakes"] },
+  "conversion-rate-optimization": {
+    practice: { title: "Conversion &amp; AOV", sub: "More from the traffic you already have",
+      items: ["Funnel audits backed by session data","Conversion-focused product and cart pages","Average order value and bundling work","Checkout, payments and COD configured","Structured CRO tests, not opinion-led redesigns","Reporting on conversion rate and AOV, month by month"] },
+    related: ["firoz-pickles"] }
+};
+SERVICES.forEach(function(s){
+  var x = SERVICE_EXTRAS[s.slug];
+  if(!x) return;
+  s.practice = x.practice; s.includes = x.includes; s.note = x.note; s.reporting = !!x.reporting;
+  if(x.faqs) s.faqs = (s.faqs || []).concat(x.faqs);
+  if(x.related) x.related.forEach(function(r){ if((s.relatedCaseStudies || (s.relatedCaseStudies = [])).indexOf(r) < 0) s.relatedCaseStudies.push(r); });
+});
+
 var TECH_PARTNERS = [
   { name: "Shopify", icon: "shopify", note: "Ecommerce platform. Official Shopify Partner." },
   { name: "Meta", icon: "meta", note: "Advertising & social" },
@@ -431,11 +483,11 @@ function ph(label, note, w, h){
               + 'M'+m+' '+(h-m-c)+'V'+(h-m)+'h'+c+'M'+(w-m)+' '+(h-m-c)+'V'+(h-m)+'h-'+c+'"/>';
   var cy = h/2;
   var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">'
-    + '<rect width="'+w+'" height="'+h+'" fill="#070707"/>'
-    + '<g stroke="#f4f2ec" stroke-opacity="0.06" stroke-width="1">'+lines+'</g>'
-    + '<g fill="none" stroke="#f4f2ec" stroke-opacity="0.16" stroke-width="2">'+corners+'</g>'
-    + '<circle cx="'+(w/2)+'" cy="'+(cy-Math.round(h*0.11))+'" r="'+Math.round(h*0.045)+'" fill="none" stroke="#0d9c80" stroke-width="2.5"/>'
-    + '<path d="M'+(w/2-Math.round(h*0.018))+' '+(cy-Math.round(h*0.11))+'h'+Math.round(h*0.036)+'M'+(w/2)+' '+(cy-Math.round(h*0.128))+'v'+Math.round(h*0.036)+'" stroke="#0d9c80" stroke-width="2.5" stroke-linecap="round"/>'
+    + '<rect width="'+w+'" height="'+h+'" fill="#f4f8f7"/>'
+    + '<g stroke="#0d1211" stroke-opacity="0.06" stroke-width="1">'+lines+'</g>'
+    + '<g fill="none" stroke="#0d1211" stroke-opacity="0.16" stroke-width="2">'+corners+'</g>'
+    + '<circle cx="'+(w/2)+'" cy="'+(cy-Math.round(h*0.11))+'" r="'+Math.round(h*0.045)+'" fill="none" stroke="#0a8a70" stroke-width="2.5"/>'
+    + '<path d="M'+(w/2-Math.round(h*0.018))+' '+(cy-Math.round(h*0.11))+'h'+Math.round(h*0.036)+'M'+(w/2)+' '+(cy-Math.round(h*0.128))+'v'+Math.round(h*0.036)+'" stroke="#0a8a70" stroke-width="2.5" stroke-linecap="round"/>'
     + '<text x="'+(w/2)+'" y="'+(cy+Math.round(h*0.03))+'" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" '
     + 'font-size="'+Math.round(h*0.042)+'" font-weight="600" letter-spacing="'+Math.round(h*0.011)+'" fill="#cfcdc6">'+esc(label).toUpperCase()+'</text>'
     + (note ? '<text x="'+(w/2)+'" y="'+(cy+Math.round(h*0.085))+'" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" '
@@ -872,32 +924,25 @@ function ctaSection(opts){
   +   gridLines(true)
   +   '<div class="wrap" style="position:relative">'
   +     eyebrow('Get in touch')
-  +     '<h2>'+titleClean+'<span style="color:rgba(0,0,0,.5)">.</span></h2>'
+  +     '<h2>'+titleClean+'<span style="color:var(--teal2)">.</span></h2>'
   +     '<p>'+body+'</p>'
   +     '<a href="'+href+'" class="btn btn-dark">'+cta+' <span aria-hidden="true">↗</span></a>'
   +   '</div>'
   + '</section>';
 }
 /* ── Platform logos ───────────────────────────────────────────
-   Official assets, used as supplied by each platform.
-     "light" (home Core Expertise cards): icon-only marks in colour —
-       Shopify bag, Meta infinity, Google "G" (supplied by Zyvex).
-     "dark": Shopify primary logo (Partners brand pack) and the mono
-       Meta lockup (Meta Brand Resource Center). Google has no dark one.
-   "light" is the version for light backgrounds, "dark" for dark ones.
-   h    = image height as a multiple of MARK_UNIT
-   pad  = clear space around it, as a multiple of MARK_UNIT
-   darkH / darkPad = overrides for the "dark" version, when it differs
-   Light icons are sized so every plate is 3 units tall. Meta's mono
-   artboard carries its own clear space (drawn at 3x, no padding); the
-   other marks are tight, so the clear space is added around them.
-   Google has no dark version, so on dark backgrounds it falls back to
-   the plain wordmark.                                                 */
+   "light": icon-only colour marks for the home Core Expertise plates
+            (Shopify bag, Meta infinity, Google "G", supplied by Zyvex).
+   "dark":  full colour logos (wordmark/lockup) used inline elsewhere,
+            e.g. the How We Work diagram and Platforms We Work In.
+            (Name kept from the old dark theme; the site is light now.)
+   h / pad          = height and clear space for "light", in MARK_UNITs
+   darkH / darkPad  = the same for "dark"                              */
 var MARK_UNIT = 20;
 var PARTNER_LOGOS = {
   shopify: { light: "/assets/img-52.svg", dark: "/assets/img-53.svg", h: 1.6, pad: 0.7, darkH: 1, darkPad: 1, alt: "Shopify" },
-  meta:    { light: "/assets/img-54.png", dark: "/assets/img-55.svg", h: 1.2, pad: 0.9, darkH: 3, darkPad: 0, alt: "Meta" },
-  google:  { light: "/assets/img-56.png", h: 1.5, pad: 0.75, alt: "Google" }
+  meta:    { light: "/assets/img-54.png", dark: "/assets/img-55.svg", h: 1.2, pad: 0.9, darkH: 1.05, darkPad: 1, alt: "Meta" },
+  google:  { light: "/assets/img-56.png", dark: "/assets/img-57.svg", h: 1.5, pad: 0.75, darkH: 1.15, darkPad: 1, alt: "Google" }
 };
 
 function brandMark(key, onLight, unit){
@@ -1024,6 +1069,51 @@ function renderFooter(){
 }
 
 /* ── Home ─────────────────────────────────────────────────────── */
+/* <lp-home> Generated by build/import_landing_works.py from the landing site's
+   home page. Do not hand-edit: change the landing site and re-run the import. */
+var LP_HOME = {
+"clients": "<div class=\"lp-sec lp-clients\"><section class=\"section clients-sec\" style=\"padding:56px 0\">\n<div class=\"wrap center\">\n<span class=\"kicker\">Clients Worldwide</span>\n<h2 class=\"h2 balance\" style=\"margin-top:14px;font-size:clamp(26px,3.2vw,36px)\">Trusted by brands across the world<span class=\"dot\">.</span></h2>\n<p class=\"lede balance\" style=\"max-width:560px;margin-left:auto;margin-right:auto;font-size:15.5px\">We build and grow businesses across the world, with clients across the UK, the UAE, Qatar, Saudi Arabia, the US and India.</p>\n</div>\n<div class=\"client-marquee\" aria-label=\"Brands we have worked with\"><div class=\"client-row\"><div class=\"logo-track\" style=\"animation-duration:61s\"><div class=\"logo-set\"><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/sa.svg\" alt=\"Saudi Arabia\" title=\"Saudi Arabia\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/gearup.png\" alt=\"GearUp\" width=\"112\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"United Kingdom\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ba51.png\" alt=\"BA 51\" width=\"59\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/qa.svg\" alt=\"Qatar\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/abc-lux-ar.png\" alt=\"ABC LUX\" width=\"51\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"United Kingdom\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/niche-spectacles.png\" alt=\"Niche Spectacles\" width=\"53\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/x-emirates.png\" alt=\"X Emirates Online\" width=\"112\" height=\"32\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/chandanveda.png\" alt=\"Chandanveda\" width=\"118\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/colin-guest.png\" alt=\"Colin Guest\" width=\"153\" height=\"17\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/city-optik.png\" alt=\"City Optik\" width=\"94\" height=\"38\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/coco-roots.png\" alt=\"Coco Roots Organic\" width=\"72\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/feza-dates.png\" alt=\"Feza Dates\" width=\"35\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/sa.svg\" alt=\"\" title=\"Saudi Arabia\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/gearup.png\" alt=\"\" width=\"112\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ba51.png\" alt=\"\" width=\"59\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/qa.svg\" alt=\"\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/abc-lux-ar.png\" alt=\"\" width=\"51\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/niche-spectacles.png\" alt=\"\" width=\"53\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/x-emirates.png\" alt=\"\" width=\"112\" height=\"32\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/chandanveda.png\" alt=\"\" width=\"118\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/colin-guest.png\" alt=\"\" width=\"153\" height=\"17\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/city-optik.png\" alt=\"\" width=\"94\" height=\"38\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/coco-roots.png\" alt=\"\" width=\"72\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/feza-dates.png\" alt=\"\" width=\"35\" height=\"44\" loading=\"lazy\"></span></span></div><div class=\"logo-set\" aria-hidden=\"true\"><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/sa.svg\" alt=\"\" title=\"Saudi Arabia\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/gearup.png\" alt=\"\" width=\"112\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ba51.png\" alt=\"\" width=\"59\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/qa.svg\" alt=\"\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/abc-lux-ar.png\" alt=\"\" width=\"51\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/niche-spectacles.png\" alt=\"\" width=\"53\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/x-emirates.png\" alt=\"\" width=\"112\" height=\"32\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/chandanveda.png\" alt=\"\" width=\"118\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/colin-guest.png\" alt=\"\" width=\"153\" height=\"17\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/city-optik.png\" alt=\"\" width=\"94\" height=\"38\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/coco-roots.png\" alt=\"\" width=\"72\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/feza-dates.png\" alt=\"\" width=\"35\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/sa.svg\" alt=\"\" title=\"Saudi Arabia\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/gearup.png\" alt=\"\" width=\"112\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ba51.png\" alt=\"\" width=\"59\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/qa.svg\" alt=\"\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/abc-lux-ar.png\" alt=\"\" width=\"51\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/gb.svg\" alt=\"\" title=\"United Kingdom\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/niche-spectacles.png\" alt=\"\" width=\"53\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/x-emirates.png\" alt=\"\" width=\"112\" height=\"32\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/chandanveda.png\" alt=\"\" width=\"118\" height=\"30\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/colin-guest.png\" alt=\"\" width=\"153\" height=\"17\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/city-optik.png\" alt=\"\" width=\"94\" height=\"38\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/coco-roots.png\" alt=\"\" width=\"72\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/feza-dates.png\" alt=\"\" width=\"35\" height=\"44\" loading=\"lazy\"></span></span></div></div></div><div class=\"client-row\"><div class=\"logo-track rev\" style=\"animation-duration:56s\"><div class=\"logo-set\"><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"UAE\" title=\"UAE\" width=\"18\" height=\"12\"><img src=\"/lp/flags/qa.svg\" alt=\"Qatar\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/wolgan.png\" alt=\"Wolgan\" width=\"95\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"UAE\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/beyondspare.png\" alt=\"BeyondSpare\" width=\"133\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"UAE\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ventberg.png\" alt=\"Ventberg Building Materials\" width=\"40\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"UAE\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/french-cakes.png\" alt=\"French Cakes\" width=\"44\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/dehlsen-energy.png\" alt=\"Dehlsen Energy\" width=\"95\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/firoz-pickles.png\" alt=\"Firoz Pickles\" width=\"56\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/heavenly-cakes.png\" alt=\"Heavenly Cakes\" width=\"68\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/bluu.png\" alt=\"bluu\" width=\"79\" height=\"28\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/la-via-deux.png\" alt=\"La Via Deux\" width=\"89\" height=\"39\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/the-bomb-case.png\" alt=\"The Bomb Case\" width=\"42\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"><img src=\"/lp/flags/qa.svg\" alt=\"\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/wolgan.png\" alt=\"\" width=\"95\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/beyondspare.png\" alt=\"\" width=\"133\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ventberg.png\" alt=\"\" width=\"40\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/french-cakes.png\" alt=\"\" width=\"44\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/dehlsen-energy.png\" alt=\"\" width=\"95\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/firoz-pickles.png\" alt=\"\" width=\"56\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/heavenly-cakes.png\" alt=\"\" width=\"68\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/bluu.png\" alt=\"\" width=\"79\" height=\"28\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/la-via-deux.png\" alt=\"\" width=\"89\" height=\"39\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/the-bomb-case.png\" alt=\"\" width=\"42\" height=\"44\" loading=\"lazy\"></span></span></div><div class=\"logo-set\" aria-hidden=\"true\"><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"><img src=\"/lp/flags/qa.svg\" alt=\"\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/wolgan.png\" alt=\"\" width=\"95\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/beyondspare.png\" alt=\"\" width=\"133\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ventberg.png\" alt=\"\" width=\"40\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/french-cakes.png\" alt=\"\" width=\"44\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/dehlsen-energy.png\" alt=\"\" width=\"95\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/firoz-pickles.png\" alt=\"\" width=\"56\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/heavenly-cakes.png\" alt=\"\" width=\"68\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/bluu.png\" alt=\"\" width=\"79\" height=\"28\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/la-via-deux.png\" alt=\"\" width=\"89\" height=\"39\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/the-bomb-case.png\" alt=\"\" width=\"42\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"><img src=\"/lp/flags/qa.svg\" alt=\"\" title=\"Qatar\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/wolgan.png\" alt=\"\" width=\"95\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/beyondspare.png\" alt=\"\" width=\"133\" height=\"26\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/ventberg.png\" alt=\"\" width=\"40\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"><img src=\"/lp/flags/ae.svg\" alt=\"\" title=\"UAE\" width=\"18\" height=\"12\"></span><span class=\"client-logo\"><img src=\"/lp/clients/french-cakes.png\" alt=\"\" width=\"44\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/dehlsen-energy.png\" alt=\"\" width=\"95\" height=\"25\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/firoz-pickles.png\" alt=\"\" width=\"56\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/heavenly-cakes.png\" alt=\"\" width=\"68\" height=\"44\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/bluu.png\" alt=\"\" width=\"79\" height=\"28\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/la-via-deux.png\" alt=\"\" width=\"89\" height=\"39\" loading=\"lazy\"></span></span><span class=\"client\"><span class=\"client-flags\"></span><span class=\"client-logo\"><img src=\"/lp/clients/the-bomb-case.png\" alt=\"\" width=\"42\" height=\"44\" loading=\"lazy\"></span></span></div></div></div></div>\n</section></div>",
+"results": "<div class=\"lp-sec lp-results\"><section class=\"section section-b\" id=\"work\">\n<div class=\"wrap\">\n<div class=\"center\">\n<span class=\"kicker\">Proven Growth</span>\n<h2 class=\"h2 balance\" style=\"margin-top:18px\">Real results, real brands<span class=\"dot\">.</span></h2>\n<p class=\"lede balance\" style=\"max-width:600px;margin-left:auto;margin-right:auto\">\nEvery number below came off a live account. Where a project is not measured in a\nmultiple, we say what it actually delivered instead of inventing one.\n</p>\n</div>\n<div class=\"cases\">\n<div class=\"case\">\n<a class=\"case-media\" href=\"/works/x-emirates\" aria-label=\"X Emirates Online case study\"><img src=\"/lp/work/xemirates-online-banner.jpg\" alt=\"X Emirates Online project preview\" width=\"1200\" height=\"630\" loading=\"lazy\" decoding=\"async\"></a>\n<div class=\"case-head\">\n<h3 class=\"case-name\">X Emirates Online</h3>\n<span class=\"case-flag\">Performance Marketing &#183; Shopify</span>\n</div>\n<p class=\"case-body\">\nA skincare brand taking orders over WhatsApp, moved onto a Shopify funnel with the\nad account rebuilt. Grew to <b>&#8377;76 lakhs in revenue</b> on Shopify, with\n<b>8.32x ROAS</b> in July and a <b>9% conversion rate</b>.\n</p>\n<div class=\"metrics\">\n<div class=\"metric\"><p class=\"metric-v\">&#8377;76L</p><p class=\"metric-l\">Revenue</p></div>\n<div class=\"metric\"><p class=\"metric-v\">8.32x</p><p class=\"metric-l\">ROAS</p></div>\n<div class=\"metric\"><p class=\"metric-v\">9%</p><p class=\"metric-l\">Conv. rate</p></div>\n</div>\n<div class=\"case-actions\"><a class=\"case-btn\" href=\"/works/x-emirates\">View full case study &#8599;</a></div>\n</div>\n<div class=\"case\">\n<a class=\"case-media\" href=\"/works/firoz-pickles\" aria-label=\"Firoz Pickles case study\"><img src=\"/lp/work/img-18.jpg\" alt=\"Firoz Pickles project preview\" width=\"1200\" height=\"630\" loading=\"lazy\" decoding=\"async\"></a>\n<div class=\"case-head\">\n<h3 class=\"case-name\">Firoz Pickles</h3>\n<span class=\"case-flag\">CRO &#183; AOV &#183; SEO</span>\n</div>\n<p class=\"case-body\">\nConversion rate and average order value worked in parallel on an existing store.\nConversion lifted <b>2.4x</b> and total sales landed at <b>3x</b> on the same\norganic traffic. No extra spend, no new audience.\n</p>\n<div class=\"metrics\">\n<div class=\"metric\"><p class=\"metric-v\">2.4x</p><p class=\"metric-l\">Conversion</p></div>\n<div class=\"metric\"><p class=\"metric-v\">3x</p><p class=\"metric-l\">Sales</p></div>\n<div class=\"metric\"><p class=\"metric-v\">0</p><p class=\"metric-l\">Extra spend</p></div>\n</div>\n<div class=\"case-actions\"><a class=\"case-btn\" href=\"/works/firoz-pickles\">View full case study &#8599;</a></div>\n</div>\n</div>\n<p class=\"center\" style=\"margin-top:40px\">\n<a href=\"/works\" class=\"btn\">See all case studies &#8599;</a>\n</p>\n</div>\n</section></div>",
+"tools": "<div class=\"lp-sec lp-tools\"><section class=\"section tools-sec\">\n<div class=\"wrap center\">\n<span class=\"kicker\">Connected Tools</span>\n<h2 class=\"h2 balance\" style=\"margin-top:18px\">One store, one system<span class=\"dot\">.</span></h2>\n<p class=\"lede balance\" style=\"max-width:600px;margin-left:auto;margin-right:auto\">We advise on the tools your Shopify store actually needs, from inventory and accounting to delivery and marketing, then wire them together so everything runs as one system.</p>\n</div>\n<div class=\"logo-marquee\" aria-label=\"Tools we work with\"><div class=\"logo-track\"><div class=\"logo-set\"><img src=\"/lp/tools/google-analytics.png\" alt=\"Google Analytics\" width=\"173\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/ms-clarity.png\" alt=\"Microsoft Clarity\" width=\"197\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/zoho.png\" alt=\"Zoho\" width=\"149\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/zoho-books.png\" alt=\"Zoho Books\" width=\"178\" height=\"64\" style=\"height:28px\" loading=\"lazy\"><img src=\"/lp/tools/zoho-pos.png\" alt=\"Zoho POS\" width=\"145\" height=\"64\" style=\"height:28px\" loading=\"lazy\"><img src=\"/lp/tools/whatsapp.png\" alt=\"WhatsApp\" width=\"64\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/klaviyo.png\" alt=\"Klaviyo\" width=\"216\" height=\"64\" style=\"height:22px\" loading=\"lazy\"><img src=\"/lp/tools/shiprocket.png\" alt=\"Shiprocket\" width=\"83\" height=\"64\" style=\"height:36px\" loading=\"lazy\"><img src=\"/lp/tools/delhivery.png\" alt=\"Delhivery\" width=\"404\" height=\"64\" style=\"height:17px\" loading=\"lazy\"><img src=\"/lp/tools/gokwik.png\" alt=\"GoKwik\" width=\"234\" height=\"64\" style=\"height:26px\" loading=\"lazy\"></div><div class=\"logo-set\" aria-hidden=\"true\"><img src=\"/lp/tools/google-analytics.png\" alt=\"\" width=\"173\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/ms-clarity.png\" alt=\"\" width=\"197\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/zoho.png\" alt=\"\" width=\"149\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/zoho-books.png\" alt=\"\" width=\"178\" height=\"64\" style=\"height:28px\" loading=\"lazy\"><img src=\"/lp/tools/zoho-pos.png\" alt=\"\" width=\"145\" height=\"64\" style=\"height:28px\" loading=\"lazy\"><img src=\"/lp/tools/whatsapp.png\" alt=\"\" width=\"64\" height=\"64\" style=\"height:30px\" loading=\"lazy\"><img src=\"/lp/tools/klaviyo.png\" alt=\"\" width=\"216\" height=\"64\" style=\"height:22px\" loading=\"lazy\"><img src=\"/lp/tools/shiprocket.png\" alt=\"\" width=\"83\" height=\"64\" style=\"height:36px\" loading=\"lazy\"><img src=\"/lp/tools/delhivery.png\" alt=\"\" width=\"404\" height=\"64\" style=\"height:17px\" loading=\"lazy\"><img src=\"/lp/tools/gokwik.png\" alt=\"\" width=\"234\" height=\"64\" style=\"height:26px\" loading=\"lazy\"></div></div></div>\n</section></div>",
+"reporting": "<div class=\"lp-sec lp-reporting\"><section class=\"section\" id=\"reporting\" style=\"scroll-margin-top:72px\">\n<div class=\"wrap\">\n<div class=\"center\">\n<span class=\"kicker\">Reporting</span>\n<h2 class=\"h2 balance\" style=\"margin-top:18px\">Your numbers, explained every month<span class=\"dot\">.</span></h2>\n<p class=\"lede balance\" style=\"max-width:600px;margin-left:auto;margin-right:auto\">\nYou will always know where your money went and what it brought back. Every number checked,\nevery report walked through with you on a call.\n</p>\n</div>\n<div class=\"diff diff-2\">\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6\"/><path d=\"m15 15 5 5\"/><path d=\"M8 10.5h5M10.5 8v5\"/></svg></span><h3>A detailed audit at onboarding</h3><p>Before we spend a rupee, we audit your ads, store, tracking and funnel, and hand you a written report of what is working, what is broken and what we will fix first.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20V10M10 20V4M16 20v-7M21 20H3\"/></svg></span><h3>A full performance report every month</h3><p>Spend, revenue, ROAS, CAC, conversion rate and repeat purchases, channel by channel, with what changed and why.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3 4.5 6v5.5c0 4.4 3.1 8.2 7.5 9.5 4.4-1.3 7.5-5.1 7.5-9.5V6z\"/><path d=\"m9 12 2.2 2.2L15.5 10\"/></svg></span><h3>Numbers you can trust</h3><p>Figures are checked against Shopify, your ad accounts and analytics, not taken from one dashboard. If tracking is off, we fix it before we report on it.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2\"/></svg></span><h3>Explained to you on a call</h3><p>We walk you through every report, line by line, so you understand the numbers and what we are doing next. No PDF dropped in your inbox and left there.</p></div>\n</div>\n<div class=\"floor\">\n<p><b>Profit or loss, you hear it straight.</b>\nA good month gets the same detail as a bad one. If a campaign is losing money, we show you\nthe numbers, tell you why, and tell you what we are changing. You will never have to chase\nus for the truth.</p>\n</div>\n</div>\n</section></div>",
+"founder": "<div class=\"lp-sec lp-founder\"><section class=\"section\" id=\"founder\" style=\"scroll-margin-top:72px\">\n<div class=\"wrap\">\n<div class=\"center\">\n<span class=\"kicker\">Our Founder</span>\n</div>\n<div class=\"founder\">\n<div class=\"founder-video\">\n<video id=\"founder-video\" playsinline controls preload=\"none\"></video>\n<div class=\"video-empty\" id=\"video-empty\"><img src=\"/lp/founder-syed-fidel-shaan.jpg\" alt=\"Syed Fidel Shaan, founder of Zyvex Tech\" width=\"960\" height=\"1200\" loading=\"lazy\"></div>\n</div>\n<div>\n<p class=\"founder-quote balance\">\nAudit first. Report plainly. Keep it performing<span class=\"dot\">.</span>\n</p>\n<p class=\"card-body\" style=\"max-width:52ch\">\nEvery engagement starts with an audit of your ads, store and tracking. Then clear monthly\nreporting, campaigns run for performance, and retention flows that turn first orders into repeat ones.\n</p>\n<p class=\"founder-by\">Syed Fidel Shaan &#183; Founder &amp; CEO</p>\n</div>\n</div>\n</div>\n</section></div>",
+"team": "<div class=\"lp-sec lp-team\"><section class=\"section\" id=\"team\" style=\"scroll-margin-top:72px\">\n<div class=\"wrap\">\n<div class=\"center\">\n<span class=\"kicker\">Our Team</span>\n<h2 class=\"h2 balance\" style=\"margin-top:18px\">The team behind the systems<span class=\"dot\">.</span></h2>\n<p class=\"lede balance\" style=\"max-width:560px;margin-left:auto;margin-right:auto\">\nThe people who build, run and report on your store. No junior bench, no hand-offs.\n</p>\n</div>\n<div class=\"team\">\n<div class=\"team-card\">\n<div class=\"team-img\"><img src=\"/lp/team/zayd-abdulla.jpg\" alt=\"Zayd Abdulla, Conversion Tracking &amp; Shopify Expert\" width=\"720\" height=\"900\" loading=\"lazy\" decoding=\"async\"></div>\n<div class=\"team-body\"><h3 class=\"team-name\">Zayd Abdulla</h3><p class=\"team-role\">Conversion Tracking &amp; Shopify Expert</p></div>\n</div>\n<div class=\"team-card\">\n<div class=\"team-img\"><img src=\"/lp/team/falah-ahmed.jpg\" alt=\"Falah Ahmed, Shopify Expert / Performance Marketing Expert\" width=\"720\" height=\"900\" loading=\"lazy\" decoding=\"async\"></div>\n<div class=\"team-body\"><h3 class=\"team-name\">Falah Ahmed</h3><p class=\"team-role\">Shopify Expert / Performance Marketing Expert</p></div>\n</div>\n<div class=\"team-card\">\n<div class=\"team-img\"><img src=\"/lp/team/abin-tomy.jpg\" alt=\"Abin Tomy, Full Stack Developer\" width=\"720\" height=\"900\" loading=\"lazy\" decoding=\"async\"></div>\n<div class=\"team-body\"><h3 class=\"team-name\">Abin Tomy</h3><p class=\"team-role\">Full Stack Developer</p></div>\n</div>\n<div class=\"team-card\">\n<div class=\"team-img\"><img src=\"/lp/team/abdul-fathah.jpg\" alt=\"Abdul Fathah, Project Co-ordinator / CRM\" width=\"720\" height=\"900\" loading=\"lazy\" decoding=\"async\"></div>\n<div class=\"team-body\"><h3 class=\"team-name\">Abdul Fathah</h3><p class=\"team-role\">Project Co-ordinator / CRM</p></div>\n</div>\n<div class=\"team-card\">\n<div class=\"team-img\"><img src=\"/lp/team/rishan-ahammed.jpg\" alt=\"Rishan Ahammed, UI/UX Designer / Content Creator\" width=\"720\" height=\"900\" loading=\"lazy\" decoding=\"async\"></div>\n<div class=\"team-body\"><h3 class=\"team-name\">Rishan Ahammed</h3><p class=\"team-role\">UI/UX Designer / Content Creator</p></div>\n</div>\n</div>\n</div>\n</section></div>",
+"why": "<div class=\"lp-sec lp-why\"><section class=\"section section-b\">\n<div class=\"wrap\">\n<div class=\"center\">\n<span class=\"kicker\">Why Brands Choose Us</span>\n<h2 class=\"h2 balance\" style=\"margin-top:18px\">What is different here<span class=\"dot\">.</span></h2>\n</div>\n<div class=\"diff\">\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"3.2\"/><path d=\"M3 19.5c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2\"/><circle cx=\"17\" cy=\"9\" r=\"2.4\"/><path d=\"M15.8 14.4c2.4.2 4.3 1.8 4.9 4.6\"/></svg></span><h3>One team, not four vendors</h3><p>Ads, SEO, retention and your store, run by one team.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4\"/><path d=\"M12 3a6 6 0 0 0-3.6 10.8c.6.5.9 1.1.9 1.8V16h5.4v-.4c0-.7.3-1.3.9-1.8A6 6 0 0 0 12 3z\"/></svg></span><h3>Honest advice first</h3><p>If a better product page beats a retainer, we&rsquo;ll say so.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4.5\" y=\"10.5\" width=\"15\" height=\"10\" rx=\"2\"/><path d=\"M8 10.5V7.5a4 4 0 0 1 8 0v3\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.4\"/></svg></span><h3>Everything stays yours</h3><p>Ad accounts, store and customer data, all on your logins.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 8h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z\"/><path d=\"M9 8V6.5a3 3 0 0 1 6 0V8\"/><path d=\"m9.5 14 1.8 1.8 3.4-3.6\"/></svg></span><h3>Official Shopify Partner</h3><p>We build the store too, so fixes ship without waiting.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 9.5h17M8 3v4M16 3v4\"/><path d=\"M9 15h6M13 13l2 2-2 2\"/></svg></span><h3>Month to month</h3><p>No lock-in. Stay because it works, not because of a contract.</p></div>\n<div class=\"diff-card\"><span class=\"diff-ic\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5S14.3 18.1 12 20.5M12 3.5C9.7 5.9 8.6 8.7 8.6 12s1.1 6.1 3.4 8.5\"/></svg></span><h3>Clients worldwide</h3><p>Brands across the UK, the Gulf, the US and India.</p></div>\n</div>\n</div>\n</section></div>",
+"reels": "<div class=\"lp-sec lp-reels\"><section class=\"section\" id=\"reels\" style=\"scroll-margin-top:72px\">\n<div class=\"wrap\">\n<div class=\"center\">\n<span class=\"kicker\">Client reels</span>\n<h2 class=\"h2 balance\" style=\"margin-top:18px\">Hear it from them<span class=\"dot\">.</span></h2>\n<p class=\"lede balance\" style=\"max-width:560px;margin-left:auto;margin-right:auto\">\nShort video reviews from the founders we&rsquo;ve built for.\n</p>\n</div>\n<div class=\"reels\" data-reels>\n<div class=\"reels-track\">\n<article class=\"reel\" data-src=\"/lp/reels/beyondspare-review.mp4\" data-poster=\"/lp/reels/beyondspare-review.jpg\" data-name=\"Muhammed Sahal\" data-role=\"Co-Founder, BeyondSpare UAE\" data-link=\"/works/beyondspare\">\n<div class=\"reel-media\"></div>\n<div class=\"reel-by\"><div><b>Muhammed Sahal</b><span>Co-Founder, BeyondSpare UAE</span></div><a class=\"reel-link\" href=\"/works/beyondspare\">Case study &#8599;</a></div>\n</article>\n<article class=\"reel\" data-src=\"/lp/reels/chandanveda-review.mp4\" data-poster=\"/lp/reels/chandanveda-review.jpg\" data-name=\"Kushal Agarwal\" data-role=\"CEO, Chandanveda\" data-link=\"/works/chandanveda\">\n<div class=\"reel-media\"></div>\n<div class=\"reel-by\"><div><b>Kushal Agarwal</b><span>CEO, Chandanveda</span></div><a class=\"reel-link\" href=\"/works/chandanveda\">Case study &#8599;</a></div>\n</article>\n</div>\n<div class=\"reels-nav\"><button class=\"reels-arrow reels-prev\" type=\"button\" aria-label=\"Previous reel\">&#8592;</button><button class=\"reels-arrow reels-next\" type=\"button\" aria-label=\"Next reel\">&#8594;</button></div>\n</div>\n</div>\n</section></div>",
+"testimonials": "<div class=\"lp-sec lp-testimonials\"><section class=\"section\" id=\"testimonials\" style=\"scroll-margin-top:72px\">\n<div class=\"wrap\">\n<div class=\"center\">\n<span class=\"kicker\">Testimonials</span>\n<h2 class=\"h2 balance\" style=\"margin-top:18px\">What clients say<span class=\"dot\">.</span></h2>\n<p class=\"lede balance\" style=\"max-width:560px;margin-left:auto;margin-right:auto\">\nIn their words, not ours.\n</p>\n</div>\n<div class=\"tcards\">\n<div class=\"tcards-track\">\n<article class=\"tcard\">\n<div class=\"tcard-top\"><img class=\"tcard-logo\" src=\"/lp/clients/x-emirates.png\" alt=\"X Emirates Online\" width=\"110\" height=\"37\" loading=\"lazy\"><span class=\"tcard-tag\">&#8377;50K &rarr; &#8377;6.45L in a month</span></div>\n<svg class=\"tcard-q\" viewBox=\"0 0 32 24\" aria-hidden=\"true\"><path d=\"M0 24V14C0 6.3 4.2 1.6 12.6 0l1.3 3.2C9.6 4.6 7.4 7.3 7.2 11.2H13V24H0zm18.6 0V14c0-7.7 4.2-12.4 12.6-14l1.3 3.2c-4.3 1.4-6.5 4.1-6.7 8H31.6V24H18.6z\"/></svg>\n<p class=\"tcard-head\">Within just one month, total sales went from &#8377;50K to &#8377;6.45 lakhs.</p>\n<div class=\"tcard-more\" id=\"tm0\"><p>I was completely unsure what to do with my business. I had worked with two digital marketing companies before, and all I got was a loss, not a single rupee of profit. Then I met Zyvex Tech, and the work they did on my website changed that. I&rsquo;m thankful to Mr. Syed Fidel Shaan and his team for their dedication and hard work for my company. I recommend them to everyone: this is a company you can trust.</p></div>\n<button class=\"tcard-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"tm0\">Read full review</button>\n<div class=\"tcard-by\"><img class=\"tcard-av\" src=\"/lp/testimonials/navneeth-krishna-v2.jpg\" alt=\"\" width=\"32\" height=\"32\" loading=\"lazy\" decoding=\"async\"><div><b>Navneeth Krishna</b><span>CEO, X Emirates Online</span></div><a class=\"tcard-link\" href=\"/works/x-emirates\">Case study &#8599;</a></div>\n</article>\n<article class=\"tcard\">\n<div class=\"tcard-top\"><img class=\"tcard-logo\" src=\"/lp/clients/firoz-pickles.png\" alt=\"Firoz Pickles\" width=\"56\" height=\"44\" loading=\"lazy\"><span class=\"tcard-tag\">Website + ongoing SEO</span></div>\n<svg class=\"tcard-q\" viewBox=\"0 0 32 24\" aria-hidden=\"true\"><path d=\"M0 24V14C0 6.3 4.2 1.6 12.6 0l1.3 3.2C9.6 4.6 7.4 7.3 7.2 11.2H13V24H0zm18.6 0V14c0-7.7 4.2-12.4 12.6-14l1.3 3.2c-4.3 1.4-6.5 4.1-6.7 8H31.6V24H18.6z\"/></svg>\n<p class=\"tcard-head\">They delivered our website exactly the way we wanted.</p>\n<div class=\"tcard-more\" id=\"tm1\"><p>Working with Zyvex Tech has been a great experience for Firoz Pickles. They understood our business and requirements from the beginning. Their attention to detail and understanding of our brand made the entire process smooth and professional. They are also handling our ongoing SEO, and we&rsquo;re happy with the way they approach the work and keep improving our online presence. I would definitely recommend Zyvex Tech to anyone looking for a reliable team for website development and digital marketing.</p></div>\n<button class=\"tcard-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"tm1\">Read full review</button>\n<div class=\"tcard-by\"><img class=\"tcard-av\" src=\"/lp/testimonials/muhammed-vasith.jpg\" alt=\"\" width=\"32\" height=\"32\" loading=\"lazy\" decoding=\"async\"><div><b>Muhammed Vasith</b><span>CEO, Firoz Pickles</span></div><a class=\"tcard-link\" href=\"/works/firoz-pickles\">Case study &#8599;</a></div>\n</article>\n<article class=\"tcard\">\n<div class=\"tcard-top\"><img class=\"tcard-logo\" src=\"/lp/clients/feza-dates.png\" alt=\"Feza Dates\" width=\"36\" height=\"44\" loading=\"lazy\"><span class=\"tcard-tag\">Premium custom build</span></div>\n<svg class=\"tcard-q\" viewBox=\"0 0 32 24\" aria-hidden=\"true\"><path d=\"M0 24V14C0 6.3 4.2 1.6 12.6 0l1.3 3.2C9.6 4.6 7.4 7.3 7.2 11.2H13V24H0zm18.6 0V14c0-7.7 4.2-12.4 12.6-14l1.3 3.2c-4.3 1.4-6.5 4.1-6.7 8H31.6V24H18.6z\"/></svg>\n<p class=\"tcard-head\">A premium, luxurious look that felt completely custom.</p>\n<div class=\"tcard-more\" id=\"tm2\"><p>I wanted the Feza Dates website to have a premium, luxurious look that didn&rsquo;t look like a typical template or theme. The team understood our vision perfectly and created a website that matches our brand identity beautifully. They also paid special attention to the gifting experience, making the overall website feel premium and seamless. Really happy with the final result and their attention to detail.</p></div>\n<button class=\"tcard-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"tm2\">Read full review</button>\n<div class=\"tcard-by\"><img class=\"tcard-av\" src=\"/lp/testimonials/faaz-mohammed-v2.jpg\" alt=\"\" width=\"32\" height=\"32\" loading=\"lazy\" decoding=\"async\"><div><b>Faaz Mohammed</b><span>CEO, Feza Dates</span></div><a class=\"tcard-link\" href=\"/works/feza-dates\">Case study &#8599;</a></div>\n</article>\n<article class=\"tcard\">\n<div class=\"tcard-top\"><img class=\"tcard-logo\" src=\"/lp/clients/beyondspare.png\" alt=\"BeyondSpare\" width=\"84\" height=\"16\" loading=\"lazy\"><span class=\"tcard-tag\">Website build, UAE</span></div>\n<svg class=\"tcard-q\" viewBox=\"0 0 32 24\" aria-hidden=\"true\"><path d=\"M0 24V14C0 6.3 4.2 1.6 12.6 0l1.3 3.2C9.6 4.6 7.4 7.3 7.2 11.2H13V24H0zm18.6 0V14c0-7.7 4.2-12.4 12.6-14l1.3 3.2c-4.3 1.4-6.5 4.1-6.7 8H31.6V24H18.6z\"/></svg>\n<p class=\"tcard-head\">The process was very smooth from start to finish.</p>\n<div class=\"tcard-more\" id=\"tm3\"><p>We are a spare parts sourcing business based in the UAE, I reached out to Zyvex for my website build and they did a fantastic job. They understood our company&rsquo;s vision and what we needed and they gave their suggestions as well. The process was very smooth from start to finish. They&rsquo;re really easy to work with, so I recommend Zyvex to anyone who&rsquo;s looking to build a website for their business.</p></div>\n<button class=\"tcard-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"tm3\">Read full review</button>\n<div class=\"tcard-by\"><span class=\"tcard-av\" aria-hidden=\"true\">MS</span><div><b>Muhammed Sahal</b><span>Co-Founder, BeyondSpare UAE</span></div><a class=\"tcard-link\" href=\"/works/beyondspare\">Case study &#8599;</a></div>\n</article>\n</div>\n<div class=\"tcards-dots\" aria-hidden=\"true\"></div>\n</div>\n</div>\n</section></div>"
+};
+
+/* Behaviour for the landing sections (from the landing site's inline scripts). */
+function initLpHome(){
+  /* client slider: hold the featured logos in place until the section is seen */
+  var m = document.querySelector('.client-marquee');
+  if(m){
+    var go = function(){ setTimeout(function(){ m.classList.add('go'); }, 1400); };
+    if(!('IntersectionObserver' in window)) go();
+    else { var o = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ o.disconnect(); go(); } }, { threshold: .35 }); o.observe(m); }
+  }
+  /* testimonials: read-more toggles + swipe dots on phones */
+  var w = document.querySelector('.tcards');
+  if(w){
+    w.querySelectorAll('.tcard-toggle').forEach(function(b){ b.addEventListener('click', function(){
+      var c = b.closest('.tcard'), op = c.classList.toggle('open');
+      b.setAttribute('aria-expanded', op); b.textContent = op ? 'Show less' : 'Read full review'; }); });
+    var t = w.querySelector('.tcards-track'), d = w.querySelector('.tcards-dots'), bar = document.createElement('i');
+    if(t && d){
+      d.appendChild(bar);
+      var upd = function(){ var vis = t.clientWidth / t.scrollWidth, max = t.scrollWidth - t.clientWidth, p = max > 0 ? t.scrollLeft / max : 0;
+        bar.style.width = (vis * 100) + '%'; bar.style.transform = 'translateX(' + (p * (1 / vis - 1) * 100) + '%)'; };
+      t.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+    }
+  }
+  /* client reels: /lp/reels.js wires up every [data-reels] row when it runs,
+     so (re)load it each time a page with reels is rendered */
+  if(document.querySelector('[data-reels]')){
+    var sc = document.createElement('script'); sc.src = '/lp/reels.js'; document.body.appendChild(sc);
+  }
+}
+/* </lp-home> */
+
 function pageHome(){
   var servicesTeaser = SERVICES.slice(0,6).map(function(s){
     return ''
@@ -1031,18 +1121,6 @@ function pageHome(){
     +   iconBox(s.icon)
     +   '<h3 class="serif ht" style="margin-top:16px;font-size:20px">'+s.name+'</h3>'
     +   '<p class="muted" style="margin-top:8px;font-size:14px">'+s.summary+'</p>'
-    + '</a>';
-  }).join('');
-
-  var portfolioTeaser = WORKS.slice(0,4).map(function(w){
-    return ''
-    + '<a href="#/works/'+w.slug+'" class="card card-media">'
-    +   '<img class="media-thumb" src="'+workImg(w.slug,'cover')+'" alt="" />'
-    +   '<div class="card-media-body">'
-    +   '<h3 class="serif" style="font-size:20px">'+w.client+'</h3>'
-    +   '<p class="muted" style="margin-top:8px;font-size:14px">'+w.category+'</p>'
-    +   '<p style="margin-top:16px;font-size:14px;color:var(--teal2)">'+w.cardLine+'</p>'
-    +   '</div>'
     + '</a>';
   }).join('');
 
@@ -1059,9 +1137,6 @@ function pageHome(){
     +   '<div class="hw-art">'+stepArt(s.art)+'</div>'
     + '</article>';
   }).join('');
-
-  var featuredCase = findWork('x-emirates') || WORKS[0];
-  var featuredStat = (featuredCase.stats && featuredCase.stats[0]) || { v: '', l: '' };
 
   var blogTeaser = BLOG_POSTS.slice(0,3).map(function(post){
     var img = BLOG_IMAGES[post.slug];
@@ -1105,6 +1180,8 @@ function pageHome(){
   +   '</div>'
   + '</section>'
 
+  + LP_HOME.clients
+
   + '<section class="section section-b">'
   +   '<div class="wrap">'
   +     eyebrow('Core Expertise')
@@ -1118,6 +1195,8 @@ function pageHome(){
   +   '</div>'
   + '</section>'
 
+  + LP_HOME.results
+
   + '<section class="section section-b">'
   +   '<div class="wrap">'
   +     '<div class="flex-between">'
@@ -1128,7 +1207,9 @@ function pageHome(){
   +   '</div>'
   + '</section>'
 
-  + '<section class="section section-b on-black" id="how-we-work">'
+  + LP_HOME.tools
+
+  + '<section class="section section-b section-mint" id="how-we-work">'
   +   '<div class="wrap">'
   +     eyebrow('How We Work')
   +     sectionTitle('Consult First, Build Second', '')
@@ -1138,61 +1219,14 @@ function pageHome(){
   +   '</div>'
   + '</section>'
 
-  + '<section class="section section-b" id="team">'
-  +   '<div class="wrap">'
-  +     '<div class="flex-between">'
-  +       '<div>'+eyebrow('Our Team')+sectionTitle('The People Behind the Systems', '')+'</div>'
-  +       '<a href="#/our-story" class="tlink">More about us &#8599;</a>'
-  +     '</div>'
-  +     '<p class="muted" style="margin-top:24px;max-width:600px;font-size:15px;line-height:1.6">A small, senior team based in Calicut. The people who audit your funnel are the same people who build the store, run the campaigns, and answer your messages. No junior bench, no account manager sitting between you and the work.</p>'
-  +     '<figure style="margin:48px 0 0">'
-  +       '<img class="media-cover" src="'+TEAM_PHOTO+'" alt="'+TEAM_PHOTO_ALT+'" />'
-  +       '<figcaption class="faint" style="margin-top:16px;font-size:13px">'+TEAM_PHOTO_CAPTION+'</figcaption>'
-  +     '</figure>'
-  +     '<dl class="dl-row" style="margin-top:56px">'
-  +       '<div><dt>Based In</dt><dd>'+COMPANY.city+'</dd></div>'
-  +       '<div><dt>Working Across</dt><dd>Worldwide</dd></div>'
-  +     '</dl>'
-  +   '</div>'
-  + '</section>'
+  + LP_HOME.reporting
+  + LP_HOME.founder
+  + LP_HOME.team
+  + LP_HOME.why
+  + LP_HOME.reels
+  + LP_HOME.testimonials
 
-  + '<section class="section section-b on-black">'
-  +   '<div class="wrap">'
-  +     eyebrow('Testimonials')
-  +     sectionTitle('What Clients Say', '')
-  +     '<p class="muted" style="margin-top:24px;max-width:520px;font-size:15px">The founders and operators we build for, in their own words.</p>'
-  +     '<div class="tm-grid">'+testimonialsHtml()+'</div>'
-  +     '<a href="#/works" class="tlink" style="display:inline-block;margin-top:40px">See the work behind them &#8599;</a>'
-  +   '</div>'
-  + '</section>'
-
-  + '<section class="section section-b">'
-  +   '<div class="wrap">'
-  +     '<div class="flex-between">'
-  +       '<div>'+eyebrow('Our Work')+sectionTitle('Proof, Not Promises')+'</div>'
-  +       '<a href="#/works" class="tlink">View all work ↗</a>'
-  +     '</div>'
-  +     '<div class="grid-4" style="margin-top:48px">'+portfolioTeaser+'</div>'
-  +   '</div>'
-  + '</section>'
-
-  + '<section class="section-teal">'
-  +   gridLines(true)
-  +   '<div class="wrap grid-detail" style="position:relative;align-items:center">'
-  +     '<div>'
-  +       eyebrow('Featured Result')
-  +       '<h2 class="title balance" style="margin-top:24px">'+featuredCase.client+'<span style="color:rgba(0,0,0,.5)">.</span></h2>'
-  +       '<p style="margin-top:16px;max-width:460px;font-size:16px;line-height:1.6">'+featuredCase.summary+'</p>'
-  +       '<a href="#/works/'+featuredCase.slug+'" class="btn btn-dark" style="margin-top:32px">Read the case study <span aria-hidden="true">↗</span></a>'
-  +     '</div>'
-  +     '<div>'
-  +       '<p class="serif" style="font-size:clamp(56px,9vw,120px);line-height:1">'+featuredStat.v+'</p>'
-  +       '<p style="margin-top:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;opacity:.7">'+featuredStat.l+' \u00b7 '+featuredCase.client+'</p>'
-  +     '</div>'
-  +   '</div>'
-  + '</section>'
-
-  + '<section class="section section-b">'
+  + '<section class="section section-b section-mint">'
   +   '<div class="wrap">'
   +     '<div class="flex-between">'
   +       '<div>'+eyebrow('From the Blog')+sectionTitle('Notes on Systems &amp; Growth', '')+'</div>'
@@ -1246,9 +1280,9 @@ function pageServices(){
   + '<section class="section-teal">'
   +   gridLines(true)
   +   '<div class="wrap" style="position:relative">'
-  +     '<p class="kicker" style="color:rgba(244,242,236,.72)">Ten Pillars &middot; One Team</p>'
+  +     '<p class="kicker" style="color:rgba(13,18,17,.72)">Ten Pillars &middot; One Team</p>'
   +     '<h2 class="svc-statement" style="margin-top:24px">We consult before we sell you anything. What the business needs gets built. What it does not, we tell you to skip.</h2>'
-  +     '<p style="margin-top:24px;max-width:520px;font-size:15px;line-height:1.6;color:rgba(244,242,236,.82)">Every pillar below can stand alone. Most engagements use two or three of them, wired together in the order the consultation says they matter, and we maintain and support what we build.</p>'
+  +     '<p style="margin-top:24px;max-width:520px;font-size:15px;line-height:1.6;color:rgba(13,18,17,.82)">Every pillar below can stand alone. Most engagements use two or three of them, wired together in the order the consultation says they matter, and we maintain and support what we build.</p>'
   +   '</div>'
   + '</section>'
 
@@ -1344,6 +1378,19 @@ function pageServiceDetail(service){
   +     '</div>'
   +   '</div>'
   + '</section>'
+  + (service.practice ? ''
+  + '<section class="section section-b section-mint">'
+  +   '<div class="wrap">'
+  +     eyebrow('In Practice')
+  +     '<h2 class="title balance" style="margin-top:16px;font-size:clamp(26px,3.4vw,40px);max-width:720px">'+service.practice.title+'<span class="dot">.</span></h2>'
+  +     '<p class="muted" style="margin-top:12px;font-size:16px">'+service.practice.sub+'</p>'
+  +     '<ul class="svc-checks">'+service.practice.items.map(function(t){ return '<li><span class="svc-check">'+svgIcon('check', 16)+'</span>'+t+'</li>'; }).join('')+'</ul>'
+  +     (service.includes ? '<p class="faint" style="margin-top:40px;font-size:12px;text-transform:uppercase;letter-spacing:.08em">'+service.includes.title+'</p>'
+  +       '<div class="svc-chips">'+service.includes.items.map(function(t){ return '<span>'+t+'</span>'; }).join('')+'</div>' : '')
+  +     (service.note ? '<div class="svc-note"><p>'+service.note.body+'</p></div>' : '')
+  +   '</div>'
+  + '</section>' : '')
+  + (service.reporting && typeof LP_HOME !== 'undefined' ? LP_HOME.reporting : '')
   + (signalsHtml ? ''
   + '<section class="section section-b">'
   +   '<div class="wrap">'
@@ -1489,7 +1536,7 @@ function pageWorkDetail(w){
       + '<section class="section-teal">'
       +   gridLines(true)
       +   '<div class="wrap" style="position:relative">'
-      +     '<p class="kicker" style="color:rgba(244,242,236,.72)">The Numbers</p>'
+      +     '<p class="kicker" style="color:rgba(13,18,17,.72)">The Numbers</p>'
       +     '<div class="wx-stats">' + w.stats.map(function(s){
               return '<div><p class="wx-stat-v">'+s.v+'</p><p class="wx-stat-l">'+s.l+'</p></div>';
             }).join('') + '</div>'
@@ -1500,7 +1547,7 @@ function pageWorkDetail(w){
       + '<section class="section-teal">'
       +   gridLines(true)
       +   '<div class="wrap" style="position:relative">'
-      +     '<p class="kicker" style="color:rgba(244,242,236,.72)">What We Wired</p>'
+      +     '<p class="kicker" style="color:rgba(13,18,17,.72)">What We Wired</p>'
       +     '<div class="wx-stats">' + w.facts.map(function(f){
               return '<div><p class="wx-stat-v" style="font-size:clamp(24px,3vw,36px)">'+f.v+'</p><p class="wx-stat-l">'+f.k+'</p></div>';
             }).join('') + '</div>'
@@ -1700,11 +1747,11 @@ function pageOurStory(){
   +   gridLines(true)
   +   '<div class="wrap grid-founder" style="position:relative;align-items:center">'
   +     '<div>'
-  +       '<img class="founder-portrait" src="'+(FOUNDER_PHOTO || ph('Founder portrait', COMPANY.founder, 900, 1125))+'" alt="'+COMPANY.founder+', '+COMPANY.founderTitle+'" />'
+  +       '<img class="founder-portrait" src="'+(FOUNDER_PHOTO || '/lp/founder-syed-fidel-shaan.jpg')+'" alt="'+COMPANY.founder+', '+COMPANY.founderTitle+'" />'
   +     '</div>'
   +     '<div>'
   +       eyebrow('About the Founder')
-  +       '<h2 class="title balance" style="margin-top:24px;font-size:clamp(34px,5vw,56px)">'+COMPANY.founder+'<span style="color:rgba(0,0,0,.5)">.</span></h2>'
+  +       '<h2 class="title balance" style="margin-top:24px;font-size:clamp(34px,5vw,56px)">'+COMPANY.founder+'<span style="color:var(--teal2)">.</span></h2>'
   +       '<p style="margin-top:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;opacity:.7">'+COMPANY.founderTitle+'</p>'
   +       '<div style="display:flex;flex-direction:column;gap:20px;margin-top:32px;font-size:16px;line-height:1.6">'
   +       '<p>'+COMPANY.founder+' founded '+COMPANY.name+' on a simple observation: most businesses don&rsquo;t need more advice, they need it built, launched, and run. He works directly with founders around the world, not as a distant consultant, but as someone in the build with them, from the first funnel audit to the tools running unattended.</p>'
@@ -1719,46 +1766,23 @@ function pageOurStory(){
   +   '</div>'
   + '</section>'
 
-  + '<section class="section section-b" id="team">'
+  + LP_HOME.team
+
+  + '<section class="section section-b" id="team-disciplines">'
   +   '<div class="wrap">'
-  +     eyebrow('The Team')
-  +     sectionTitle('The Team Behind It', '')
+  +     eyebrow('What We Cover')
+  +     sectionTitle('One Team, Every Discipline', '')
   +     '<p class="muted" style="margin-top:24px;max-width:640px;font-size:16px;line-height:1.7">A small, senior team in Calicut working directly with the founders and operators who hire us. The person who audits your funnel is the person who builds the store and runs the campaigns. No handover to a junior bench, and nobody between you and the work.</p>'
-  +     '<figure style="margin:48px 0 0">'
-  +       '<img class="media-cover" src="'+(TEAM_PHOTO || ph('Team photo', 'The Zyvex Tech team', 1200, 630))+'" alt="'+TEAM_PHOTO_ALT+'" />'
-  +       '<figcaption class="faint" style="margin-top:16px;font-size:13px">'+TEAM_PHOTO_CAPTION+'</figcaption>'
-  +     '</figure>'
   +     '<p class="faint" style="margin-top:56px;font-size:12px;text-transform:uppercase;letter-spacing:.08em">What the team covers</p>'
   +     '<div class="grid-3" style="margin-top:24px">'+disciplinesHtml+'</div>'
   +   '</div>'
   + '</section>'
 
-  + '<section class="section section-b">'
-  +   '<div class="wrap">'
-  +     eyebrow('Our Clients')
-  +     sectionTitle('Brands We Build For', '')
-  +     '<p class="muted" style="margin-top:24px;max-width:560px;font-size:15px">Ecommerce and D2C brands, and businesses selling services, across India, the UAE, Qatar and the UK.</p>'
-  +     '<div class="ticker"><div class="ticker-track">'+tickerHtml+'</div></div>'
-  +   '</div>'
-  + '</section>'
+  + LP_HOME.clients
 
-  + '<section class="section section-b on-black">'
-  +   '<div class="wrap">'
-  +     eyebrow('Testimonials')
-  +     sectionTitle('What Clients Say', '')
-  +     '<div class="tm-grid">'+testimonialsHtml()+'</div>'
-  +   '</div>'
-  + '</section>'
+  + LP_HOME.reels
+  + LP_HOME.testimonials
 
-  + '<section class="section section-b">'
-  +   '<div class="wrap">'
-  +     eyebrow('In the Room')
-  +     sectionTitle('Working With Our Clients', '')
-  +     '<p class="muted" style="margin-top:24px;max-width:620px;font-size:15px;line-height:1.7">Audits, planning sessions and reviews: the part of an engagement that decides whether the build is right before anyone opens a code editor.</p>'
-  +     '<div class="meet-grid">'+meetingsHtml+'</div>'
-  +     '<a href="#/works" class="btn btn-teal" style="margin-top:48px">View Full Portfolio <span aria-hidden="true">&#8599;</span></a>'
-  +   '</div>'
-  + '</section>'
 
   + '<section class="section">'
   +   '<div class="wrap grid-2" style="row-gap:48px">'+aboutHtml+'</div>'
@@ -1997,6 +2021,7 @@ function page404(){
 
 /* ── Router ───────────────────────────────────────────────────── */
 function attachHandlers(){
+  if(typeof initLpHome === 'function') initLpHome();
   var toggle = document.querySelector('.menu-toggle');
   var nav = document.querySelector('.mobile-nav');
   if(toggle && nav){
@@ -2114,6 +2139,10 @@ function router(){
     goTo('/works', true); return;
   } else if(parts[0] === 'case-studies' && parts.length === 2){
     goTo('/works/' + parts[1], true); return;
+  } else if(parts[0] === 'works' && !HASH_MODE){
+    /* The portfolio (/works, /works/<slug>) is static pages imported from
+       the landing site (static/works*), so load it as a real page. */
+    window.location.replace(path); return;
   } else if(parts[0] === 'works' && parts.length === 1){
     html = pageWorks();
     title = 'Works | ' + COMPANY.name;
@@ -2168,6 +2197,7 @@ document.addEventListener('click', function(e){
   if(!a) return;
   var href = a.getAttribute('href');
   if(!href || href.charAt(0) !== '/' || a.getAttribute('target') === '_blank' || a.hasAttribute('download')) return;
+  if(/^\/works(\/|$|#|\?)/.test(href)) return;   /* static portfolio pages: full page load */
   e.preventDefault();
   if(href !== currentPath()) goTo(href);
 });

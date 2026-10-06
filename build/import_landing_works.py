@@ -1,0 +1,337 @@
+# -*- coding: utf-8 -*-
+"""Import the portfolio from the India landing site into this site.
+
+One-off importer, kept so the import can be re-run when the landing site's
+portfolio changes:
+
+    python build/import_landing_works.py /path/to/zyvex-landing-page
+
+It copies the landing site's /works page and every case study into
+static/works.html and static/works/<slug>.html, and its assets into
+static/lp/. build/rebuild.py then copies static/ into dist/ verbatim.
+It also writes a set of landing home-page sections (client logos, results,
+tools, reporting, founder, team, why us, reels, testimonials) into
+src/index.html between generated markers, for this site's home page.
+
+What it changes on the way in:
+  - asset paths  /assets/...  ->  /lp/...   (keeps them clear of this site's /assets)
+  - header and footer replaced with this site's navigation
+  - internal links use this site's routes (no trailing slash, /contact, ...)
+  - canonical / Open Graph URLs point at www.zyvextech.co
+  - landing-only tracking removed: attribution.js, the Meta Pixel loader and
+    the /api/config call (this site runs no analytics by design)
+"""
+import io, os, re, sys, shutil, glob
+
+SITE = "https://www.zyvextech.co"
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+STATIC = os.path.join(ROOT, "static")
+LP = os.path.join(STATIC, "lp")
+
+SKIP_ASSETS = {"attribution.js", "app.js"}   # tracking / Pixel loader
+
+HEADER = """<header class="site-header">
+<div class="header-in">
+<a class="brand" href="/">
+<img src="/lp/logo.png" alt="">
+<span class="brand-name">Zyvex Tech</span>
+</a>
+<nav class="nav zx-nav" aria-label="Main">
+<a href="/services" class="nav-link">Services</a>
+<a href="/works" class="nav-link active">Works</a>
+<a href="/our-story" class="nav-link">Our Story</a>
+<a href="/blog" class="nav-link">Blog</a>
+<a href="/contact" class="nav-link zx-nav-cta">Contact</a>
+</nav>
+</div>
+</header>"""
+
+FOOTER = """<footer class="site-footer zx-footer">
+<div class="footer-in">
+<span>&#169; Zyvex Tech LLP &#183; Calicut, India &#183; Working worldwide</span>
+<span>
+<a href="/services">Services</a> &#183;
+<a href="/works">Works</a> &#183;
+<a href="/our-story">Our Story</a> &#183;
+<a href="/blog">Blog</a> &#183;
+<a href="/contact">Contact</a>
+</span>
+</div>
+</footer>"""
+
+# Case-study behaviour from the landing site's assets/app.js, minus the Pixel.
+CASE_APP_JS = """/* Case-study pages: scroll reveal and founder video.
+   Imported from the landing site's assets/app.js with the Meta Pixel removed. */
+var CONFIG = { FOUNDER_VIDEO: "", FOUNDER_POSTER: "" };
+function initFounderVideo(){
+  var v = document.getElementById('founder-video'), empty = document.getElementById('video-empty');
+  if(!v || !CONFIG.FOUNDER_VIDEO) return;
+  v.src = CONFIG.FOUNDER_VIDEO;
+  if(CONFIG.FOUNDER_POSTER) v.poster = CONFIG.FOUNDER_POSTER;
+  if(empty) empty.style.display = 'none';
+}
+function initReveal(){
+  var els = document.querySelectorAll('.rv');
+  if(!els.length) return;
+  if(!('IntersectionObserver' in window)){
+    Array.prototype.forEach.call(els, function(el){ el.classList.add('in'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); obs.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  Array.prototype.forEach.call(els, function(el){ obs.observe(el); });
+}
+document.addEventListener('DOMContentLoaded', function(){ initFounderVideo(); initReveal(); });
+"""
+
+# Small layer on top of the landing CSS for this site's header and footer.
+SITE_NAV_CSS = """/* This site's navigation on the imported portfolio pages. */
+.zx-nav{display:flex;align-items:center;gap:26px}
+.zx-nav .nav-link{font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .15s}
+.zx-nav .nav-link:hover,.zx-nav .nav-link.active{color:var(--ink)}
+.zx-nav .zx-nav-cta{background:var(--teal);color:#fff!important;padding:9px 16px;border-radius:2px}
+.zx-nav .zx-nav-cta:hover{background:var(--teal2)}
+@media(max-width:760px){
+  .site-header .header-in{flex-direction:row!important;align-items:center!important;justify-content:space-between;height:60px!important;padding:0 16px;gap:14px}
+  .site-header .brand{flex:0 0 auto}
+  .site-header .brand-name{display:none}
+  .zx-nav{gap:14px;overflow-x:auto;scrollbar-width:none}
+  .zx-nav::-webkit-scrollbar{display:none}
+  .zx-nav .nav-link{font-size:11px;white-space:nowrap}
+  .zx-nav .zx-nav-cta{padding:7px 11px}
+}
+@media(max-width:440px){.zx-nav .nav-link:nth-child(3),.zx-nav .nav-link:nth-child(4){display:none}}
+.zx-footer .footer-in{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
+.zx-footer a{color:var(--muted)}
+"""
+
+
+def route(path):
+    """Landing-site href -> this site's href."""
+    m = re.match(r"^/works/([a-z0-9-]+)/?(#.*)?$", path)
+    if m:
+        return "/works/" + m.group(1) + (m.group(2) or "")
+    table = {
+        "/works/": "/works", "/works": "/works",
+        "/": "/services/performance-marketing",
+        "/shopify/": "/services/shopify-ecommerce-development",
+        "/#start": "/contact", "/shopify/#start": "/contact",
+        "/#founder": "/our-story", "/#team": "/our-story",
+    }
+    return table.get(path, path)
+
+
+def convert(html):
+    # drop landing tracking
+    html = re.sub(r'<script defer src="/assets/attribution\.js[^"]*"></script>\n?', "", html)
+    html = re.sub(r'<script src="/assets/app\.js[^"]*"></script>', '<script src="/lp/case-app.js"></script>', html)
+    # inline copies of the Pixel loader (works index, X Emirates)
+    html = re.sub(r"<script>\s*/\* ─+\s*Zyvex Tech — case-study pages.*?</script>",
+                  '<script src="/lp/case-app.js"></script>', html, flags=re.S)
+    assert "fbq(" not in html and "/api/" not in html and "attribution.js" not in html
+    # absolute landing URLs -> this site
+    html = re.sub(r"https://in\.zyvextech\.co/works/([a-z0-9-]+)/",
+                  lambda m: SITE + "/works/" + m.group(1), html)
+    html = html.replace("https://in.zyvextech.co/works/", SITE + "/works")
+    html = html.replace("https://in.zyvextech.co/assets/", SITE + "/lp/")
+    # internal links
+    html = re.sub(r'href="(/[^"]*)"', lambda m: 'href="' + (m.group(1) if m.group(1).startswith("/assets/") else route(m.group(1))) + '"', html)
+    html = re.sub(r'(<a [^>]*href="/[^"]*")\s+target="_blank" rel="noopener"', r"\1", html)
+    # header / footer (after link rewriting, so their links stay as written)
+    html = re.sub(r'<header class="site-header">.*?</header>', HEADER, html, count=1, flags=re.S)
+    html = re.sub(r'<footer class="site-footer">.*?</footer>', FOOTER, html, count=1, flags=re.S)
+    # asset paths
+    html = html.replace('"/assets/', '"/lp/').replace("'/assets/", "'/lp/").replace("(/assets/", "(/lp/")
+    html = html.replace('<html lang="en-IN">', '<html lang="en">')
+    # our nav layer, after the landing stylesheets
+    html = html.replace("</head>", '<link rel="stylesheet" href="/lp/site-nav.css">\n</head>', 1)
+    assert "in.zyvextech.co" not in html, re.findall(r".{40}in\.zyvextech\.co.{40}", html)[:3]
+    return html
+
+
+def main(src):
+    if os.path.isdir(os.path.join(STATIC, "works")):
+        shutil.rmtree(os.path.join(STATIC, "works"))
+    if os.path.isdir(LP):
+        shutil.rmtree(LP)
+    os.makedirs(os.path.join(STATIC, "works"), exist_ok=True)
+
+    pages = {"works.html": os.path.join(src, "works", "index.html")}
+    for f in sorted(glob.glob(os.path.join(src, "works", "*", "index.html"))):
+        pages[os.path.join("works", os.path.basename(os.path.dirname(f)) + ".html")] = f
+    for out, f in pages.items():
+        io.open(os.path.join(STATIC, out), "w", encoding="utf-8").write(convert(io.open(f, encoding="utf-8").read()))
+
+    # assets: everything under landing assets/, minus tracking
+    for dp, _, fs in os.walk(os.path.join(src, "assets")):
+        for fn in fs:
+            if fn in SKIP_ASSETS and dp == os.path.join(src, "assets"):
+                continue
+            rel = os.path.relpath(os.path.join(dp, fn), os.path.join(src, "assets"))
+            dst = os.path.join(LP, rel)
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            if fn.endswith(".css"):
+                css = io.open(os.path.join(dp, fn), encoding="utf-8").read()
+                io.open(dst, "w", encoding="utf-8").write(css.replace("/assets/", "/lp/"))
+            else:
+                shutil.copyfile(os.path.join(dp, fn), dst)
+    io.open(os.path.join(LP, "case-app.js"), "w", encoding="utf-8").write(CASE_APP_JS)
+    io.open(os.path.join(LP, "site-nav.css"), "w", encoding="utf-8").write(SITE_NAV_CSS)
+    print("pages:", len(pages), "| assets:", sum(len(f) for _, _, f in os.walk(LP)))
+
+
+# ── Home-page sections ────────────────────────────────────────────────
+# Sections of the landing home page that this site's home page reuses.
+# They are written into src/index.html between generated markers:
+#   JS:  /* <lp-home> ... </lp-home> */   var LP_HOME = {...}; initLpHome()
+#   CSS: /* <lp-home-css> ... </lp-home-css> */  landing CSS scoped to .lp-sec
+HOME_SECTIONS = {               # key: heading text that identifies the section
+    "clients": "Trusted by brands across the world",
+    "results": "Real results, real brands",
+    "tools": "One store, one system",
+    "reporting": "Your numbers, explained every month",
+    "founder": 'id="founder"',
+    "team": "The team behind the systems",
+    "why": "What is different here",
+    "reels": "Hear it from them",
+    "testimonials": "What clients say",
+}
+
+
+def _split_selectors(sel):
+    out, depth, cur = [], 0, ""
+    for ch in sel:
+        if ch in "([": depth += 1
+        if ch in ")]": depth -= 1
+        if ch == "," and depth == 0:
+            out.append(cur); cur = ""
+        else:
+            cur += ch
+    out.append(cur)
+    return [x.strip() for x in out if x.strip()]
+
+
+def scope_css(css, scope):
+    """Prefix every selector with `scope`, recursing into @media/@supports.
+    Global at-rules (@font-face, @keyframes, @property) are dropped or kept as-is;
+    rules aimed at the page itself (:root, html, body, *) are dropped."""
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    out, i, n = [], 0, len(css)
+    while i < n:
+        j = css.find("{", i)
+        if j < 0: break
+        head = css[i:j].strip()
+        # find matching brace
+        depth, k = 1, j + 1
+        while k < n and depth:
+            if css[k] == "{": depth += 1
+            elif css[k] == "}": depth -= 1
+            k += 1
+        body = css[j + 1:k - 1]
+        i = k
+        if head.startswith("@media") or head.startswith("@supports"):
+            inner = scope_css(body, scope)
+            if inner.strip(): out.append(head + "{" + inner + "}")
+        elif head.startswith("@keyframes"):
+            out.append(head + "{" + body + "}")
+        elif head.startswith("@"):
+            continue                       # @font-face, @property: this site has its own
+        else:
+            sels = []
+            for sel in _split_selectors(head):
+                if re.match(r"^(:root|html|body|\*)(?![-\w])", sel):
+                    continue
+                sels.append(scope + " " + sel)
+            if sels: out.append(",".join(sels) + "{" + body + "}")
+    return "\n".join(out)
+
+
+def home_sections(src):
+    html = io.open(os.path.join(src, "index.html"), encoding="utf-8").read()
+    body = html[html.index("<body"):]
+    found = {}
+    for m in re.finditer(r"<section[^>]*>", body):
+        sec = body[m.start():body.index("</section>", m.start()) + len("</section>")]
+        for key, marker in HOME_SECTIONS.items():
+            if marker in sec and key not in found:
+                found[key] = sec
+    missing = set(HOME_SECTIONS) - set(found)
+    assert not missing, missing
+    out = {}
+    for key, sec in found.items():
+        sec = re.sub(r'(<section class="[^"]*?)\s*\brv\b', r"\1", sec, count=1)   # no scroll-reveal
+        sec = re.sub(r'href="(/[^"]*)"', lambda m: 'href="' + route(m.group(1)) + '"', sec)
+        sec = re.sub(r'\s+target="_blank" rel="noopener"', "", sec)
+        sec = re.sub(r'data-link="(/[^"]*)"', lambda m: 'data-link="' + route(m.group(1)) + '"', sec)
+        sec = sec.replace('"/assets/', '"/lp/')
+        sec = re.sub(r"\s*\n\s*", "\n", sec)
+        out[key] = '<div class="lp-sec lp-' + key + '">' + sec + "</div>"
+    css = re.findall(r"<style[^>]*>(.*?)</style>", html, re.S)[0]
+    light = io.open(os.path.join(src, "assets", "light.css"), encoding="utf-8").read()
+    scoped = scope_css(css, ".lp-sec") + "\n" + scope_css(light, ".lp-sec")
+    reels_css = io.open(os.path.join(src, "assets", "reels.css"), encoding="utf-8").read()
+    return out, scoped.replace("/assets/", "/lp/"), re.sub(r"/\*.*?\*/", "", reels_css, flags=re.S).strip()
+
+
+LP_HOME_JS = r"""
+/* Behaviour for the landing sections (from the landing site's inline scripts). */
+function initLpHome(){
+  /* client slider: hold the featured logos in place until the section is seen */
+  var m = document.querySelector('.client-marquee');
+  if(m){
+    var go = function(){ setTimeout(function(){ m.classList.add('go'); }, 1400); };
+    if(!('IntersectionObserver' in window)) go();
+    else { var o = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ o.disconnect(); go(); } }, { threshold: .35 }); o.observe(m); }
+  }
+  /* testimonials: read-more toggles + swipe dots on phones */
+  var w = document.querySelector('.tcards');
+  if(w){
+    w.querySelectorAll('.tcard-toggle').forEach(function(b){ b.addEventListener('click', function(){
+      var c = b.closest('.tcard'), op = c.classList.toggle('open');
+      b.setAttribute('aria-expanded', op); b.textContent = op ? 'Show less' : 'Read full review'; }); });
+    var t = w.querySelector('.tcards-track'), d = w.querySelector('.tcards-dots'), bar = document.createElement('i');
+    if(t && d){
+      d.appendChild(bar);
+      var upd = function(){ var vis = t.clientWidth / t.scrollWidth, max = t.scrollWidth - t.clientWidth, p = max > 0 ? t.scrollLeft / max : 0;
+        bar.style.width = (vis * 100) + '%'; bar.style.transform = 'translateX(' + (p * (1 / vis - 1) * 100) + '%)'; };
+      t.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+    }
+  }
+  /* client reels: /lp/reels.js wires up every [data-reels] row when it runs,
+     so (re)load it each time a page with reels is rendered */
+  if(document.querySelector('[data-reels]')){
+    var sc = document.createElement('script'); sc.src = '/lp/reels.js'; document.body.appendChild(sc);
+  }
+}
+"""
+
+
+def write_home_sections(src):
+    secs, css, reels_css = home_sections(src)
+    P = os.path.join(ROOT, "src", "index.html")
+    s = io.open(P, encoding="utf-8").read()
+    import json
+    js = ("/* <lp-home> Generated by build/import_landing_works.py from the landing site's\n"
+          "   home page. Do not hand-edit: change the landing site and re-run the import. */\n"
+          "var LP_HOME = " + json.dumps(secs, ensure_ascii=False, indent=0) + ";\n"
+          + LP_HOME_JS + "/* </lp-home> */\n")
+    cssblock = ("/* <lp-home-css> Generated by build/import_landing_works.py: the landing site's\n"
+                "   styles, scoped to .lp-sec, plus its reels styles. Do not hand-edit. */\n"
+                + css + "\n" + reels_css + "\n/* </lp-home-css> */\n")
+    if "/* <lp-home>" in s:
+        s = re.sub(r"/\* <lp-home>.*?/\* </lp-home> \*/\n", lambda m: js, s, flags=re.S)
+        s = re.sub(r"/\* <lp-home-css>.*?/\* </lp-home-css> \*/\n", lambda m: cssblock, s, flags=re.S)
+    else:
+        s = s.replace("function pageHome(){", js + "\nfunction pageHome(){", 1)
+        s = s.replace("</style>", cssblock + "</style>", 1)
+    io.open(P, "w", encoding="utf-8").write(s)
+    print("home sections:", ", ".join(secs), "| scoped css: %.1f KB" % (len(css) / 1024))
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        sys.exit(__doc__)
+    main(sys.argv[1])
+    write_home_sections(sys.argv[1])

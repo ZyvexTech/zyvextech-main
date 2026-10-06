@@ -62,7 +62,7 @@ const tpl=({p,title,desc,body,active,img})=>{
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#030303">
+<meta name="theme-color" content="#ffffff">
 <title>${esc(plain(title))}</title>
 <meta name="description" content="${esc(clip(desc,158))}">
 <link rel="canonical" href="${url}">
@@ -79,7 +79,7 @@ const tpl=({p,title,desc,body,active,img})=>{
 <link rel="icon" href="/assets/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/logo.png">
 <link rel="stylesheet" href="/assets/app.css">
-<style>html,body{margin:0;padding:0;background:#030303}</style>
+<style>html,body{margin:0;padding:0;background:#ffffff}</style>
 </head>
 <body>
 <div id="root">${doc}</div>
@@ -87,6 +87,17 @@ const tpl=({p,title,desc,body,active,img})=>{
 </body>
 </html>
 `;};
+
+// Pages that live in static/ (the imported portfolio) win over the SPA
+// version of the same route: they are not prerendered, only listed in the sitemap.
+const STATIC_DIR=path.join(__dirname,'..','static');
+const staticPaths=[];
+(function walk(d){ if(!fs.existsSync(d)) return; for(const f of fs.readdirSync(d)){ const full=path.join(d,f);
+  if(fs.statSync(full).isDirectory()){ if(f!=='lp') walk(full); }
+  else if(f.endsWith('.html')) staticPaths.push('/'+path.relative(STATIC_DIR,full).replace(/\\/g,'/').replace(/\.html$/,'')); } })(STATIC_DIR);
+staticPaths.sort();
+for(let i=routes.length-1;i>=0;i--) if(staticPaths.includes(routes[i].p)) routes.splice(i,1);
+const sitemapPaths=routes.filter(r=>r.p!=='/404').map(r=>r.p).concat(staticPaths);
 
 let n=0, bytes=0;
 for(const r of routes){
@@ -99,6 +110,6 @@ for(const r of routes){
 }
 fs.writeFileSync(path.join(OUT,'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-  + routes.filter(r=>r.p!=='/404').map(r=>`  <url><loc>${SITE+(r.p==='/'?'/':r.p)}</loc><priority>${r.p==='/'?'1.0':(r.p.split('/').length>2?'0.7':'0.8')}</priority></url>`).join('\n')
+  + sitemapPaths.map(p=>`  <url><loc>${SITE+(p==='/'?'/':p)}</loc><priority>${p==='/'?'1.0':(p.split('/').length>2?'0.7':'0.8')}</priority></url>`).join('\n')
   + '\n</urlset>\n');
-console.log('pages written:', n, '| total html', (bytes/1048576).toFixed(2), 'MB | avg', Math.round(bytes/n/1024), 'KB');
+console.log('pages written:', n, '| static pages:', staticPaths.length, '| total html', (bytes/1048576).toFixed(2), 'MB | avg', Math.round(bytes/n/1024), 'KB');

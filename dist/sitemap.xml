@@ -12,21 +12,6 @@
   <url><loc>https://www.zyvextech.co/services/mobile-app-development</loc><priority>0.7</priority></url>
   <url><loc>https://www.zyvextech.co/services/custom-software-development</loc><priority>0.7</priority></url>
   <url><loc>https://www.zyvextech.co/services/b2b-lead-generation-systems</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works</loc><priority>0.8</priority></url>
-  <url><loc>https://www.zyvextech.co/works/x-emirates</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/wolgan</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/abclux</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/beyondspare</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/ba51</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/nichespectacles</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/frenchcakes</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/feza-dates</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/colin-guest</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/firoz-pickles</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/cocoroots</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/turmaroot</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/thebombcase</loc><priority>0.7</priority></url>
-  <url><loc>https://www.zyvextech.co/works/chandanveda</loc><priority>0.7</priority></url>
   <url><loc>https://www.zyvextech.co/our-story</loc><priority>0.8</priority></url>
   <url><loc>https://www.zyvextech.co/blog</loc><priority>0.8</priority></url>
   <url><loc>https://www.zyvextech.co/blog/5-signs-your-shopify-store-needs-a-conversion-audit</loc><priority>0.7</priority></url>
@@ -45,4 +30,20 @@
   <url><loc>https://www.zyvextech.co/contact/mobile-app-development</loc><priority>0.7</priority></url>
   <url><loc>https://www.zyvextech.co/contact/custom-software-development</loc><priority>0.7</priority></url>
   <url><loc>https://www.zyvextech.co/contact/b2b-lead-generation-systems</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works</loc><priority>0.8</priority></url>
+  <url><loc>https://www.zyvextech.co/works/abclux</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/ba51</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/beyondspare</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/chandanveda</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/cocoroots</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/colin-guest</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/feza-dates</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/firoz-pickles</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/frenchcakes</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/nichespectacles</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/solforge-academy</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/thebombcase</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/turmaroot</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/wolgan</loc><priority>0.7</priority></url>
+  <url><loc>https://www.zyvextech.co/works/x-emirates</loc><priority>0.7</priority></url>
 </urlset>

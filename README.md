@@ -56,22 +56,27 @@ download a 2.5 MB document.
 zyvextech-main-site/
 ├── src/
 │   └── index.html          ← THE source of truth. Edit this and nothing else.
+├── static/                 ← copied into dist/ verbatim by the build
+│   ├── works.html, works/<slug>.html   ← the portfolio, imported from the landing site
+│   └── lp/                 ← landing-site assets (case images, client logos, team, reels…)
 ├── build/
 │   ├── rebuild.py          ← build orchestrator (run this)
-│   └── prerender.js        ← static route generator
+│   ├── prerender.js        ← static route generator
+│   └── import_landing_works.py ← re-imports the portfolio and home sections from the landing site
 ├── dist/                   ← generated. Do not hand-edit; it is overwritten.
 │   ├── index.html          ← prerendered home
 │   ├── services.html  services/<slug>.html      (10 services)
-│   ├── works.html     works/<slug>.html         (14 case studies)
+│   ├── works.html     works/<slug>.html         (15 case studies, from static/)
 │   ├── blog.html      blog/<slug>.html          (5 posts)
 │   ├── contact.html   contact/<slug>.html       (10 per-service contact pages)
 │   ├── our-story.html, 404.html
-│   ├── assets/             ← app.css, app.js, runalto.woff, logo.png, 53 images
+│   ├── assets/             ← app.css, app.js, runalto.woff, logo.png, extracted images
+│   ├── lp/                 ← from static/lp
 │   ├── vercel.json, robots.txt, sitemap.xml
 └── scripts-archive/        ← one-off patch scripts, already applied. Reference only.
 ```
 
-**46 prerendered routes.** Each is a complete HTML document with its own
+**30 prerendered routes plus 16 static portfolio pages.** Each is a complete HTML document with its own
 `<title>`, meta description, canonical URL and Open Graph tags, so the site
 indexes properly and deep links work without JavaScript. Once loaded, the
 client-side router takes over and navigation happens with no page reload.
@@ -101,13 +106,14 @@ npm run build
 # or: python build/rebuild.py
 ```
 
-That does five things:
+That does six things:
 
 1. Writes `index.artifact.html` — the self-contained page with hash routing switched on, for offline or standalone previewing.
 2. Extracts every inline `data:` URI into `dist/assets/`, deduplicated by content hash, and splits the inline `<style>` and `<script>` into `app.css` and `app.js`.
-3. Runs `prerender.js`, which loads `app.js` inside a Node `vm` sandbox with a stubbed `window`/`document`, calls each page function, and writes one HTML file per route plus `sitemap.xml`.
-4. Writes `vercel.json`, `serve.json`, and `robots.txt`.
-5. Generates a production deployment zip (`dist.zip`).
+3. Runs `prerender.js`, which loads `app.js` inside a Node `vm` sandbox with a stubbed `window`/`document`, calls each page function, and writes one HTML file per route plus `sitemap.xml`. Routes that exist in `static/` (the portfolio) are skipped there and only listed in the sitemap.
+4. Copies `static/` into `dist/`.
+5. Writes `vercel.json`, `serve.json`, and `robots.txt`.
+6. Generates a production deployment zip (`dist.zip`).
 
 Output lands in `dist/`. Commit it and push to `master` to deploy (see Deployment workflow above).
 
@@ -129,21 +135,38 @@ Everything lives in plain data arrays near the top of `src/index.html`:
 | `SERVICES` | the 10 service pages — summary, description, process, FAQs |
 | `WORKS` / `WORKS_ORDER` | the 14 case studies, their stats, country flags and running order |
 | `BLOG_POSTS` | the 5 articles |
-| `TESTIMONIALS` / `WORK_REVIEWS` | client quotes (**currently placeholders**) |
+| `TESTIMONIALS` / `WORK_REVIEWS` | old SPA quote slots (the pages now show the landing testimonials) |
 | `APPROACH` | the four How We Work steps and their diagrams |
 | `STATS`, `VALUES`, `TOOLS_ADVISED`, `TECH_PARTNERS` | the supporting blocks |
 | `TEAM_PHOTO`, `FOUNDER_PHOTO`, `TEAM_MEETING_PHOTO`, `CLIENT_LOGOS` | image slots (**placeholders**) |
 
 Change the data, run the build, commit, and push to `master`.
 
+### Content shared with the landing site
+
+The design is the landing site's light theme (white, ink text, teal accents).
+Three things come straight from the landing site (`ZyvexTech/zyvex-landing-page`):
+
+- **The portfolio** (`/works`, `/works/<slug>`) is the landing site's portfolio, as static pages in `static/`.
+- **Home-page sections** (client logos, results, connected tools, reporting, founder, team, why us, client reels, testimonials) live in `src/index.html` as `LP_HOME`, between `<lp-home>` markers, with their CSS between `<lp-home-css>` markers. The team, client logos, reels and testimonials are also used on Our Story.
+- **Service extras** (`SERVICE_EXTRAS` in `src/index.html`): the "In practice" checklists, Shopify build inclusions, ad-spend note and extra FAQs.
+
+To pull in landing-site changes to the portfolio or home sections, re-run the importer, then build:
+
+```bash
+python build/import_landing_works.py /path/to/zyvex-landing-page
+npm run build
+```
+
+The importer swaps in this site's navigation and footer, moves landing assets under `/lp/`, and strips the landing site's Meta Pixel / lead-form tracking. Do not hand-edit the generated parts; change the landing site and re-import.
+
 ---
 
 ## Known gaps
 
-- **Placeholder images** still in place: team group photo, founder portrait, client meeting photos, client logos, and the X Emirates / Firoz Pickles result screenshots.
-- **Testimonials are empty** — the cards render "Quote to be added" until real quotes go into `TESTIMONIALS` and `WORK_REVIEWS`.
-- **X Emirates is labelled a UAE client.** It is an Indian client. Fixed on the India landing site, not yet here.
-- **Logos.** The home page Core Expertise cards show full-colour Shopify, Meta and Google logos (Meta and Google from the CC0 `gilbarbara/logos` set). Google has no dark-background version, so it is still a plain wordmark on the Works page, and WhatsApp is a wordmark everywhere.
+- **Old SPA case-study pages** (`pageWorks`, `pageWorkDetail`, `WORKS` data) are now only used by the single-file preview artifact (hash mode); the live site serves the imported portfolio. The home page, service pages and blog still use `WORKS` for thumbnails and related-work rows.
+- **Preview artifact** (`index.artifact.html`) does not include the `/lp/` assets, so landing-sourced images and videos do not show there.
+- **Logos.** The home page Core Expertise cards show full-colour Shopify, Meta and Google logos (Meta and Google from the CC0 `gilbarbara/logos` set). The How We Work diagram uses the full-colour Shopify and Meta logos.
 
 ---
 
