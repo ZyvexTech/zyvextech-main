@@ -2375,7 +2375,10 @@ function pageServiceDetail(service){
   +     '<div>'
   +       '<p class="faint" style="font-size:12px;text-transform:uppercase;letter-spacing:.08em">What&rsquo;s included</p>'
   +       '<ul style="margin-top:20px;border-top:1px solid var(--line);padding-top:20px;display:flex;flex-direction:column;gap:12px">'+deliverables+'</ul>'
-  +       '<a href="#/contact/'+service.slug+'" class="btn btn-teal" style="margin-top:32px">Talk to us about '+service.name+' <span aria-hidden="true">↗</span></a>'
+  +       '<div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">'
+  +         '<a href="#/contact/'+service.slug+'" class="btn btn-teal">Talk to us about '+service.name+' <span aria-hidden="true">↗</span></a>'
+  +         whatsappButton()
+  +       '</div>'
   +     '</div>'
   +   '</div>'
   + '</section>'
