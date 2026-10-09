@@ -33,7 +33,9 @@ def sub(mo):
         return seen[h]
     count[0] += 1
     ctx = s[max(0, mo.start() - 90):mo.start()]
-    stem = "logo" if "LOGO_DATA_URI" in ctx else ("runalto" if "Runalto" in ctx else "img-%02d" % count[0])
+    # images are named by content hash, so a changed image gets a new URL and
+    # the year-long immutable cache on /assets/ never serves a stale copy
+    stem = "logo" if "LOGO_DATA_URI" in ctx else ("runalto" if "Runalto" in ctx else "img-" + h)
     name = stem + "." + EXT.get(mime, "bin")
     if os.path.exists(os.path.join(ASSETS, name)):
         name = "%s-%s.%s" % (stem, h[:5], EXT.get(mime, "bin"))

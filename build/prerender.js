@@ -52,6 +52,13 @@ C.SERVICES.forEach(s=>add('/contact/'+s.slug, 'Contact | '+s.name+' | '+C.COMPAN
 
 add('/404', 'Not Found | '+C.COMPANY.name, 'That page could not be found.', C.page404(), '');
 
+// app.css / app.js keep fixed names, so every page links them with a content
+// hash (?v=...). /assets/ is cached as immutable for a year; without this a
+// returning visitor keeps running the old app.js after a deploy.
+const crypto=require('crypto');
+const ver=f=>crypto.createHash('sha1').update(fs.readFileSync(path.join(OUT,'assets',f))).digest('hex').slice(0,10);
+const CSS_V=ver('app.css'), JS_V=ver('app.js');
+
 // ── write a real HTML file per route ──────────────────────────────────
 const tpl=({p,title,desc,body,active,img})=>{
   const url=SITE+(p==='/'?'/':p);
@@ -78,12 +85,12 @@ const tpl=({p,title,desc,body,active,img})=>{
 <meta name="twitter:image" content="${ogimg}">
 <link rel="icon" href="/assets/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/logo.png">
-<link rel="stylesheet" href="/assets/app.css">
+<link rel="stylesheet" href="/assets/app.css?v=${CSS_V}">
 <style>html,body{margin:0;padding:0;background:#ffffff}</style>
 </head>
 <body>
 <div id="root">${doc}</div>
-<script src="/assets/app.js" defer></script>
+<script src="/assets/app.js?v=${JS_V}" defer></script>
 </body>
 </html>
 `;};

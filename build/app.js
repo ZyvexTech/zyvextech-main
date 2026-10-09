@@ -28,8 +28,8 @@ function svgIcon(name, px){
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:'+px+'px;height:'+px+'px;display:block" aria-hidden="true">'+(ICONS[name]||'')+'</svg>';
 }
 
-var BLOG_IMAGES = {"5-signs-your-shopify-store-needs-a-conversion-audit":{"cover":"/assets/img-03.svg","pattern":"/assets/img-04.svg","quote":"/assets/img-05.svg"},"why-most-whatsapp-marketing-automations-fail":{"cover":"/assets/img-06.svg","pattern":"/assets/img-07.svg","quote":"/assets/img-08.svg"},"shopify-vs-shopify-plus-when-its-actually-time-to-upgrade":{"cover":"/assets/img-09.svg","pattern":"/assets/img-10.svg","quote":"/assets/img-11.svg"},"the-real-cost-of-a-cheap-meta-ads-agency":{"cover":"/assets/img-12.svg","pattern":"/assets/img-13.svg","quote":"/assets/img-14.svg"},"seo-for-shopify-stores-technical-basics-most-agencies-skip":{"cover":"/assets/img-15.svg","pattern":"/assets/img-16.svg","quote":"/assets/img-17.svg"}};
-var CASE_IMAGES = {"firoz-pickles":{"cover":"/assets/img-18.jpg","pattern":"/assets/img-19.jpg","detail":"/assets/img-20.jpg"},"feza-dates":{"cover":"/assets/img-21.jpg","pattern":"/assets/img-22.jpg","detail":"/assets/img-23.jpg"},"x-emirates":{"cover":"/assets/img-24.jpg","pattern":"/assets/img-25.jpg","detail":"/assets/img-26.jpg"},"chandanveda":{"cover":"/assets/img-27.jpg","pattern":"/assets/img-28.jpg","detail":"/assets/img-29.jpg"}};
+var BLOG_IMAGES = {"5-signs-your-shopify-store-needs-a-conversion-audit":{"cover":"/assets/img-e9d607c17a.svg","pattern":"/assets/img-37c5a7d448.svg","quote":"/assets/img-21646b453c.svg"},"why-most-whatsapp-marketing-automations-fail":{"cover":"/assets/img-eddab1205a.svg","pattern":"/assets/img-261c262ddd.svg","quote":"/assets/img-1ec37e906b.svg"},"shopify-vs-shopify-plus-when-its-actually-time-to-upgrade":{"cover":"/assets/img-f38efcf909.svg","pattern":"/assets/img-b51fa1d98a.svg","quote":"/assets/img-80f803a83f.svg"},"the-real-cost-of-a-cheap-meta-ads-agency":{"cover":"/assets/img-fdce9fd91d.svg","pattern":"/assets/img-6ca568d645.svg","quote":"/assets/img-2d0bff9fa5.svg"},"seo-for-shopify-stores-technical-basics-most-agencies-skip":{"cover":"/assets/img-bfeb3cee90.svg","pattern":"/assets/img-805c192679.svg","quote":"/assets/img-bbf82d1057.svg"}};
+var CASE_IMAGES = {"firoz-pickles":{"cover":"/assets/img-01cccc3b33.jpg","pattern":"/assets/img-5242ec1158.jpg","detail":"/assets/img-5622201f70.jpg"},"feza-dates":{"cover":"/assets/img-558bb79bb5.jpg","pattern":"/assets/img-dc4078a4af.jpg","detail":"/assets/img-74d21b3bc0.jpg"},"x-emirates":{"cover":"/assets/img-4ffc57a775.jpg","pattern":"/assets/img-f3e24c316c.jpg","detail":"/assets/img-adb26e5c6e.jpg"},"chandanveda":{"cover":"/assets/img-e08a078435.jpg","pattern":"/assets/img-946cbb7bbd.jpg","detail":"/assets/img-f964c6f656.jpg"}};
 
 
 /* ── Team photo ───────────────────────────────────────────────
@@ -37,7 +37,7 @@ var CASE_IMAGES = {"firoz-pickles":{"cover":"/assets/img-18.jpg","pattern":"/ass
    "data:image/jpeg;base64,..." URI or a hosted image URL.
    Recommended crop: wide, roughly 1200x630. Nothing else needs
    to change — the Our Team section on the home page reads this. */
-var TEAM_PHOTO = "/assets/img-30.svg";
+var TEAM_PHOTO = "/assets/img-eb4e1c3e37.svg";
 var TEAM_PHOTO_ALT = "The Zyvex Tech team in Calicut";
 /* Founder portrait: swap this for the real photo. Portrait crop, roughly 4:5. */
 var FOUNDER_PHOTO = "";
@@ -747,10 +747,10 @@ function workImages(){
   var CI = CASE_IMAGES;
   return {
     "colin-guest": {
-      cover:            "/assets/img-31.jpg",
+      cover:            "/assets/img-d449a2b7ac.jpg",
       "colin-consult":  ph('Consultation', 'Workshop / notes photo', 1200, 800),
-      "colin-landing":  "/assets/img-32.jpg",
-      "colin-scroll":   "/assets/img-33.jpg",
+      "colin-landing":  "/assets/img-0cd300352a.jpg",
+      "colin-scroll":   "/assets/img-9e86849f56.jpg",
       "colin-zoho-pos": ph('Zoho POS', 'Inventory and SKU sync', 1200, 800),
       "colin-zoho-books": ph('Zoho Books', 'Sales flowing into the books', 1200, 800),
       "colin-seo":      ph('SEO', 'Search setup at launch', 1200, 800)
@@ -776,7 +776,7 @@ function workImages(){
   };
 }
 var WORK_IMAGES = workImages();
-(function(){ var extra = {"wolgan":{"cover":"/assets/img-34.jpg","inline":"/assets/img-35.jpg"},"abclux":{"cover":"/assets/img-36.jpg","inline":"/assets/img-37.jpg"},"beyondspare":{"cover":"/assets/img-38.jpg","inline":"/assets/img-39.jpg"},"ba51":{"cover":"/assets/img-40.jpg","inline":"/assets/img-41.jpg"},"nichespectacles":{"cover":"/assets/img-42.jpg","inline":"/assets/img-43.jpg"},"frenchcakes":{"cover":"/assets/img-44.jpg","inline":"/assets/img-45.jpg"},"cocoroots":{"cover":"/assets/img-46.jpg","inline":"/assets/img-47.jpg"},"turmaroot":{"cover":"/assets/img-48.jpg","inline":"/assets/img-49.jpg"},"thebombcase":{"cover":"/assets/img-50.jpg","inline":"/assets/img-51.jpg"}};
+(function(){ var extra = {"wolgan":{"cover":"/assets/img-bc3151de87.jpg","inline":"/assets/img-82e67826ea.jpg"},"abclux":{"cover":"/assets/img-ba389fe34e.jpg","inline":"/assets/img-9d541c5add.jpg"},"beyondspare":{"cover":"/assets/img-6b1bb4c206.jpg","inline":"/assets/img-53225d56b8.jpg"},"ba51":{"cover":"/assets/img-b4f7217bce.jpg","inline":"/assets/img-1d4e774749.jpg"},"nichespectacles":{"cover":"/assets/img-08c76548ef.jpg","inline":"/assets/img-61a8031772.jpg"},"frenchcakes":{"cover":"/assets/img-1f42db9ff7.jpg","inline":"/assets/img-28119eb02a.jpg"},"cocoroots":{"cover":"/assets/img-897768de8a.jpg","inline":"/assets/img-d7820ba672.jpg"},"turmaroot":{"cover":"/assets/img-f8a8f4b51e.jpg","inline":"/assets/img-c150f8f992.jpg"},"thebombcase":{"cover":"/assets/img-b98d4dae0c.jpg","inline":"/assets/img-feed74020e.jpg"}};
   for(var k in extra){ WORK_IMAGES[k] = extra[k]; } })();
 function workImg(slug, key){
   var set = WORK_IMAGES[slug] || {};
@@ -940,9 +940,9 @@ function ctaSection(opts){
    darkH / darkPad  = the same for "dark"                              */
 var MARK_UNIT = 20;
 var PARTNER_LOGOS = {
-  shopify: { light: "/assets/img-52.svg", dark: "/assets/img-53.svg", h: 1.6, pad: 0.7, darkH: 1, darkPad: 1, alt: "Shopify" },
-  meta:    { light: "/assets/img-54.png", dark: "/assets/img-55.svg", h: 1.2, pad: 0.9, darkH: 1.05, darkPad: 1, alt: "Meta" },
-  google:  { light: "/assets/img-56.png", dark: "/assets/img-57.svg", h: 1.5, pad: 0.75, darkH: 1.15, darkPad: 1, alt: "Google" }
+  shopify: { light: "/assets/img-fce5d2c70d.svg", dark: "/assets/img-22c82e8e43.svg", h: 1.6, pad: 0.7, darkH: 1, darkPad: 1, alt: "Shopify" },
+  meta:    { light: "/assets/img-ccdde9701f.png", dark: "/assets/img-374c478fb4.svg", h: 1.2, pad: 0.9, darkH: 1.05, darkPad: 1, alt: "Meta" },
+  google:  { light: "/assets/img-75f2ed8bfc.png", dark: "/assets/img-c7ccf32798.svg", h: 1.5, pad: 0.75, darkH: 1.15, darkPad: 1, alt: "Google" }
 };
 
 function brandMark(key, onLight, unit){
