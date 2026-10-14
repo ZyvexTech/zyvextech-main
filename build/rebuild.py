@@ -69,6 +69,39 @@ if p.stdout:
 if p.stderr:
     print("Prerender warnings/errors:", p.stderr.strip())
 
+# 3b ── Google Analytics 4 tag, injected right after <head> on every page in
+#        dist/ (prerendered routes and the static portfolio pages alike), so it
+#        lives in one place and survives re-imports of static/works.
+#        The SPA's History API navigation is picked up by GA4 Enhanced
+#        Measurement (page views on browser history events), so no extra code.
+#        index.artifact.html is a preview build and is left untagged.
+GA_ID = "G-3NLC55WGTF"
+GA_TAG = """<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '%s');
+</script>""" % (GA_ID, GA_ID)
+tagged = 0
+for dirpath, _, files in os.walk(OUT):
+    for f in files:
+        if not f.endswith(".html") or f == "index.artifact.html":
+            continue
+        fp = os.path.join(dirpath, f)
+        h = io.open(fp, encoding="utf-8").read()
+        if GA_ID in h:
+            continue
+        out, n = re.subn(r"<head(\s[^>]*)?>", lambda mo: mo.group(0) + "\n" + GA_TAG, h, count=1, flags=re.I)
+        if n:
+            io.open(fp, "w", encoding="utf-8").write(out)
+            tagged += 1
+        else:
+            print("WARNING: no <head> in", os.path.relpath(fp, OUT))
+print("GA4 tag injected into %d pages" % tagged)
+
 # 4 ── config files
 io.open(os.path.join(OUT, "vercel.json"), "w", encoding="utf-8").write("""{
   "cleanUrls": true,

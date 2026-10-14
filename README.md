@@ -41,7 +41,7 @@ Local changes → commit → push to master → Vercel automatically deploys
 | Icons & diagrams | Inline SVG, drawn in code |
 | Build | Python 3 (`rebuild.py`) orchestrating Node (`prerender.js`) |
 | Hosting | Vercel static hosting, `cleanUrls: true`, long-cache headers on `/assets/*` |
-| Analytics / tracking | None on this site by design (the ad-funnel tracking lives on the India landing site) |
+| Analytics / tracking | Google Analytics 4 only (`G-3NLC55WGTF`, property *zyvextech.co*), injected into every page at build time by `build/rebuild.py` step 3b. No ad pixels: the ad-funnel tracking lives on the India landing site |
 
 **Why one file.** Everything is inline in the source so the site can be
 previewed as a single artifact. The build step pulls the inline data URIs
