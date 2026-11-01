@@ -169,7 +169,8 @@ NO_CURRENCY = [
     (r"Before we spend a rupee,", "Before we spend anything,"),
 ]
 CURRENCY_RE = re.compile(r"(?i)(₹|&#8377;|rupee|lakh|\binr\b|\brs\.)")
-SKIP_ASSETS |= {"xemirates-revenue.jpg", "xemirates-meta-roas.jpg"}   # money screenshots
+# Pages allowed to keep currency figures (and so their money screenshots): X Emirates only.
+CURRENCY_OK = {os.path.join("works", "x-emirates.html")}
 
 
 def no_currency(html, where):
@@ -195,7 +196,7 @@ def route(path):
     return table.get(path, path)
 
 
-def convert(html):
+def convert(html, allow_currency=False):
     # drop landing tracking
     html = re.sub(r'<script defer src="/assets/attribution\.js[^"]*"></script>\n?', "", html)
     html = re.sub(r'<script src="/assets/app\.js[^"]*"></script>', '<script src="/lp/case-app.js"></script>', html)
@@ -220,7 +221,9 @@ def convert(html):
     # our nav layer, after the landing stylesheets
     html = html.replace("</head>", '<link rel="stylesheet" href="/lp/site-nav.css">\n</head>', 1)
     assert "in.zyvextech.co" not in html, re.findall(r".{40}in\.zyvextech\.co.{40}", html)[:3]
-    return no_currency(html, "page")
+    # X Emirates is the one case study allowed to show its ₹ figures (owner's call);
+    # every other page stays currency-free.
+    return html if allow_currency else no_currency(html, "page")
 
 
 def main(src):
@@ -234,7 +237,8 @@ def main(src):
     for f in sorted(glob.glob(os.path.join(src, "works", "*", "index.html"))):
         pages[os.path.join("works", os.path.basename(os.path.dirname(f)) + ".html")] = f
     for out, f in pages.items():
-        io.open(os.path.join(STATIC, out), "w", encoding="utf-8").write(convert(io.open(f, encoding="utf-8").read()))
+        io.open(os.path.join(STATIC, out), "w", encoding="utf-8").write(
+            convert(io.open(f, encoding="utf-8").read(), allow_currency=(out in CURRENCY_OK)))
 
     # assets: everything under landing assets/, minus tracking
     for dp, _, fs in os.walk(os.path.join(src, "assets")):
