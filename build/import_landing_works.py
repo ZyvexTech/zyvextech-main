@@ -273,7 +273,6 @@ HOME_SECTIONS = {               # key: heading text that identifies the section
     "tools": "One store, one system",
     "reporting": "Your numbers, explained every month",
     "founder": 'id="founder"',
-    "cofounder": 'id="cofounder"',
     "team": "The team behind the systems",
     "why": "What is different here",
     "reels": "Hear it from them",
