@@ -82,7 +82,6 @@ img,svg{display:block}
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .ticker-track{display:flex;width:max-content;gap:20px;animation:zt-ticker 46s linear infinite}
-.ticker:hover .ticker-track{animation-play-state:paused}
 @keyframes zt-ticker{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 10px))}}
 .ticker-item{flex:0 0 auto;display:flex;align-items:center;justify-content:center;height:96px;min-width:210px;
   padding:0 30px;border:1px solid var(--line);background:rgba(13,18,17,.02)}
@@ -852,9 +851,6 @@ background:rgba(10,154,127,.08);border:1px solid rgba(6,122,100,.22);color:var(-
 .lp-sec .client-flags{display:flex;gap:4px;height:12px}
 .lp-sec .client-flags img{width:18px;height:12px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.1)}
 .lp-sec .client-logo{height:44px;display:flex;align-items:center}
-.lp-sec .client-marquee .logo-track{animation-play-state:paused}
-.lp-sec .client-marquee.go .logo-track{animation-play-state:running}
-.lp-sec .client-marquee.go:hover .logo-track{animation-play-state:paused}
 @media(max-width:640px){.lp-sec .client-marquee .logo-set{gap:38px;padding-right:38px}
 .lp-sec .client-logo img{transform:scale(.8)}
 .lp-sec .client-marquee .logo-track{animation-duration:34s}}
@@ -2086,13 +2082,6 @@ var LP_HOME = {
 
 /* Behaviour for the landing sections (from the landing site's inline scripts). */
 function initLpHome(){
-  /* client slider: hold the featured logos in place until the section is seen */
-  var m = document.querySelector('.client-marquee');
-  if(m){
-    var go = function(){ setTimeout(function(){ m.classList.add('go'); }, 1400); };
-    if(!('IntersectionObserver' in window)) go();
-    else { var o = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ o.disconnect(); go(); } }, { threshold: .35 }); o.observe(m); }
-  }
   /* testimonials: read-more toggles + swipe dots on phones */
   var w = document.querySelector('.tcards');
   if(w){

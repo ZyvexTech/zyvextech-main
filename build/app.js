@@ -1085,13 +1085,6 @@ var LP_HOME = {
 
 /* Behaviour for the landing sections (from the landing site's inline scripts). */
 function initLpHome(){
-  /* client slider: hold the featured logos in place until the section is seen */
-  var m = document.querySelector('.client-marquee');
-  if(m){
-    var go = function(){ setTimeout(function(){ m.classList.add('go'); }, 1400); };
-    if(!('IntersectionObserver' in window)) go();
-    else { var o = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ o.disconnect(); go(); } }, { threshold: .35 }); o.observe(m); }
-  }
   /* testimonials: read-more toggles + swipe dots on phones */
   var w = document.querySelector('.tcards');
   if(w){
