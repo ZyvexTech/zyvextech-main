@@ -87,6 +87,80 @@ var APPROACH = [
     points: ["Ongoing support", "Especially Shopify"] }
 ];
 
+/* How We Work v2: each step gets a small working mock-up instead of a line
+   diagram. Copy comes from APPROACH; the mock-ups illustrate the step.      */
+function hw2Visual(key){
+  var bar = function(title, right){ return '<div class="mk-bar"><i></i><i></i><i></i><span'+(key==='build'?' class="mk-url"':'')+'>'+title+'</span>'+(right?'<b>'+right+'</b>':'')+'</div>'; };
+  if(key === 'consult'){
+    var row = function(k, v){ return '<div class="mk-row"><span class="mk-chk">&#10003;</span><div style="min-width:0"><p class="mk-k">'+k+'</p><p class="mk-v">'+v+'</p></div></div>'; };
+    return '<div class="mk mk-call">'+bar('Discovery call','Live')
+      + '<div class="mk-call-body">'
+      +   '<figure class="mk-cam"><img src="/lp/founder-syed-fidel-shaan.jpg" alt="Syed Fidel Shaan, founder of Zyvex Tech, on a discovery call" loading="lazy">'
+      +     '<figcaption><span class="mk-wave"><i></i><i></i><i></i><i></i></span>Syed &middot; Zyvex Tech</figcaption></figure>'
+      +   '<div class="mk-notes"><p class="mk-lab">Call notes</p>'
+      +     row('Business model','How the money is actually made')
+      +     row('Product','What it is, and who buys it')
+      +     row('Goals','Where it needs to get to')
+      +     '<p class="mk-foot">Tools recommended so far: <b>0</b></p>'
+      +   '</div>'
+      + '</div></div>';
+  }
+  if(key === 'scope'){
+    var t = function(name, fit){ return '<span class="mk-tool '+(fit?'fit':'skip')+'"><em>'+name+'</em><b>'+(fit?'Fits':'Skip')+'</b></span>'; };
+    return '<div class="mk mk-stack">'+bar('Stack check')
+      + '<div class="mk-stack-body"><div class="mk-tools">'
+      +   t('Shopify Plus',0)+t('Shopify',1)+t('Custom ERP',0)+t('Meta Ads',1)+t('AI chat widget',0)+t('Technical SEO',1)
+      + '</div><div class="mk-tray"><p class="mk-lab">Your stack</p>'
+      +   '<div class="mk-tray-items"><span>Shopify</span><span>Meta Ads</span><span>Technical SEO</span></div>'
+      +   '<p class="mk-foot"><b>3</b> tools you would not have used, skipped</p></div>'
+      + '</div></div>';
+  }
+  if(key === 'build'){
+    var p = function(name, tools){ return '<li><p><span>'+name+'</span><em>'+tools+'</em></p><div class="mk-meter"><i></i></div></li>'; };
+    return '<div class="mk mk-build">'+bar('yourstore.com')
+      + '<div class="mk-build-body">'
+      +   '<div class="mk-site"><div class="mk-s-nav"></div><div class="mk-s-hero"><i></i><i></i><b></b></div><div class="mk-s-grid"><span></span><span></span><span></span></div></div>'
+      +   '<ul class="mk-prog">'+p('Store','Shopify')+p('Campaigns','Meta &middot; Google')+p('Funnels','Landing &middot; Checkout')+p('Retention','WhatsApp &middot; Email')
+      +     '<li class="mk-golive">&#9679; Live</li></ul>'
+      + '</div></div>';
+  }
+  /* maintain */
+  return '<div class="mk mk-ops">'+bar('After launch','All systems normal')
+    + '<div class="mk-ops-body">'
+    +   '<div class="mk-chart"><p class="mk-lab">Store health</p>'
+    +     '<svg viewBox="0 0 300 96" aria-hidden="true"><defs><linearGradient id="mkGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12d6b0" stop-opacity=".28"/><stop offset="1" stop-color="#12d6b0" stop-opacity="0"/></linearGradient></defs>'
+    +     '<path class="mk-area" d="M0 78 C30 74 45 64 70 66 S110 52 135 54 S175 40 200 36 S250 26 275 18 L300 14 L300 96 L0 96Z"/>'
+    +     '<path class="mk-line" d="M0 78 C30 74 45 64 70 66 S110 52 135 54 S175 40 200 36 S250 26 275 18 L300 14"/></svg>'
+    +     '<div class="mk-tiles"><span>Monitor</span><span>Improve</span><span>Support</span></div></div>'
+    +   '<div class="mk-chat"><div class="mk-msg them">Can we add a bundle offer before the sale?</div>'
+    +     '<div class="mk-msg us"><p>Done. The bundle is live and checkout is tested.<small>Zyvex support</small></p><img src="/lp/team/zayd-abdulla.jpg" alt="" loading="lazy"></div></div>'
+    + '</div></div>';
+}
+function hw2Section(){
+  var steps = APPROACH.map(function(s, i){
+    var pts = (s.points || []).map(function(t){ return '<li>'+t+'</li>'; }).join('');
+    return '<article class="hw2-step" id="hw2-step-'+s.step+'">'
+      + '<div class="hw2-vis">'+hw2Visual(s.art)+'</div>'
+      + '<div class="hw2-copy"><p class="hw2-num">Step '+String(s.step).padStart(2,'0')+'</p>'
+      +   '<h3 class="hw2-h">'+s.title+'</h3><p class="hw2-body">'+s.body+'</p>'
+      +   (pts ? '<ul class="hw2-chips">'+pts+'</ul>' : '')
+      + '</div></article>';
+  }).join('');
+  var rail = APPROACH.map(function(s, i){
+    var short = ['Consult','Scope','Build','Maintain'][i] || s.title;
+    return '<li'+(i===0?' class="on"':'')+'><button type="button" data-hw2="'+i+'"><span class="hw2-dot">'+String(s.step).padStart(2,'0')+'</span>'+short+'</button></li>';
+  }).join('');
+  return '<section class="hw2" id="how-we-work"><div class="wrap hw2-grid">'
+    + '<div class="hw2-side">'+eyebrow('How We Work')
+    +   '<h2 class="hw2-title balance">Consult First,<br><em>Build Second</em><span class="dot">.</span></h2>'
+    +   '<p class="hw2-lede">Four steps, in this order, on every engagement. Nothing gets built until we know what the business actually needs.</p>'
+    +   '<ol class="hw2-rail"><span class="hw2-rail-fill" aria-hidden="true"></span>'+rail+'</ol>'
+    +   '<a href="#/our-story" class="hw2-link">More about how we work &#8599;</a>'
+    + '</div>'
+    + '<div class="hw2-steps">'+steps+'</div>'
+    + '</div></section>';
+}
+
 /* Small diagrams for the How We Work steps. Abstract on purpose; they
    carry the idea of each step rather than decorating it.               */
 function stepArt(key){
@@ -1117,19 +1191,6 @@ function pageHome(){
     + '</a>';
   }).join('');
 
-  var approachTeaser = APPROACH.map(function(s){
-    var pts = (s.points || []).map(function(t){ return '<li>'+t+'</li>'; }).join('');
-    return ''
-    + '<article class="hw-step">'
-    +   '<div class="hw-copy">'
-    +     '<p class="hw-n">'+String(s.step).padStart(2,'0')+'</p>'
-    +     '<h3 class="hw-title">'+s.title+'</h3>'
-    +     '<p class="hw-body">'+s.body+'</p>'
-    +     (pts ? '<ul class="hw-points">'+pts+'</ul>' : '')
-    +   '</div>'
-    +   '<div class="hw-art">'+stepArt(s.art)+'</div>'
-    + '</article>';
-  }).join('');
 
   var blogTeaser = BLOG_POSTS.slice(0,3).map(function(post){
     var img = BLOG_IMAGES[post.slug];
@@ -1201,15 +1262,7 @@ function pageHome(){
 
   + LP_HOME.tools
 
-  + '<section class="section section-b section-mint" id="how-we-work">'
-  +   '<div class="wrap">'
-  +     eyebrow('How We Work')
-  +     sectionTitle('Consult First, Build Second', '')
-  +     '<p class="muted" style="margin-top:24px;max-width:560px;font-size:16px;line-height:1.6">Four steps, in this order, on every engagement.</p>'
-  +     '<div class="hw-steps">'+approachTeaser+'</div>'
-  +     '<a href="#/our-story" class="tlink" style="display:inline-block;margin-top:56px">More about how we work &#8599;</a>'
-  +   '</div>'
-  + '</section>'
+  + hw2Section()
 
   + LP_HOME.reporting
   + LP_HOME.founder
@@ -2042,20 +2095,39 @@ function attachHandlers(){
       toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     });
   }
-  /* Steps fade in as you reach them. The class is added here, not in the
-     markup, so the content is visible to crawlers and with JS disabled. */
-  var hwSteps = document.querySelectorAll('.hw-step');
-  if(hwSteps.length && 'IntersectionObserver' in window){
-    var hwObs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); hwObs.unobserve(e.target); }
+  /* How We Work: steps animate in as they arrive, and the pinned rail tracks
+     the step in view. Animations are armed here, not in the markup, so the
+     finished state is what crawlers, no-JS and reduced-motion visitors see. */
+  var hw2 = document.querySelector('.hw2');
+  if(hw2){
+    var hwSteps = hw2.querySelectorAll('.hw2-step'), hwRail = hw2.querySelectorAll('.hw2-rail li'), hwFill = hw2.querySelector('.hw2-rail-fill');
+    var hwReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if('IntersectionObserver' in window && !hwReduce){
+      hw2.classList.add('hw2-anim');
+      var hwObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); hwObs.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+      Array.prototype.forEach.call(hwSteps, function(el){ hwObs.observe(el); });
+    }
+    var hwSet = function(i){
+      Array.prototype.forEach.call(hwSteps, function(s, k){ s.classList.toggle('on', k === i); });
+      Array.prototype.forEach.call(hwRail, function(l, k){ l.classList.toggle('on', k <= i); });
+      if(hwFill && hwRail[i]) hwFill.style.height = (hwRail[i].offsetTop - hwRail[0].offsetTop) + 'px';
+    };
+    if(window.__hw2Scroll) window.removeEventListener('scroll', window.__hw2Scroll);
+    window.__hw2Scroll = function(){
+      if(!document.body.contains(hw2)) return;
+      var mid = window.innerHeight * 0.55, cur = 0;
+      Array.prototype.forEach.call(hwSteps, function(s, k){ if(s.getBoundingClientRect().top < mid) cur = k; });
+      hwSet(cur);
+    };
+    window.addEventListener('scroll', window.__hw2Scroll, { passive: true });
+    window.__hw2Scroll();
+    Array.prototype.forEach.call(hw2.querySelectorAll('[data-hw2]'), function(b){
+      b.addEventListener('click', function(){
+        var s = hwSteps[+b.getAttribute('data-hw2')];
+        if(s) s.scrollIntoView({ behavior: hwReduce ? 'auto' : 'smooth', block: 'center' });
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
-    Array.prototype.forEach.call(hwSteps, function(el){
-      if(el.getBoundingClientRect().top > window.innerHeight * 0.9){
-        el.classList.add('reveal');
-        hwObs.observe(el);
-      }
     });
   }
 

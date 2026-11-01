@@ -78,6 +78,158 @@ img,svg{display:block}
 .hw-step.reveal .hw-art{opacity:0;transform:translateY(14px)}
 .hw-step.reveal.in{opacity:1;transform:none;transition:opacity .65s ease,transform .65s ease}
 .hw-step.reveal.in .hw-art{opacity:1;transform:none;transition:opacity .7s ease .18s,transform .7s ease .18s}
+/* ── How We Work v2: dark band, pinned step rail, animated mock-ups ── */
+.hw2{position:relative;isolation:isolate;background:#050908;color:#f1efe8;padding:112px 0 120px;text-align:left}
+.hw2::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(900px 520px at 88% -5%,rgba(18,214,176,.13),transparent 62%),
+  radial-gradient(760px 520px at -5% 105%,rgba(18,214,176,.08),transparent 60%),
+  repeating-linear-gradient(90deg,transparent 0 calc(12.5% - 1px),rgba(255,255,255,.035) calc(12.5% - 1px) 12.5%)}
+.hw2-grid{display:grid;gap:52px}
+@media(min-width:1024px){.hw2-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:84px;align-items:start}.hw2-side{position:sticky;top:110px}}
+.hw2-title{font-family:'Runalto',Georgia,serif;font-weight:400;font-size:clamp(40px,5.2vw,74px);line-height:1.02;margin-top:22px;color:#f4f2ec;letter-spacing:-.01em}
+.hw2-title em{font-style:normal;color:#12d6b0}
+.hw2-lede{margin-top:22px;color:#a3a19a;font-size:17px;line-height:1.6;max-width:430px}
+.hw2-rail{list-style:none;margin:44px 0 0;padding:0;position:relative;display:none}
+@media(min-width:1024px){.hw2-rail{display:block}}
+.hw2-rail::before,.hw2-rail-fill{content:"";position:absolute;left:15px;top:27px;width:1px}
+.hw2-rail::before{bottom:27px;background:rgba(255,255,255,.12)}
+.hw2-rail-fill{height:0;background:#12d6b0;box-shadow:0 0 12px rgba(18,214,176,.8);transition:height .5s ease}
+.hw2-rail button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:18px;width:100%;padding:12px 0;cursor:pointer;color:#7d7b75;font-size:15px;transition:color .3s}
+.hw2-rail button:hover,.hw2-rail li.on button{color:#f4f2ec}
+.hw2-dot{flex:none;position:relative;z-index:1;width:31px;height:31px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:#050908;display:grid;place-items:center;font-size:11.5px;letter-spacing:.04em;transition:border-color .3s,color .3s,box-shadow .3s}
+.hw2-rail li.on .hw2-dot{border-color:#12d6b0;color:#12d6b0;box-shadow:0 0 0 5px rgba(18,214,176,.12)}
+.hw2-link{display:inline-block;margin-top:40px;color:#12d6b0;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid rgba(18,214,176,.35);padding-bottom:3px}
+.hw2-link:hover{border-color:#12d6b0}
+.hw2-steps{display:grid;gap:28px}
+@media(min-width:1024px){.hw2-steps{gap:60px}}
+.hw2-step{border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border-radius:20px;overflow:hidden;transition:border-color .45s,box-shadow .45s}
+.hw2-step.on{border-color:rgba(18,214,176,.38);box-shadow:0 30px 80px -40px rgba(18,214,176,.35)}
+.hw2-vis{position:relative;padding:24px;border-bottom:1px solid rgba(255,255,255,.07);background:radial-gradient(520px 260px at 50% 0%,rgba(18,214,176,.08),transparent 70%)}
+@media(min-width:640px){.hw2-vis{padding:30px}}
+.hw2-copy{padding:26px 28px 30px}
+.hw2-num{font-size:12px;letter-spacing:.2em;color:#12d6b0;text-transform:uppercase}
+.hw2-h{font-family:'Runalto',Georgia,serif;font-weight:400;font-size:clamp(24px,2.5vw,33px);line-height:1.12;margin-top:10px;color:#f4f2ec}
+.hw2-body{margin-top:12px;color:#a3a19a;font-size:15.5px;line-height:1.65;max-width:580px}
+.hw2-chips{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.hw2-chips li{border:1px solid rgba(18,214,176,.3);color:#bfeee2;background:rgba(18,214,176,.06);border-radius:999px;padding:6px 13px;font-size:12px;letter-spacing:.04em}
+/* mock windows */
+.mk{border:1px solid rgba(255,255,255,.1);border-radius:12px;background:#0a100f;box-shadow:0 24px 60px -30px rgba(0,0,0,.9);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#e9e7e0;overflow:hidden}
+.mk-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.07);font-size:11.5px;color:#8e8c86}
+.mk-bar>i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.16)}
+.mk-bar>span{margin-left:8px}
+.mk-bar>b{margin-left:auto;font-weight:500;font-size:11px;letter-spacing:.06em;color:#12d6b0;display:flex;align-items:center;gap:6px}
+.mk-bar>b::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:mkPulse 1.6s ease-in-out infinite}
+.mk-lab{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#7f7d77}
+.mk-foot{font-size:11.5px;color:#8e8c86;margin-top:12px}
+.mk-foot b{color:#12d6b0;font-weight:600}
+@keyframes mkPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+/* 1 consult */
+.mk-call-body{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:14px;padding:14px}
+.mk-cam{position:relative;margin:0;border-radius:10px;overflow:hidden;min-height:190px;background:#111}
+.mk-cam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.mk-cam::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75))}
+.mk-cam figcaption{position:absolute;left:10px;bottom:10px;z-index:1;font-size:11px;color:#fff;display:flex;align-items:center;gap:7px}
+.mk-wave{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.mk-wave i{width:2px;height:100%;background:#12d6b0;border-radius:1px;animation:mkWave 1s ease-in-out infinite}
+.mk-wave i:nth-child(2){animation-delay:.15s}.mk-wave i:nth-child(3){animation-delay:.3s}.mk-wave i:nth-child(4){animation-delay:.45s}
+@keyframes mkWave{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.mk-wave i{transform-origin:bottom}
+.mk-notes{display:flex;flex-direction:column;gap:12px;padding:4px 2px}
+.mk-row{display:flex;gap:10px;align-items:flex-start}
+.mk-chk{flex:none;width:20px;height:20px;border-radius:50%;background:#12d6b0;color:#04110e;font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px}
+.mk-k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8e8c86}
+.mk-v{font-size:13.5px;color:#e9e7e0;margin-top:3px;white-space:nowrap;overflow:hidden;border-bottom:1px solid rgba(18,214,176,.35);padding-bottom:5px}
+@media(max-width:520px){.mk-call-body{grid-template-columns:1fr}.mk-cam{min-height:170px}.mk-v{white-space:normal}}
+/* 2 scope */
+.mk-stack-body{padding:16px;display:grid;gap:16px}
+.mk-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media(max-width:520px){.mk-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mk-tool{position:relative;display:flex;flex-direction:column;gap:6px;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 11px;font-size:12.5px}
+.mk-tool em{font-style:normal;position:relative;align-self:flex-start}
+.mk-tool b{font-weight:500;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.mk-tool.skip{opacity:.45}
+.mk-tool.skip em::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;background:#e9e7e0;transform-origin:left}
+.mk-tool.skip b{color:#a3a19a}
+.mk-tool.fit{border-color:rgba(18,214,176,.55);background:rgba(18,214,176,.08);box-shadow:0 0 22px -8px rgba(18,214,176,.7)}
+.mk-tool.fit b{color:#12d6b0}
+.mk-tray{border:1px dashed rgba(18,214,176,.45);border-radius:10px;padding:12px 14px}
+.mk-tray-items{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.mk-tray-items span{background:#12d6b0;color:#04110e;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
+/* 3 build */
+.mk-url{background:rgba(255,255,255,.06);border-radius:6px;padding:3px 10px;margin-left:10px!important}
+.mk-build-body{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:16px;padding:16px}
+@media(max-width:520px){.mk-build-body{grid-template-columns:1fr}}
+.mk-site{border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px;display:grid;gap:9px;background:#0d1413}
+.mk-s-nav{height:9px;border-radius:3px;background:rgba(255,255,255,.12);width:100%}
+.mk-s-hero{border-radius:6px;background:linear-gradient(135deg,rgba(18,214,176,.35),rgba(18,214,176,.08));padding:14px 12px;display:grid;gap:6px}
+.mk-s-hero i{display:block;height:8px;border-radius:3px;background:rgba(255,255,255,.75);width:70%}
+.mk-s-hero i+i{width:45%;background:rgba(255,255,255,.4)}
+.mk-s-hero b{display:block;width:62px;height:16px;border-radius:999px;background:#f4f2ec;margin-top:4px}
+.mk-s-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.mk-s-grid span{aspect-ratio:1/1.15;border-radius:6px;background:rgba(255,255,255,.08);position:relative}
+.mk-s-grid span::after{content:"";position:absolute;left:6px;right:14px;bottom:7px;height:5px;border-radius:2px;background:rgba(255,255,255,.22)}
+.mk-prog{list-style:none;margin:0;padding:2px 0 0;display:grid;gap:13px;align-content:start}
+.mk-prog p{display:flex;justify-content:space-between;gap:8px;font-size:12.5px}
+.mk-prog p em{font-style:normal;color:#7f7d77;font-size:11px}
+.mk-meter{height:5px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:6px;overflow:hidden}
+.mk-meter i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#0a9a7f,#12d6b0);border-radius:3px;transform-origin:left}
+.mk-golive{display:inline-flex;align-items:center;gap:7px;margin-top:4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#04110e;background:#12d6b0;border-radius:999px;padding:6px 12px;font-weight:600;justify-self:start}
+/* 4 maintain */
+.mk-ops-body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:16px;padding:16px}
+@media(max-width:520px){.mk-ops-body{grid-template-columns:1fr}}
+.mk-chart svg{display:block;width:100%;height:auto;margin-top:10px}
+.mk-line{fill:none;stroke:#12d6b0;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:640;stroke-dashoffset:0;filter:drop-shadow(0 0 6px rgba(18,214,176,.6))}
+.mk-area{fill:url(#mkGrad)}
+.mk-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.mk-tiles span{border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px;text-align:center;font-size:11.5px;color:#a3a19a;animation:mkCycle 6s infinite}
+.mk-tiles span:nth-child(2){animation-delay:2s}.mk-tiles span:nth-child(3){animation-delay:4s}
+@keyframes mkCycle{0%,30%{border-color:rgba(18,214,176,.6);color:#f4f2ec;background:rgba(18,214,176,.1)}36%,100%{border-color:rgba(255,255,255,.1);color:#a3a19a;background:transparent}}
+.mk-chat{display:flex;flex-direction:column;gap:10px;justify-content:flex-end}
+.mk-msg{font-size:12.5px;line-height:1.45;border-radius:12px;padding:9px 12px;max-width:92%}
+.mk-msg.them{align-self:flex-start;background:rgba(255,255,255,.08);border-bottom-left-radius:4px}
+.mk-msg.us{align-self:flex-end;display:flex;gap:8px;align-items:flex-end;background:transparent;padding:0;max-width:100%}
+.mk-msg.us img{width:26px;height:26px;border-radius:50%;object-fit:cover;flex:none}
+.mk-msg.us p{background:#12d6b0;color:#04110e;border-radius:12px;border-bottom-right-radius:4px;padding:9px 12px}
+.mk-msg small{display:block;font-size:10px;color:rgba(4,17,14,.62);margin-top:4px;letter-spacing:.04em}
+/* entrance animations: only when JS has armed them, so the finished state
+   is what crawlers, no-JS and reduced-motion visitors see */
+.hw2-anim .hw2-step{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease,border-color .45s,box-shadow .45s}
+.hw2-anim .hw2-step.in{opacity:1;transform:none}
+.hw2-anim .hw2-step:not(.in) .mk *{animation-play-state:paused!important}
+.hw2-anim .mk-row{animation:mkUp .55s ease both}
+.hw2-anim .mk-row:nth-child(2){animation-delay:.6s}.hw2-anim .mk-row:nth-child(3){animation-delay:1.2s}.hw2-anim .mk-row:nth-child(4){animation-delay:1.8s}
+.hw2-anim .mk-v{animation:mkType 1s steps(28,end) both}
+.hw2-anim .mk-row:nth-child(2) .mk-v{animation-delay:.9s}.hw2-anim .mk-row:nth-child(3) .mk-v{animation-delay:1.5s}.hw2-anim .mk-row:nth-child(4) .mk-v{animation-delay:2.1s}
+.hw2-anim .mk-chk{animation:mkPop .4s ease both}
+.hw2-anim .mk-row:nth-child(2) .mk-chk{animation-delay:1.5s}.hw2-anim .mk-row:nth-child(3) .mk-chk{animation-delay:2.1s}.hw2-anim .mk-row:nth-child(4) .mk-chk{animation-delay:2.7s}
+.hw2-anim .mk-notes .mk-foot{animation:mkUp .5s ease 3s both}
+.hw2-anim .mk-tool{animation:mkUp .45s ease both}
+.hw2-anim .mk-tool:nth-child(2){animation-delay:.08s}.hw2-anim .mk-tool:nth-child(3){animation-delay:.16s}.hw2-anim .mk-tool:nth-child(4){animation-delay:.24s}.hw2-anim .mk-tool:nth-child(5){animation-delay:.32s}.hw2-anim .mk-tool:nth-child(6){animation-delay:.4s}
+.hw2-anim .mk-tool.skip{animation:mkUp .45s ease both,mkDim .5s ease 1.2s both}
+.hw2-anim .mk-tool.skip em::after{animation:mkStrike .45s ease 1.2s both}
+.hw2-anim .mk-tool.fit{animation:mkUp .45s ease both,mkGlow .6s ease 1.5s both}
+.hw2-anim .mk-tool b{animation:mkFade .4s ease 1.3s both}
+.hw2-anim .mk-tray-items span{animation:mkPop .45s ease both}
+.hw2-anim .mk-tray-items span:nth-child(1){animation-delay:1.9s}.hw2-anim .mk-tray-items span:nth-child(2){animation-delay:2.1s}.hw2-anim .mk-tray-items span:nth-child(3){animation-delay:2.3s}
+.hw2-anim .mk-tray .mk-foot{animation:mkFade .5s ease 2.7s both}
+.hw2-anim .mk-site>*{animation:mkUp .5s ease both}
+.hw2-anim .mk-s-hero{animation-delay:.35s}.hw2-anim .mk-s-grid{animation-delay:.7s}
+.hw2-anim .mk-meter i{animation:mkFill 1s cubic-bezier(.5,0,.2,1) both}
+.hw2-anim .mk-prog li:nth-child(1) .mk-meter i{animation-delay:.3s}.hw2-anim .mk-prog li:nth-child(2) .mk-meter i{animation-delay:.9s}.hw2-anim .mk-prog li:nth-child(3) .mk-meter i{animation-delay:1.5s}.hw2-anim .mk-prog li:nth-child(4) .mk-meter i{animation-delay:2.1s}
+.hw2-anim .mk-golive{animation:mkPop .45s ease 3.1s both}
+.hw2-anim .mk-line{animation:mkDraw 2s ease .2s both}
+.hw2-anim .mk-area{animation:mkFade 1s ease 1.4s both}
+.hw2-anim .mk-msg.them{animation:mkUp .5s ease 1s both}
+.hw2-anim .mk-msg.us{animation:mkUp .5s ease 2.2s both}
+@keyframes mkUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes mkFade{from{opacity:0}to{opacity:1}}
+@keyframes mkPop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+@keyframes mkType{from{max-width:0}to{max-width:100%}}
+@keyframes mkStrike{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes mkDim{from{opacity:1}to{opacity:.45}}
+@keyframes mkGlow{from{border-color:rgba(255,255,255,.12);background:transparent;box-shadow:none}to{border-color:rgba(18,214,176,.55);background:rgba(18,214,176,.08);box-shadow:0 0 22px -8px rgba(18,214,176,.7)}}
+@keyframes mkFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes mkDraw{from{stroke-dashoffset:640}to{stroke-dashoffset:0}}
 .ticker{position:relative;overflow:hidden;margin-top:48px;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
@@ -1083,6 +1235,80 @@ var APPROACH = [
     body: "We stay on after launch to maintain it, support your team and keep improving it, especially for Shopify clients.",
     points: ["Ongoing support", "Especially Shopify"] }
 ];
+
+/* How We Work v2: each step gets a small working mock-up instead of a line
+   diagram. Copy comes from APPROACH; the mock-ups illustrate the step.      */
+function hw2Visual(key){
+  var bar = function(title, right){ return '<div class="mk-bar"><i></i><i></i><i></i><span'+(key==='build'?' class="mk-url"':'')+'>'+title+'</span>'+(right?'<b>'+right+'</b>':'')+'</div>'; };
+  if(key === 'consult'){
+    var row = function(k, v){ return '<div class="mk-row"><span class="mk-chk">&#10003;</span><div style="min-width:0"><p class="mk-k">'+k+'</p><p class="mk-v">'+v+'</p></div></div>'; };
+    return '<div class="mk mk-call">'+bar('Discovery call','Live')
+      + '<div class="mk-call-body">'
+      +   '<figure class="mk-cam"><img src="/lp/founder-syed-fidel-shaan.jpg" alt="Syed Fidel Shaan, founder of Zyvex Tech, on a discovery call" loading="lazy">'
+      +     '<figcaption><span class="mk-wave"><i></i><i></i><i></i><i></i></span>Syed &middot; Zyvex Tech</figcaption></figure>'
+      +   '<div class="mk-notes"><p class="mk-lab">Call notes</p>'
+      +     row('Business model','How the money is actually made')
+      +     row('Product','What it is, and who buys it')
+      +     row('Goals','Where it needs to get to')
+      +     '<p class="mk-foot">Tools recommended so far: <b>0</b></p>'
+      +   '</div>'
+      + '</div></div>';
+  }
+  if(key === 'scope'){
+    var t = function(name, fit){ return '<span class="mk-tool '+(fit?'fit':'skip')+'"><em>'+name+'</em><b>'+(fit?'Fits':'Skip')+'</b></span>'; };
+    return '<div class="mk mk-stack">'+bar('Stack check')
+      + '<div class="mk-stack-body"><div class="mk-tools">'
+      +   t('Shopify Plus',0)+t('Shopify',1)+t('Custom ERP',0)+t('Meta Ads',1)+t('AI chat widget',0)+t('Technical SEO',1)
+      + '</div><div class="mk-tray"><p class="mk-lab">Your stack</p>'
+      +   '<div class="mk-tray-items"><span>Shopify</span><span>Meta Ads</span><span>Technical SEO</span></div>'
+      +   '<p class="mk-foot"><b>3</b> tools you would not have used, skipped</p></div>'
+      + '</div></div>';
+  }
+  if(key === 'build'){
+    var p = function(name, tools){ return '<li><p><span>'+name+'</span><em>'+tools+'</em></p><div class="mk-meter"><i></i></div></li>'; };
+    return '<div class="mk mk-build">'+bar('yourstore.com')
+      + '<div class="mk-build-body">'
+      +   '<div class="mk-site"><div class="mk-s-nav"></div><div class="mk-s-hero"><i></i><i></i><b></b></div><div class="mk-s-grid"><span></span><span></span><span></span></div></div>'
+      +   '<ul class="mk-prog">'+p('Store','Shopify')+p('Campaigns','Meta &middot; Google')+p('Funnels','Landing &middot; Checkout')+p('Retention','WhatsApp &middot; Email')
+      +     '<li class="mk-golive">&#9679; Live</li></ul>'
+      + '</div></div>';
+  }
+  /* maintain */
+  return '<div class="mk mk-ops">'+bar('After launch','All systems normal')
+    + '<div class="mk-ops-body">'
+    +   '<div class="mk-chart"><p class="mk-lab">Store health</p>'
+    +     '<svg viewBox="0 0 300 96" aria-hidden="true"><defs><linearGradient id="mkGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12d6b0" stop-opacity=".28"/><stop offset="1" stop-color="#12d6b0" stop-opacity="0"/></linearGradient></defs>'
+    +     '<path class="mk-area" d="M0 78 C30 74 45 64 70 66 S110 52 135 54 S175 40 200 36 S250 26 275 18 L300 14 L300 96 L0 96Z"/>'
+    +     '<path class="mk-line" d="M0 78 C30 74 45 64 70 66 S110 52 135 54 S175 40 200 36 S250 26 275 18 L300 14"/></svg>'
+    +     '<div class="mk-tiles"><span>Monitor</span><span>Improve</span><span>Support</span></div></div>'
+    +   '<div class="mk-chat"><div class="mk-msg them">Can we add a bundle offer before the sale?</div>'
+    +     '<div class="mk-msg us"><p>Done. The bundle is live and checkout is tested.<small>Zyvex support</small></p><img src="/lp/team/zayd-abdulla.jpg" alt="" loading="lazy"></div></div>'
+    + '</div></div>';
+}
+function hw2Section(){
+  var steps = APPROACH.map(function(s, i){
+    var pts = (s.points || []).map(function(t){ return '<li>'+t+'</li>'; }).join('');
+    return '<article class="hw2-step" id="hw2-step-'+s.step+'">'
+      + '<div class="hw2-vis">'+hw2Visual(s.art)+'</div>'
+      + '<div class="hw2-copy"><p class="hw2-num">Step '+String(s.step).padStart(2,'0')+'</p>'
+      +   '<h3 class="hw2-h">'+s.title+'</h3><p class="hw2-body">'+s.body+'</p>'
+      +   (pts ? '<ul class="hw2-chips">'+pts+'</ul>' : '')
+      + '</div></article>';
+  }).join('');
+  var rail = APPROACH.map(function(s, i){
+    var short = ['Consult','Scope','Build','Maintain'][i] || s.title;
+    return '<li'+(i===0?' class="on"':'')+'><button type="button" data-hw2="'+i+'"><span class="hw2-dot">'+String(s.step).padStart(2,'0')+'</span>'+short+'</button></li>';
+  }).join('');
+  return '<section class="hw2" id="how-we-work"><div class="wrap hw2-grid">'
+    + '<div class="hw2-side">'+eyebrow('How We Work')
+    +   '<h2 class="hw2-title balance">Consult First,<br><em>Build Second</em><span class="dot">.</span></h2>'
+    +   '<p class="hw2-lede">Four steps, in this order, on every engagement. Nothing gets built until we know what the business actually needs.</p>'
+    +   '<ol class="hw2-rail"><span class="hw2-rail-fill" aria-hidden="true"></span>'+rail+'</ol>'
+    +   '<a href="#/our-story" class="hw2-link">More about how we work &#8599;</a>'
+    + '</div>'
+    + '<div class="hw2-steps">'+steps+'</div>'
+    + '</div></section>';
+}
 
 /* Small diagrams for the How We Work steps. Abstract on purpose; they
    carry the idea of each step rather than decorating it.               */
@@ -2114,19 +2340,6 @@ function pageHome(){
     + '</a>';
   }).join('');
 
-  var approachTeaser = APPROACH.map(function(s){
-    var pts = (s.points || []).map(function(t){ return '<li>'+t+'</li>'; }).join('');
-    return ''
-    + '<article class="hw-step">'
-    +   '<div class="hw-copy">'
-    +     '<p class="hw-n">'+String(s.step).padStart(2,'0')+'</p>'
-    +     '<h3 class="hw-title">'+s.title+'</h3>'
-    +     '<p class="hw-body">'+s.body+'</p>'
-    +     (pts ? '<ul class="hw-points">'+pts+'</ul>' : '')
-    +   '</div>'
-    +   '<div class="hw-art">'+stepArt(s.art)+'</div>'
-    + '</article>';
-  }).join('');
 
   var blogTeaser = BLOG_POSTS.slice(0,3).map(function(post){
     var img = BLOG_IMAGES[post.slug];
@@ -2198,15 +2411,7 @@ function pageHome(){
 
   + LP_HOME.tools
 
-  + '<section class="section section-b section-mint" id="how-we-work">'
-  +   '<div class="wrap">'
-  +     eyebrow('How We Work')
-  +     sectionTitle('Consult First, Build Second', '')
-  +     '<p class="muted" style="margin-top:24px;max-width:560px;font-size:16px;line-height:1.6">Four steps, in this order, on every engagement.</p>'
-  +     '<div class="hw-steps">'+approachTeaser+'</div>'
-  +     '<a href="#/our-story" class="tlink" style="display:inline-block;margin-top:56px">More about how we work &#8599;</a>'
-  +   '</div>'
-  + '</section>'
+  + hw2Section()
 
   + LP_HOME.reporting
   + LP_HOME.founder
@@ -3039,20 +3244,39 @@ function attachHandlers(){
       toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     });
   }
-  /* Steps fade in as you reach them. The class is added here, not in the
-     markup, so the content is visible to crawlers and with JS disabled. */
-  var hwSteps = document.querySelectorAll('.hw-step');
-  if(hwSteps.length && 'IntersectionObserver' in window){
-    var hwObs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); hwObs.unobserve(e.target); }
+  /* How We Work: steps animate in as they arrive, and the pinned rail tracks
+     the step in view. Animations are armed here, not in the markup, so the
+     finished state is what crawlers, no-JS and reduced-motion visitors see. */
+  var hw2 = document.querySelector('.hw2');
+  if(hw2){
+    var hwSteps = hw2.querySelectorAll('.hw2-step'), hwRail = hw2.querySelectorAll('.hw2-rail li'), hwFill = hw2.querySelector('.hw2-rail-fill');
+    var hwReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if('IntersectionObserver' in window && !hwReduce){
+      hw2.classList.add('hw2-anim');
+      var hwObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); hwObs.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+      Array.prototype.forEach.call(hwSteps, function(el){ hwObs.observe(el); });
+    }
+    var hwSet = function(i){
+      Array.prototype.forEach.call(hwSteps, function(s, k){ s.classList.toggle('on', k === i); });
+      Array.prototype.forEach.call(hwRail, function(l, k){ l.classList.toggle('on', k <= i); });
+      if(hwFill && hwRail[i]) hwFill.style.height = (hwRail[i].offsetTop - hwRail[0].offsetTop) + 'px';
+    };
+    if(window.__hw2Scroll) window.removeEventListener('scroll', window.__hw2Scroll);
+    window.__hw2Scroll = function(){
+      if(!document.body.contains(hw2)) return;
+      var mid = window.innerHeight * 0.55, cur = 0;
+      Array.prototype.forEach.call(hwSteps, function(s, k){ if(s.getBoundingClientRect().top < mid) cur = k; });
+      hwSet(cur);
+    };
+    window.addEventListener('scroll', window.__hw2Scroll, { passive: true });
+    window.__hw2Scroll();
+    Array.prototype.forEach.call(hw2.querySelectorAll('[data-hw2]'), function(b){
+      b.addEventListener('click', function(){
+        var s = hwSteps[+b.getAttribute('data-hw2')];
+        if(s) s.scrollIntoView({ behavior: hwReduce ? 'auto' : 'smooth', block: 'center' });
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
-    Array.prototype.forEach.call(hwSteps, function(el){
-      if(el.getBoundingClientRect().top > window.innerHeight * 0.9){
-        el.classList.add('reveal');
-        hwObs.observe(el);
-      }
     });
   }
 
