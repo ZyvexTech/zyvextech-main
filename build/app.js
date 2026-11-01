@@ -1216,81 +1216,78 @@ function pageHome(){
     return '<details class="faq-item"><summary>'+f.q+'</summary><p>'+f.a+'</p></details>';
   }).join('');
 
-  return ''
-  + '<section class="hero-section">'
-  +   gridLines(false)
-  +   '<div class="wrap" style="position:relative">'
-  +     '<p class="kicker" style="text-transform:uppercase">'+COMPANY.name+', '+COMPANY.markets+'</p>'
-  +     '<h1 class="hero-title balance" style="margin-top:24px;max-width:760px">Systems That Sell While You Don&rsquo;t<span class="dot">.</span></h1>'
-  +     '<p class="muted" style="margin-top:24px;max-width:560px;font-size:17px;line-height:1.6">'+COMPANY.tagline+'</p>'
-  +     '<p class="faint" style="margin-top:12px;max-width:560px;font-size:15px;font-style:italic">'+COMPANY.founder+', '+COMPANY.founderTitle+'</p>'
-  +     '<div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:16px">'
-  +       '<a href="#/services" class="btn btn-teal">Explore Services</a>'
-  +       '<a href="#/contact" class="btn btn-outline">Start a Conversation</a>'
-  +     '</div>'
-  +     '<div style="margin-top:64px;border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;gap:24px 40px;font-size:13px" class="muted">'
-  +       '<span>'+COMPANY.city+'</span><span>'+COMPANY.website+'</span><span>Consulting · Shopify · Performance Marketing</span>'
-  +     '</div>'
-  +   '</div>'
-  + '</section>'
-
-  + LP_HOME.clients
-
-  + '<section class="section section-b">'
-  +   '<div class="wrap">'
-  +     eyebrow('Core Expertise')
-  +     sectionTitle('Where We Specialize', '')
-  +     '<p class="muted" style="margin-top:24px;max-width:520px;font-size:15px">Three platforms we go deep on, not just dabble in: the foundation under everything else we build.</p>'
-  +     '<div class="grid-3" style="margin-top:48px">'
-  +       coreServiceCard('shopify', 'Shopify Ecommerce', 'Official Shopify Partner', 'End-to-end Shopify and Shopify Plus builds, checkout configuration, and ongoing implementation, backed by official partner status.')
-  +       coreServiceCard('meta', 'Meta Ads', 'Performance Marketing', 'Meta (Facebook & Instagram) campaigns built for measurable ROAS: audience research, creative testing, and retargeting run as an ongoing system.')
-  +       coreServiceCard('google', 'SEO', 'Organic Growth', 'Technical and on-page SEO, keyword strategy, and Shopify-specific search audits, for growth that compounds instead of spikes.')
-  +     '</div>'
-  +   '</div>'
-  + '</section>'
-
-
-  + '<section class="section section-b">'
-  +   '<div class="wrap">'
-  +     '<div class="flex-between">'
-  +       '<div>'+eyebrow('Our Services')+sectionTitle('10 Pillars. One Team', '')+'</div>'
-  +       '<a href="#/services" class="tlink">View all services ↗</a>'
-  +     '</div>'
-  +     '<div class="grid-3" style="margin-top:48px">'+servicesTeaser+'</div>'
-  +   '</div>'
-  + '</section>'
-
-  + LP_HOME.tools
-
-  + hw2Section()
-
-  + LP_HOME.reporting
-  + LP_HOME.founder
-  + LP_HOME.team
-  + LP_HOME.why
-  + LP_HOME.results
-  + LP_HOME.reels
-  + LP_HOME.testimonials
-
-  + '<section class="section section-b section-mint">'
-  +   '<div class="wrap">'
-  +     '<div class="flex-between">'
-  +       '<div>'+eyebrow('From the Blog')+sectionTitle('Notes on Systems &amp; Growth', '')+'</div>'
-  +       '<a href="#/blog" class="tlink">View all articles ↗</a>'
-  +     '</div>'
-  +     '<div class="grid-3" style="margin-top:48px">'+blogTeaser+'</div>'
-  +   '</div>'
-  + '</section>'
-
-  + '<section class="section section-b on-black">'
-  +   '<div class="wrap">'
-  +     eyebrow('FAQ')
-  +     sectionTitle('Common Questions', '')
-  +     '<div style="margin-top:40px;max-width:760px;display:flex;flex-direction:column">'+faqHtml+'</div>'
-  +   '</div>'
-  + '</section>'
-
-  + ctaSection();
+  /* Sections in order of importance: who we are and proof first, how we work
+     and the detail after, reference material last. Each is wrapped in a
+     .hv-sec band; bands alternate white / mint (see the home v2 skin CSS). */
+  var sections = [
+    /* hero */          '<section class="hero-section">'
+    +   gridLines(false)
+    +   '<div class="wrap" style="position:relative">'
+    +     '<p class="kicker" style="text-transform:uppercase">'+COMPANY.name+', '+COMPANY.markets+'</p>'
+    +     '<h1 class="hero-title balance" style="margin-top:24px;max-width:760px">Systems That Sell While You Don&rsquo;t<span class="dot">.</span></h1>'
+    +     '<p class="muted" style="margin-top:24px;max-width:560px;font-size:17px;line-height:1.6">'+COMPANY.tagline+'</p>'
+    +     '<p class="faint" style="margin-top:12px;max-width:560px;font-size:15px;font-style:italic">'+COMPANY.founder+', '+COMPANY.founderTitle+'</p>'
+    +     '<div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:16px">'
+    +       '<a href="#/services" class="btn btn-teal">Explore Services</a>'
+    +       '<a href="#/contact" class="btn btn-outline">Start a Conversation</a>'
+    +     '</div>'
+    +     '<div style="margin-top:64px;border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;gap:24px 40px;font-size:13px" class="muted">'
+    +       '<span>'+COMPANY.city+'</span><span>'+COMPANY.website+'</span><span>Consulting · Shopify · Performance Marketing</span>'
+    +     '</div>'
+    +   '</div>'
+    + '</section>',
+    /* trust */         LP_HOME.clients,
+    /* what we do */    '<section class="section section-b">'
+    +   '<div class="wrap">'
+    +     eyebrow('Core Expertise')
+    +     sectionTitle('Where We Specialize', '')
+    +     '<p class="muted" style="margin-top:24px;max-width:520px;font-size:15px">Three platforms we go deep on, not just dabble in: the foundation under everything else we build.</p>'
+    +     '<div class="grid-3" style="margin-top:48px">'
+    +       coreServiceCard('shopify', 'Shopify Ecommerce', 'Official Shopify Partner', 'End-to-end Shopify and Shopify Plus builds, checkout configuration, and ongoing implementation, backed by official partner status.')
+    +       coreServiceCard('meta', 'Meta Ads', 'Performance Marketing', 'Meta (Facebook & Instagram) campaigns built for measurable ROAS: audience research, creative testing, and retargeting run as an ongoing system.')
+    +       coreServiceCard('google', 'SEO', 'Organic Growth', 'Technical and on-page SEO, keyword strategy, and Shopify-specific search audits, for growth that compounds instead of spikes.')
+    +     '</div>'
+    +   '</div>'
+    + '</section>',
+    /* proof */         LP_HOME.results,
+    /* proof, video */  LP_HOME.reels,
+    /* process */       hw2Section(),
+    /* all services */  '<section class="section section-b">'
+    +   '<div class="wrap">'
+    +     '<div class="flex-between">'
+    +       '<div>'+eyebrow('Our Services')+sectionTitle('10 Pillars. One Team', '')+'</div>'
+    +       '<a href="#/services" class="tlink">View all services ↗</a>'
+    +     '</div>'
+    +     '<div class="grid-3" style="margin-top:48px">'+servicesTeaser+'</div>'
+    +   '</div>'
+    + '</section>',
+    /* why us */        LP_HOME.why,
+    /* reporting */     LP_HOME.reporting,
+    /* reviews */       LP_HOME.testimonials,
+    /* founder */       LP_HOME.founder,
+    /* team */          LP_HOME.team,
+    /* tools */         LP_HOME.tools,
+    /* blog */          '<section class="section section-b section-mint">'
+    +   '<div class="wrap">'
+    +     '<div class="flex-between">'
+    +       '<div>'+eyebrow('From the Blog')+sectionTitle('Notes on Systems &amp; Growth', '')+'</div>'
+    +       '<a href="#/blog" class="tlink">View all articles ↗</a>'
+    +     '</div>'
+    +     '<div class="grid-3" style="margin-top:48px">'+blogTeaser+'</div>'
+    +   '</div>'
+    + '</section>',
+    /* faq */           '<section class="section section-b on-black">'
+    +   '<div class="wrap">'
+    +     eyebrow('FAQ')
+    +     sectionTitle('Common Questions', '')
+    +     '<div style="margin-top:40px;max-width:760px;display:flex;flex-direction:column">'+faqHtml+'</div>'
+    +   '</div>'
+    + '</section>'
+  ];
+  return '<div class="home-v2">'
+    + sections.map(function(h, i){ return '<div class="hv-sec hv-'+(i % 2 ? 'b' : 'a')+'">'+h+'</div>'; }).join('')
+    + '<div class="hv-sec hv-'+(sections.length % 2 ? 'b' : 'a')+'">'+ctaSection()+'</div>'
+    + '</div>';
 }
 
 /* ── Services index ──────────────────────────────────────────── */
@@ -2095,6 +2092,36 @@ function attachHandlers(){
       toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     });
   }
+  /* Home v2: cards fade up as they arrive (finished state without JS).
+     A scroll check rather than IntersectionObserver: anything whose top has
+     entered the viewport, or that was scrolled past quickly, is revealed. */
+  var hvReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hvCards = document.querySelectorAll('.home-v2 .core-card, .home-v2 .lp-sec .diff-card, .home-v2 .lp-sec .team-card, .home-v2 .lp-sec .case, .home-v2 .lp-sec .tcard, .home-v2 .grid-3 > a.hoverable, .home-v2 .faq-item, .home-v2 .lp-sec .reel');
+  if(hvCards.length && !hvReduce){
+    var hvPending = [];
+    Array.prototype.forEach.call(hvCards, function(el){
+      if(el.getBoundingClientRect().top > window.innerHeight * 0.92){
+        var sib = Array.prototype.indexOf.call(el.parentNode.children, el);
+        el.style.transitionDelay = (Math.min(sib, 5) * 80) + 'ms';
+        el.classList.add('hv-rv'); hvPending.push(el);
+        el.addEventListener('transitionend', function f(){ el.style.transitionDelay = ''; el.removeEventListener('transitionend', f); });
+      }
+    });
+    var hvTick = false;
+    var hvCheck = function(){
+      hvTick = false;
+      var lim = window.innerHeight * 0.94;
+      hvPending = hvPending.filter(function(el){
+        if(el.getBoundingClientRect().top < lim){ el.classList.add('in'); return false; }
+        return true;
+      });
+      if(!hvPending.length) window.removeEventListener('scroll', window.__hvScroll);
+    };
+    if(window.__hvScroll) window.removeEventListener('scroll', window.__hvScroll);
+    window.__hvScroll = function(){ if(!hvTick){ hvTick = true; requestAnimationFrame(hvCheck); } };
+    window.addEventListener('scroll', window.__hvScroll, { passive: true });
+    hvCheck();
+  }
   /* How We Work: steps animate in as they arrive, and the pinned rail tracks
      the step in view. Animations are armed here, not in the markup, so the
      finished state is what crawlers, no-JS and reduced-motion visitors see. */
@@ -2102,13 +2129,7 @@ function attachHandlers(){
   if(hw2){
     var hwSteps = hw2.querySelectorAll('.hw2-step'), hwRail = hw2.querySelectorAll('.hw2-rail li'), hwFill = hw2.querySelector('.hw2-rail-fill');
     var hwReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if('IntersectionObserver' in window && !hwReduce){
-      hw2.classList.add('hw2-anim');
-      var hwObs = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); hwObs.unobserve(e.target); } });
-      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
-      Array.prototype.forEach.call(hwSteps, function(el){ hwObs.observe(el); });
-    }
+    if(!hwReduce) hw2.classList.add('hw2-anim');
     var hwSet = function(i){
       Array.prototype.forEach.call(hwSteps, function(s, k){ s.classList.toggle('on', k === i); });
       Array.prototype.forEach.call(hwRail, function(l, k){ l.classList.toggle('on', k <= i); });
@@ -2117,8 +2138,12 @@ function attachHandlers(){
     if(window.__hw2Scroll) window.removeEventListener('scroll', window.__hw2Scroll);
     window.__hw2Scroll = function(){
       if(!document.body.contains(hw2)) return;
-      var mid = window.innerHeight * 0.55, cur = 0;
-      Array.prototype.forEach.call(hwSteps, function(s, k){ if(s.getBoundingClientRect().top < mid) cur = k; });
+      var mid = window.innerHeight * 0.55, lim = window.innerHeight * 0.85, cur = 0;
+      Array.prototype.forEach.call(hwSteps, function(s, k){
+        var t = s.getBoundingClientRect().top;
+        if(t < mid) cur = k;
+        if(t < lim) s.classList.add('in');   /* reveal, including steps scrolled past */
+      });
       hwSet(cur);
     };
     window.addEventListener('scroll', window.__hw2Scroll, { passive: true });
