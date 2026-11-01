@@ -95,8 +95,15 @@ function hw2Visual(key){
     var row = function(k, v){ return '<div class="mk-row"><span class="mk-chk">&#10003;</span><div style="min-width:0"><p class="mk-k">'+k+'</p><p class="mk-v">'+v+'</p></div></div>'; };
     return '<div class="mk mk-call">'+bar('Discovery call','Live')
       + '<div class="mk-call-body">'
-      +   '<figure class="mk-cam"><img src="/lp/founder-syed-fidel-shaan.jpg" alt="Syed Fidel Shaan, founder of Zyvex Tech, on a discovery call" loading="lazy">'
-      +     '<figcaption><span class="mk-wave"><i></i><i></i><i></i><i></i></span>Syed &middot; Zyvex Tech</figcaption></figure>'
+      +   '<div class="mk-meet" role="img" aria-label="Online video call: Syed and Farhan from Zyvex Tech on a discovery call with a client">'
+      +     '<div class="mk-meet-top"><span>10:30 &middot; Discovery call</span><span class="mk-meet-rec">3 people</span></div>'
+      +     '<div class="mk-mgrid">'
+      +       '<div class="mk-tile speaking"><img src="/lp/founder-syed-fidel-shaan.jpg" alt="" loading="lazy"><span class="mk-name"><span class="mk-wave"><i></i><i></i><i></i><i></i></span>Syed</span></div>'
+      +       '<div class="mk-tile"><img src="/lp/farhan-ahammed.jpg" alt="" loading="lazy" style="object-position:50% 32%"><span class="mk-name">Farhan</span></div>'
+      +       '<div class="mk-tile mk-tile-av"><span class="mk-av">Y</span><span class="mk-name">You (founder)</span></div>'
+      +     '</div>'
+      +     '<div class="mk-ctrl"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11h-2z"/></svg></i><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg></i><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2H0v2h24v-2h-4zM4 6h16v10H4V6zm8 1-4 4h3v4h2v-4h3l-4-4z"/></svg></i><i class="mk-end"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08a.996.996 0 0 1 0-1.41C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.39.39.39 1.02 0 1.41l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85a.996.996 0 0 1-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg></i></div>'
+      +   '</div>'
       +   '<div class="mk-notes"><p class="mk-lab">Call notes</p>'
       +     row('Business model','How the money is actually made')
       +     row('Product','What it is, and who buys it')
