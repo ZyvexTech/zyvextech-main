@@ -1188,7 +1188,6 @@ function pageHome(){
   +   '</div>'
   + '</section>'
 
-  + LP_HOME.results
 
   + '<section class="section section-b">'
   +   '<div class="wrap">'
@@ -1216,6 +1215,7 @@ function pageHome(){
   + LP_HOME.founder
   + LP_HOME.team
   + LP_HOME.why
+  + LP_HOME.results
   + LP_HOME.reels
   + LP_HOME.testimonials
 
