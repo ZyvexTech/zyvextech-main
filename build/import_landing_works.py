@@ -133,23 +133,23 @@ SITE_NAV_CSS = """/* This site's navigation on the imported portfolio pages. */
 # dirhams on the UK and UAE case studies stay. Landing-site copy that
 # quotes rupees is rewritten here (figures become multiples/percentages), screenshots
 # that only exist to show money figures are dropped, and the X Emirates
-# banner (which reads "₹76 Lakhs") is replaced by build/lp-overrides/.
+# banner ("₹1.03 Crore") is shown only where X Emirates is (see CURRENCY_OK).
 NO_CURRENCY = [
     # X Emirates: card lines, meta descriptions, hero, metrics
-    (r"From WhatsApp orders to &#8377;76 lakhs in Shopify revenue, 8\.32x ROAS",
+    (r"From WhatsApp orders to &#8377;1\.03 crore in Shopify revenue, 8\.32x ROAS",
      "From WhatsApp orders to a Shopify store with 8.32x ROAS and a 9% conversion rate"),
-    (r"reaching &#8377;76 lakhs in revenue, 8\.32x ROAS", "reaching 8.32x ROAS"),
-    (r"moved onto a Shopify store we grew to <b>&#8377;76 lakhs in revenue</b>, with 8\.32x ROAS",
+    (r"reaching &#8377;1\.03 crore in revenue, 8\.32x ROAS", "reaching 8.32x ROAS"),
+    (r"moved onto a Shopify store we grew to <b>&#8377;1\.03 crore in revenue</b>, with 8\.32x ROAS",
      "moved onto a Shopify store where sales grew <b>nearly 13x in the first month</b>, with 8.32x ROAS"),
-    (r'<p class="metric-v">&#8377;76L</p><p class="metric-l">Revenue on Shopify</p>',
+    (r'<p class="metric-v">&#8377;1\.03Cr</p><p class="metric-l">Revenue on Shopify</p>',
      '<p class="metric-v">13x</p><p class="metric-l">Sales, first month</p>'),
-    (r'<p class="metric-v">&#8377;76L</p><p class="metric-l">Revenue</p>',
+    (r'<p class="metric-v">&#8377;1\.03Cr</p><p class="metric-l">Revenue</p>',
      '<p class="metric-v">13x</p><p class="metric-l">Sales, month one</p>'),
-    (r"Grew to <b>&#8377;76 lakhs in revenue</b> on Shopify, with",
+    (r"Grew to <b>&#8377;1\.03 crore in revenue</b> on Shopify, with",
      "Sales grew <b>nearly 13x in the first month</b> on Shopify, with"),
     # X Emirates case study: revenue section and ROAS section
-    (r"&#8377;76 Lakhs in Revenue</h2>", "Sales That Kept Growing</h2>"),
-    (r"The store has done <b>&#8377;76,65,516</b> in total sales on Shopify this year, from 1 January to 2 October 2026\.",
+    (r"&#8377;1 Crore in Revenue</h2>", "Sales That Kept Growing</h2>"),
+    (r"The store has crossed <b>&#8377;1 crore</b> in sales on Shopify this year: <b>&#8377;1,03,33,430</b> in total sales from 1 January to 13 November 2026, across more than 12,000 orders\.",
      "Within the first month total sales grew <b>nearly 13x</b>, and the store has kept growing through 2026."),
     (r'<div class="wshots">\s*<img src="/lp/work/xemirates-revenue\.jpg"[^>]*>\s*</div>', ""),
     (r"In July 2026 the account spent <b>&#8377;1,80,812</b> and returned <b>&#8377;15,04,356</b> in revenue, a purchase ROAS of <b>8\.32x</b>\.",
@@ -157,7 +157,7 @@ NO_CURRENCY = [
     (r'<div class="metric"><p class="metric-v">&#8377;1\.8L</p><p class="metric-l">Ad spend, July</p></div><div class="metric"><p class="metric-v">&#8377;15\.04L</p><p class="metric-l">Revenue, July</p></div>',
      '<div class="metric"><p class="metric-v">9%</p><p class="metric-l">Conversion rate</p></div><div class="metric"><p class="metric-v">13x</p><p class="metric-l">Sales, first month</p></div>'),
     (r'<div class="wshots">\s*<img src="/lp/work/xemirates-meta-roas\.jpg"[^>]*>\s*</div>', ""),
-    (r"a Shopify store that has done &#8377;76 lakhs in revenue, with ads returning",
+    (r"a Shopify store that has crossed &#8377;1 crore in revenue, with ads returning",
      "a Shopify store where sales grew nearly 13x in the first month, with ads returning"),
     # X Emirates testimonial
     (r"all I got was a loss, not a single rupee of profit\.", "all I got was a loss, not any profit."),
