@@ -49,7 +49,7 @@ HEADER = """<header class="site-header">
 
 FOOTER = """<footer class="site-footer zx-footer">
 <div class="footer-in">
-<span>&#169; Zyvex Tech LLP &#183; Calicut, India &#183; Working worldwide</span>
+<span>&#169; Zyvex LLP &#183; Calicut, India &#183; Working worldwide</span>
 <span>
 <a href="/services">Services</a> &#183;
 <a href="/works">Works</a> &#183;

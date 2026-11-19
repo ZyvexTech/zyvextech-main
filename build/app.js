@@ -45,7 +45,7 @@ var TEAM_PHOTO_CAPTION = "The Zyvex Tech team in Calicut, India.";
 
 var COMPANY = {
   name: "Zyvex Tech",
-  legalName: "Zyvex Tech LLP",
+  legalName: "Zyvex LLP",
   founder: "Syed Fidel Shaan",
   founderTitle: "Founder & CEO",
   city: "Calicut, India",
