@@ -1694,6 +1694,19 @@ function pageWorkDetail(w){
 }
 
 /* ── Our Story ────────────────────────────────────────────────── */
+/* Second founder, shown beside Syed on Our Story (same text as the
+   "Our Founders" section on the home page). */
+var COFOUNDER = {
+  name: "Farhan Ahammed",
+  title: "Founder",
+  photo: "/lp/farhan-ahammed.jpg",
+  focus: "Digital Solutions, Strategy &amp; Execution",
+  bio: [
+    "Driven by a passion for building and innovation, Farhan focuses on creating digital solutions that help businesses move forward. He believes in thoughtful strategy, quality execution and partnerships built on trust.",
+    "He works alongside Syed on every engagement, making sure what gets planned is built, launched and looked after, with the same team accountable from the first call to the monthly report."
+  ]
+};
+
 function pageOurStory(){
   var aboutRows = [
     { n: "01", title: "Who We Are", icon: "target", body: "A consulting, implementation, and performance marketing firm working at the intersection of process, ecommerce, and demand generation." },
@@ -1803,7 +1816,7 @@ function pageOurStory(){
   +       '<img class="founder-portrait" src="'+(FOUNDER_PHOTO || '/lp/founder-syed-fidel-shaan.jpg')+'" alt="'+COMPANY.founder+', '+COMPANY.founderTitle+'" />'
   +     '</div>'
   +     '<div>'
-  +       eyebrow('About the Founder')
+  +       eyebrow('Our Founders')
   +       '<h2 class="title balance" style="margin-top:24px;font-size:clamp(34px,5vw,56px)">'+COMPANY.founder+'<span style="color:var(--teal2)">.</span></h2>'
   +       '<p style="margin-top:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;opacity:.7">'+COMPANY.founderTitle+'</p>'
   +       '<div style="display:flex;flex-direction:column;gap:20px;margin-top:32px;font-size:16px;line-height:1.6">'
@@ -1815,6 +1828,23 @@ function pageOurStory(){
   +         '<div style="display:flex;justify-content:space-between;gap:16px"><dt style="opacity:.6">Focus</dt><dd style="text-align:right">Systems, Ecommerce &amp; Performance Marketing</dd></div>'
   +         '<div style="display:flex;justify-content:space-between;gap:16px"><dt style="opacity:.6">Working across</dt><dd style="text-align:right">'+COMPANY.markets+'</dd></div>'
   +       '</dl>'
+  +     '</div>'
+  +   '</div>'
+  +   '<div class="wrap grid-founder grid-founder-rev" style="position:relative;align-items:center;margin-top:96px">'
+  +     '<div class="founder-text">'
+  +       '<h2 class="title balance" style="font-size:clamp(34px,5vw,56px)">'+COFOUNDER.name+'<span style="color:var(--teal2)">.</span></h2>'
+  +       '<p style="margin-top:12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;opacity:.7">'+COFOUNDER.title+'</p>'
+  +       '<div style="display:flex;flex-direction:column;gap:20px;margin-top:32px;font-size:16px;line-height:1.6">'
+  +       COFOUNDER.bio.map(function(p){ return '<p>'+p+'</p>'; }).join('')
+  +       '</div>'
+  +       '<dl class="dl-2" style="margin-top:40px;grid-template-columns:1fr;gap:14px">'
+  +         '<div style="display:flex;justify-content:space-between;gap:16px"><dt style="opacity:.6">Based in</dt><dd style="text-align:right">'+COMPANY.city+'</dd></div>'
+  +         '<div style="display:flex;justify-content:space-between;gap:16px"><dt style="opacity:.6">Focus</dt><dd style="text-align:right">'+COFOUNDER.focus+'</dd></div>'
+  +         '<div style="display:flex;justify-content:space-between;gap:16px"><dt style="opacity:.6">Working across</dt><dd style="text-align:right">'+COMPANY.markets+'</dd></div>'
+  +       '</dl>'
+  +     '</div>'
+  +     '<div class="founder-photo-col">'
+  +       '<img class="founder-portrait" src="'+COFOUNDER.photo+'" alt="'+COFOUNDER.name+', '+COFOUNDER.title+'" />'
   +     '</div>'
   +   '</div>'
   + '</section>'
